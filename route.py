@@ -41,7 +41,7 @@ def getMessage(data):
                 __messaging_event = messaging_event
                 isMessage = "message" in __messaging_event
                 isPostback = "postback" in __messaging_event
-                content_message = __getPayloadOrText(isMessage,isPostback)
+                content_message = __getPayloadOrText(isMessage,isPostback,__messaging_event)
 
                 data_package = getResponse(client_id,content_message)
                 sendMessage(data_package)
@@ -55,22 +55,22 @@ def sendMessage(data):
         print(r.text)
 
 
-def __getPayloadOrText(isMessage,isPostback): # just to instanciate the above
+def __getPayloadOrText(isMessage,isPostback,m): # just to instanciate the above
     if isMessage:
-        return getMessageText()
+        return getMessageText(m)
     elif isPostback:
-        return getPostbackPayload()
+        return getPostbackPayload(m)
     else:
         raise TypeError("Message sent from client was not a text neither a payload.")
 
 
-def getMessageText():
+def getMessageText(messaging_event):
     if "attachments" in messaging_event["message"]:
         return "attachments" # caso o usuario clicar no joinha da isso
     else:
         return __messaging_event["message"]["text"]
 
-def getPostbackPayload():
+def getPostbackPayload(messaging_event):
     return __messaging_event["postback"]["payload"]
 
 
