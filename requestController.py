@@ -7,8 +7,8 @@ import os
 class RequestController:
 
     def __init__(self):
-        __PARAMS = {"access_token": os.environ["PAGE_ACCESS_TOKEN"]}
-        __HEADERS = {"Content-Type": "application/json"}
+        self.__PARAMS = {"access_token": os.environ["PAGE_ACCESS_TOKEN"]}
+        self.__HEADERS = {"Content-Type": "application/json"}
 
     def unpackMessage(self,data):
         if data["object"] == "page":
