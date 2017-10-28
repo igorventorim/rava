@@ -33,15 +33,15 @@ def home():
 
 @app.route("/registerStartedButton")
 def registerStartedButton():
-    return MessengerProfile.createStartedButton()
+    return MessengerProfile().createStartedButton()
 
 @app.route("/registerMsgGreeting")
 def registerMsgGreeting():
-    return MessengerProfile.createGreeting()
+    return MessengerProfile().createGreeting()
 
 @app.route("/readGreeting")
 def readGreeting():
-    return MessengerProfile.readGreeting()
+    return MessengerProfile().readGreeting()
 
 
 if __name__ == '__main__':
