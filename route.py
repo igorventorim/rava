@@ -49,8 +49,9 @@ def registerMsgGreeting():
 
 @app.route("/readGreeting")
 def readGreeting():
-    return MessengerProfile().readGreeting()
-
+    r = MessengerProfile().readGreeting()
+    print(r)
+    return "ok", 200
 
 if __name__ == '__main__':
     app.run(debug=True)
