@@ -30,7 +30,7 @@ class Strings():
     # CONFIG MESSENGER PROFILE
     GET_STARTED = u"START_BOT"
     # GREETING must be UTF-8 and has a 160 character limit.
-    GREETING = u"Robô de Auxílio Virtual ao Aprendizado!" # TEXT: Texto a ser exibido no cumprimento, exemplo de cumprimento "text":"Hello {{user_first_name}}!"
+    GREETING = "Robô de Auxílio Virtual ao Aprendizado!" # TEXT: Texto a ser exibido no cumprimento, exemplo de cumprimento "text":"Hello {{user_first_name}}!"
     WHITELIST= u"[]" # list: A list of domains being used. All domains must be valid. Up to 10 domains allowed.
     URL_PAYMENT_POLICY_PRIVACY = u"" # SET URL PAYMENT POLICY PRIVACY
     PUBLIC_KEY = u"" # SET PUBLIC KEY
