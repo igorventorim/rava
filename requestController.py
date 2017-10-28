@@ -19,19 +19,19 @@ class RequestController:
             for entry in data["entry"]:
                 for messaging_event in entry["messaging"]:
                     message = Message(messaging_event)
-                    user = message.getClientID()
+                    userId = message.getClientID()
 
                     if(message.getContentMessage() == Strings.GET_STARTED):
-                        msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient())
-                        data = self.__getResponse(user, msgText)
+                        msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(userId))
+                        data = self.__getResponse(userId, msgText)
                         self.__sendMessage(data)
                         msgText = Strings.APRESENTATION
-                        data = self.__getResponse(user, msgText)
+                        data = self.__getResponse(userId, msgText)
                         self.__sendMessage(data)
 
                     else:
                         msgText = message.getContentMessage()
-                        data = self.__getResponse(user,msgText)
+                        data = self.__getResponse(userId,msgText)
                         self.__sendMessage(data)
 
 
