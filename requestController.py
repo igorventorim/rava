@@ -5,6 +5,7 @@ import requests
 import os
 
 from strings import Strings
+from userData import UserData
 
 
 class RequestController:
@@ -21,12 +22,17 @@ class RequestController:
                     user = message.getClientID()
 
                     if(message.getContentMessage() == Strings.GET_STARTED):
-                        msgText = Strings.GREETING
+                        msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient())
                         data = self.__getResponse(user, msgText)
+                        self.__sendMessage(data)
+                        msgText = Strings.APRESENTATION
+                        data = self.__getResponse(user, msgText)
+                        self.__sendMessage(data)
+
                     else:
                         msgText = message.getContentMessage()
                         data = self.__getResponse(user,msgText)
-                    self.__sendMessage(data)
+                        self.__sendMessage(data)
 
 
     def __getResponse(self,client_id, text):

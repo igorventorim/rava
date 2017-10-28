@@ -51,7 +51,7 @@ def registerMsgGreeting():
 def readGreeting():
     r = MessengerProfile().readGreeting()
     print(r)
-    return "ok", 200
+    return r["data"], 200
 
 if __name__ == '__main__':
     app.run(debug=True)
