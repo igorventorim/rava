@@ -3,7 +3,7 @@ from message import Message
 import json
 import requests
 import os
-
+import answerViewTemplates
 from strings import Strings
 from userData import UserData
 
@@ -19,31 +19,22 @@ class RequestController:
             for entry in data["entry"]:
                 for messaging_event in entry["messaging"]:
                     message = Message(messaging_event)
-                    userId = message.getClientID()
+                    user_id = message.getClientID()
 
                     if(message.getContentMessage() == Strings.GET_STARTED):
-                        msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(userId))
-                        data = self.__getResponse(userId, msgText)
+                        msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(user_id))
+                        data = answerViewTemplates.text(user_id, msgText)
                         self.__sendMessage(data)
                         msgText = Strings.APRESENTATION
-                        data = self.__getResponse(userId, msgText)
+                        data = answerViewTemplates.text(user_id, msgText,["Cadastrar pergunta","Responder Pergunta"])
                         self.__sendMessage(data)
 
                     else:
                         msgText = message.getContentMessage()
-                        data = self.__getResponse(userId,msgText)
+                        data = answerViewTemplates.text(user_id,msgText)
                         self.__sendMessage(data)
 
 
-    def __getResponse(self,client_id, text):
-        return json.dumps({
-            "recipient": {
-                "id": client_id
-            },
-            "message": {
-                "text": text
-            }
-        })
 
     # def __getNameUser
 
