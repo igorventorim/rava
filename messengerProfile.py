@@ -38,6 +38,7 @@ class MessengerProfile():
     def createGreeting(self):
         data = { "greeting":[ { "locale":"default", "text":Strings.GREETING} ] }
         result = json.loads(requests.post(self.__urlProfile,params=self.__params,headers=self.__headers,data=data).text)
+        print(result)
         return result["result"] == "success"
 
     def readGreeting(self):
