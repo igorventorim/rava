@@ -41,7 +41,7 @@ def getMessage(data):
                 __messaging_event = messaging_event
                 isMessage = "message" in __messaging_event
                 isPostback = "postback" in __messaging_event
-                content_message = __getPayloadOrText()
+                content_message = __getPayloadOrText(isMessage,isPostback)
 
                 data_package = getResponse(client_id,content_message)
                 sendMessage(data_package)
@@ -55,7 +55,7 @@ def sendMessage(data):
         print(r.text)
 
 
-def __getPayloadOrText(): # just to instanciate the above
+def __getPayloadOrText(isMessage,isPostback): # just to instanciate the above
     if isMessage:
         return getMessageText()
     elif isPostback:
