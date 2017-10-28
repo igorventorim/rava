@@ -1,7 +1,9 @@
+# encoding: utf-8
 from flask import Flask, request,render_template, redirect, url_for, session,flash
 import requests
 import sys
 import os
+import json
 
 app = Flask(__name__)
 
