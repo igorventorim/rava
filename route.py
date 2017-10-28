@@ -55,7 +55,7 @@ def sendMessage(data):
         print(r.text)
 
 
-def __getPayloadOrText(self): # just to instanciate the above
+def __getPayloadOrText(): # just to instanciate the above
     if isMessage:
         return getMessageText()
     elif isPostback:
@@ -64,13 +64,13 @@ def __getPayloadOrText(self): # just to instanciate the above
         raise TypeError("Message sent from client was not a text neither a payload.")
 
 
-def getMessageText(self):
+def getMessageText():
     if "attachments" in messaging_event["message"]:
         return "attachments" # caso o usuario clicar no joinha da isso
     else:
         return __messaging_event["message"]["text"]
 
-def getPostbackPayload(self):
+def getPostbackPayload():
     return __messaging_event["postback"]["payload"]
 
 
