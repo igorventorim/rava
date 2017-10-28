@@ -35,17 +35,17 @@ def home():
 def registerStartedButton():
      r = MessengerProfile().createStartedButton()
      if(r == True):
-        return "true", 200
+        return "ok", 200
      else:
-         return "false", 200
+         return "erro", 200
 
 @app.route("/registerMsgGreeting")
 def registerMsgGreeting():
     r= MessengerProfile().createGreeting()
     if (r == True):
-        return "true", 200
+        return "ok", 200
     else:
-        return "false", 200
+        return "erro", 200
 
 @app.route("/readGreeting")
 def readGreeting():
