@@ -26,7 +26,7 @@ class RequestController:
                         data = answerViewTemplates.text(user_id, msgText)
                         self.__sendMessage(data)
                         msgText = Strings.APRESENTATION
-                        data = answerViewTemplates.text(user_id, msgText,["Cadastrar pergunta","Responder Pergunta"])
+                        data = answerViewTemplates.quick_reply(user_id, msgText,["Cadastrar pergunta","Responder Pergunta"])
                         self.__sendMessage(data)
 
                     else:
