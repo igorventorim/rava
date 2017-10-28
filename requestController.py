@@ -1,13 +1,16 @@
+from authentication import Authentication
 from message import Message
 import json
 import requests
 import os
 
+from strings import Strings
+
 
 class RequestController:
 
     def __init__(self):
-        self.__PARAMS = {"access_token": os.environ["PAGE_ACCESS_TOKEN"]}
+        self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
 
     def unpackMessage(self,data):
@@ -17,7 +20,12 @@ class RequestController:
                     message = Message(messaging_event)
                     user = message.getClientID()
 
-                    data = self.__getResponse(user,message.getContentMessage())
+                    if(message.getContentMessage() == Strings.GET_STARTED):
+                        msgText = Strings.GREETING
+                        data = self.__getResponse(user, msgText)
+                    else:
+                        msgText = message.getContentMessage()
+                        data = self.__getResponse(user,msgText)
                     self.__sendMessage(data)
 
 
@@ -30,6 +38,8 @@ class RequestController:
                 "text": text
             }
         })
+
+    # def __getNameUser
 
     def __sendMessage(self,data):
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=self.__PARAMS, headers=self.__HEADERS, data=data)
