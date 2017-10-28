@@ -36,7 +36,7 @@ class MessengerProfile():
     # ------ GREETING TEXT ------
     # https://developers.facebook.com/docs/messenger-platform/messenger-profile/greeting-text
     def createGreeting(self):
-        data = { "greeting":[ { "locale":"default", "text":Strings.GREETING} ] }
+        data = { "greeting":[ { "locale":"default", "text":Strings.GREETING}, { "locale":"en_US", "text":Strings.GREETING} ] }
         result = json.loads(requests.post(self.__urlProfile,params=self.__params,headers=self.__headers,data=data).text)
         print(result)
         return result["result"] == "success"
