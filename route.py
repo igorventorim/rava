@@ -39,8 +39,8 @@ def getMessage(data):
             for messaging_event in entry["messaging"]:
                 client_id = messaging_event["sender"]["id"]
                 __messaging_event = messaging_event
-                isMessage = "message" in self.__messaging_event
-                isPostback = "postback" in self.__messaging_event
+                isMessage = "message" in __messaging_event
+                isPostback = "postback" in __messaging_event
                 content_message = self.__getPayloadOrText()
 
                 data_package = getResponse(client_id,content_message)
