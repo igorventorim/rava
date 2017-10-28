@@ -68,10 +68,10 @@ def getMessageText(messaging_event):
     if "attachments" in messaging_event["message"]:
         return "attachments" # caso o usuario clicar no joinha da isso
     else:
-        return __messaging_event["message"]["text"]
+        return messaging_event["message"]["text"]
 
 def getPostbackPayload(messaging_event):
-    return __messaging_event["postback"]["payload"]
+    return messaging_event["postback"]["payload"]
 
 
 def getResponse(client_id,text):
