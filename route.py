@@ -51,8 +51,8 @@ def getMessage(data):
 def sendMessage(data):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=__PARAMS, headers=__HEADERS, data=data)
     if r.status_code != 200:
-        print r.status_code
-        print r.text
+        print(r.status_code)
+        print(r.text)
 
 
 def __getPayloadOrText(self): # just to instanciate the above
