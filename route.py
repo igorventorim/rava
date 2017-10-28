@@ -1,7 +1,13 @@
 from flask import Flask, request,render_template, redirect, url_for, session,flash
+import requests
+import sys
 import os
 
 app = Flask(__name__)
+
+
+__PARAMS = {"access_token":  os.environ["PAGE_ACCESS_TOKEN"] }
+__HEADERS = {"Content-Type": "application/json"}
 
 
 @app.route('/', methods=['GET'])
@@ -17,13 +23,67 @@ def verify():
 
 @app.route('/', methods=['POST']) 
 def webhook():
-    request.get_json()
+    getMessage(request.get_json())
     return "ok", 200
 
 
 @app.route("/home")
 def home():
-    return "<h1>Hello World</hi>"
+    return "<h1>Robo de Auxilio Virtual ao Aprendizado!</hi>"
+
+
+
+def getMessage(data):
+    if data["object"] == "page":
+        for entry in data["entry"]:
+            for messaging_event in entry["messaging"]:
+                client_id = messaging_event["sender"]["id"]
+                __messaging_event = messaging_event
+                isMessage = "message" in self.__messaging_event
+                isPostback = "postback" in self.__messaging_event
+                content_message = self.__getPayloadOrText()
+
+                data_package = getResponse(client_id,content_message)
+                sendMessage(data_package)
+
+
+
+def sendMessage(data):
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=__PARAMS, headers=__HEADERS, data=data)
+    if r.status_code != 200:
+        print r.status_code
+        print r.text
+
+
+def __getPayloadOrText(self): # just to instanciate the above
+    if isMessage:
+        return getMessageText()
+    elif isPostback:
+        return getPostbackPayload()
+    else:
+        raise TypeError("Message sent from client was not a text neither a payload.")
+
+
+def getMessageText(self):
+    if "attachments" in messaging_event["message"]:
+        return "attachments" # caso o usuario clicar no joinha da isso
+    else:
+        return __messaging_event["message"]["text"]
+
+def getPostbackPayload(self):
+    return __messaging_event["postback"]["payload"]
+
+
+def getResponse(client_id,text):
+    return json.dumps({
+                        "recipient": {
+                            "id": client_id
+                        },
+                        "message": {
+                            "text": text
+                        }
+                          })
+
 
 
 if __name__ == '__main__':
