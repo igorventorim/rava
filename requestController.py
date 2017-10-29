@@ -30,7 +30,7 @@ class RequestController:
 
     def __selector(self,message):
         try:
-            cmd = message.getContentMessage().split('', 1)[0]
+            cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
