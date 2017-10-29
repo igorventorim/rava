@@ -18,21 +18,7 @@ class RequestController:
             for entry in data["entry"]:
                 for messaging_event in entry["messaging"]:
                     message = Message(messaging_event)
-                    # user_id = message.getClientID()
                     self.__selector(message)
-
-                    # if(message.getContentMessage() == Strings.GET_STARTED):
-                    #     msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(user_id))
-                    #     data = answerViewTemplates.text(user_id, msgText)
-                    #     self.__sendMessage(data)
-                    #     msgText = Strings.APRESENTATION
-                    #     data = answerViewTemplates.quick_reply(user_id, msgText,["Cadastrar pergunta","Responder Pergunta"])
-                    #     self.__sendMessage(data)
-                    #
-                    # else:
-                    #     msgText = message.getContentMessage()
-                    #     data = answerViewTemplates.text(user_id,msgText)
-                    #     self.__sendMessage(data)
 
 
     def __sendMessage(self,data):
@@ -44,7 +30,7 @@ class RequestController:
 
     def __selector(self,message):
         try:
-            self.options[message.getContentMessage()](self,message)
+            self.options[message.getContentMessage().upper()](self,message)
         except:
             self.erro(message)
 
@@ -54,7 +40,22 @@ class RequestController:
         data = answerViewTemplates.text(user_id, msgText)
         self.__sendMessage(data)
         msgText = Strings.APRESENTATION
-        data = answerViewTemplates.quick_reply(user_id, msgText, ["Cadastrar pergunta", "Responder Pergunta"])
+        data = answerViewTemplates.quick_reply(user_id, msgText, [Strings.PROFESSOR, Strings.ALUNO])
+        self.__sendMessage(data)
+
+    def help(self,message):
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, Strings.HELP_INFO)
+        self.__sendMessage(data)
+
+    def professor(self,message):
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, Strings.PROFESSOR_INFO)
+        self.__sendMessage(data)
+
+    def aluno(self,message):
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, Strings.ALUNO_INFO)
         self.__sendMessage(data)
 
     def erro(self,message):
@@ -63,4 +64,8 @@ class RequestController:
         data = answerViewTemplates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         self.__sendMessage(data)
 
-    options = {Strings.GET_STARTED: started}
+    options = {Strings.GET_STARTED.upper(): started,
+               Strings.HELP.upper(): help,
+               Strings.PROFESSOR.upper(): professor,
+               Strings.ALUNO.upper(): aluno
+               }
