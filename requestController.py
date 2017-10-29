@@ -145,7 +145,7 @@ class RequestController:
                Strings.ALUNO.upper(): __aluno,
                Strings.CMD_CRIAR_CURSO.upper(): __criar_curso,
                Strings.CMD_CRIAR_ATIVIDADE.upper(): __criar_atividade,
-               Strings.CMD_LISTAR_CURSOS.upper(): __listar_cursos(),
+               Strings.CMD_LISTAR_CURSOS.upper(): __listar_cursos,
                Strings.CMD_LISTAR_ATIVIDADES.upper(): __listar_atividades,
                Strings.CMD_LOGIN_CURSO.upper(): __login_curso,
                Strings.CMD_VISUALIZAR_ATIVIDADES.upper(): __visualizar_atividades,
