@@ -41,29 +41,37 @@ class Strings():
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
                 "Comandos para Professor:\n" \
-                "/curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
-                "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
-                "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
-                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
-                "/professor - Exibe os comandos utilizados para professores.\n\n"
+                "/curso nomedocurso    - Cadastrar um novo curso. \n" \
+                "exemplo: /curso cálculo 1\n\n" \
+                "/atividade codcurso descricao    - Cadastra uma nova atividade a um curso." \
+                "exemplo: /atividade cal01 Qual é a derivada de 2x? \n\n" \
+                "/listcursos    - Lista os cursos criados por você.\n\n" \
+                "/listatividades    - Lista a suas atividades criadas que estão em aberto.\n\n" \
+                "/professor    - Exibe os comandos utilizados para professores.\n\n"
     HELP_INFO_ALUNO = "Aluno:\n" \
-        "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
-        "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
-        "/notas -  Exibe notas de tarefas respondidas.\n\n" \
-        "/aluno - Exibe os comandos utilizados para alunos.\n\n" \
+        "/cadastrar codcurso    - Se cadastra em um curso.\n" \
+        "exemplo: /cadastrar cal01\n\n" \
+        "/tarefas     - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
+        "/notas     -  Exibe notas de tarefas respondidas.\n\n" \
+        "/aluno     - Exibe os comandos utilizados para alunos.\n\n" \
         "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
     ALUNO_INFO =  "Bem vindo, você está na área do aluno, você pode realizar os seguintes comandos:\n" \
-                "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
-                "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
-                "/notas -  Exibe notas de tarefas respondidas.\n\n" \
+                "/cadastrar codcurso    - Se cadastra em um curso.\n" \
+                "exemplo: /cadastrar cal01\n\n" \
+                "/tarefas     - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
+                "/notas     -  Exibe notas de tarefas respondidas.\n\n" \
+                "/aluno     - Exibe os comandos utilizados para alunos.\n\n" \
                 "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
     PROFESSOR_INFO = "Bem vindo, você está na área do professor, você pode realizar os seguintes comandos:\n" \
-                "/curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
-                "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
-                "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
-                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
+                 "/curso nomedocurso    - Cadastrar um novo curso. \n" \
+                "exemplo: /curso cálculo 1\n\n" \
+                "/atividade codcurso descricao    - Cadastra uma nova atividade a um curso.\n" \
+                "exemplo: /atividade cal01 Qual é a derivada de 2x? \n\n" \
+                "/listcursos    - Lista os cursos criados por você.\n\n" \
+                "/listatividades    - Lista a suas atividades criadas que estão em aberto.\n\n" \
+                "/professor    - Exibe os comandos utilizados para professores.\n\n"
                 "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
 

@@ -5,6 +5,7 @@ class Course:
         self.__name = name
         self.__teatcher = teatcher
         self.__questions = []
+        self.__students = []
 
     def getCode(self):
         return self.__code
@@ -20,3 +21,9 @@ class Course:
 
     def addActivity(self,question):
         self.__questions.append(question)
+
+    def getStudents(self):
+        return self.__students
+
+    def addStudent(self, student):
+        self.__students.append(student)
