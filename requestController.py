@@ -44,7 +44,7 @@ class RequestController:
 
     def __selector(self,message):
         try:
-            self.options[message.getContentMessage().upper()](message)
+            self.options[message.getContentMessage()](message)
         except:
             self.erro(message)
 
