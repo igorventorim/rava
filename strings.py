@@ -29,25 +29,29 @@ class Strings():
 
     PROFESSOR="Professor"
     ALUNO="Aluno"
-    CRIAR_CURSO="/curso"
-    CRIAR_ATIVIDADE="/atividade"
-    LISTAR_CURSOS="/listcursos"
-    LISTAR_ATIVIDADES="/listatividades"
-    LOGIN_CURSO="/cadastrar"
-    VISUALIZAR_ATIVIDADES="/tarefas"
-    VISUALIZAR_NOTAS="/notas"
+    CMD_CRIAR_CURSO="/curso"
+    CMD_CRIAR_ATIVIDADE="/atividade"
+    CMD_LISTAR_CURSOS="/listcursos"
+    CMD_LISTAR_ATIVIDADES="/listatividades"
+    CMD_LOGIN_CURSO="/cadastrar"
+    CMD_VISUALIZAR_ATIVIDADES="/tarefas"
+    CMD_VISUALIZAR_NOTAS="/notas"
+    CMD_PROFESSOR="/professor"
+    CMD_ALUNO="/aluno"
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
                 "Comandos para Professor:\n" \
                 "/curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
                 "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
                 "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
-                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n"
+                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
+                "/professor - Exibe os comandos utilizados para professores.\n\n"
     HELP_INFO_ALUNO = "Aluno:\n" \
-                "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
-                "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
-                "/notas -  Exibe notas de tarefas respondidas.\n\n" \
-                "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
+        "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
+        "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
+        "/notas -  Exibe notas de tarefas respondidas.\n\n" \
+        "/aluno - Exibe os comandos utilizados para alunos.\n\n" \
+        "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
     ALUNO_INFO =  "Bem vindo, você está na área do aluno, você pode realizar os seguintes comandos:\n" \
                 "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \

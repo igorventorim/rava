@@ -30,7 +30,10 @@ class RequestController:
 
     def __selector(self,message):
         try:
-            self.options[message.getContentMessage().upper()](self,message)
+            if(message.getContentMessage()[0] != "#"):
+                self.options[message.getContentMessage().upper()](self,message)
+            else:
+                self.answer(message)
         except:
             self.erro(message)
 
@@ -66,25 +69,46 @@ class RequestController:
         self.__sendMessage(data)
 
     def criar_curso(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Vamos criar um curso :)")
+        self.__sendMessage(data)
 
     def criar_atividade(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Vamos criar uma atividade :)")
+        self.__sendMessage(data)
 
     def listar_curso(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Vamos listar os meus cursos criados :)")
+        self.__sendMessage(data)
 
     def listar_atividades(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Vamos listar minhas atividades criadas :)")
+        self.__sendMessage(data)
 
     def login_curso(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Me cadastrei em um curso :)")
+        self.__sendMessage(data)
 
     def visualizar_atividades(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Visualizar as atividades dos cursos que estou cadastrado :)")
+        self.__sendMessage(data)
 
     def visualizar_notas(self,message):
-        pass
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Visualizar as notas das atividades que eu respondi :)")
+        self.__sendMessage(data)
 
     def info_nova_atividade(self):
         pass
@@ -92,14 +116,23 @@ class RequestController:
     def info_feedback(self):
         pass
 
+    def answer(self,message):
+        content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        data = answerViewTemplates.text(user_id, "Resposta enviada com sucesso :)")
+        self.__sendMessage(data)
+        pass
+
     options = {Strings.GET_STARTED.upper(): started,
                Strings.HELP.upper(): help,
                Strings.PROFESSOR.upper(): professor,
                Strings.ALUNO.upper(): aluno,
-               Strings.CRIAR_CURSO.upper(): criar_curso,
-               Strings.CRIAR_ATIVIDADE.upper(): criar_atividade,
-               Strings.LISTAR_ATIVIDADES.upper(): listar_atividades,
-               Strings.LOGIN_CURSO.upper(): login_curso,
-               Strings.VISUALIZAR_ATIVIDADES.upper(): visualizar_atividades,
-               Strings.VISUALIZAR_NOTAS.upper(): visualizar_notas
+               Strings.CMD_CRIAR_CURSO.upper(): criar_curso,
+               Strings.CMD_CRIAR_ATIVIDADE.upper(): criar_atividade,
+               Strings.CMD_LISTAR_ATIVIDADES.upper(): listar_atividades,
+               Strings.CMD_LOGIN_CURSO.upper(): login_curso,
+               Strings.CMD_VISUALIZAR_ATIVIDADES.upper(): visualizar_atividades,
+               Strings.CMD_VISUALIZAR_NOTAS.upper(): visualizar_notas,
+               Strings.CMD_ALUNO.upper(): aluno,
+               Strings.CMD_PROFESSOR.upper(): professor
                }
