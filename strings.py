@@ -64,6 +64,7 @@ class Strings():
                 "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
                 "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
                 "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
+                "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
 
 
