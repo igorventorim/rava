@@ -44,10 +44,10 @@ class RequestController:
 
 
     def __selector(self):
-        try:
+        # try:
             self.options[self.message.getContentMessage()]()
-        except:
-            self.erro()
+        # except:
+            # self.erro()
 
     def started(self):
         user_id = self.message.getClientID()
