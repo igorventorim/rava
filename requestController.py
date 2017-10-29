@@ -8,6 +8,7 @@ from userData import UserData
 
 class RequestController:
 
+    message = None
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
@@ -17,9 +18,9 @@ class RequestController:
         if data["object"] == "page":
             for entry in data["entry"]:
                 for messaging_event in entry["messaging"]:
-                    message = Message(messaging_event)
+                    self.message = Message(messaging_event)
                     # user_id = message.getClientID()
-                    self.__selector(message)
+                    self.__selector()
 
                     # if(message.getContentMessage() == Strings.GET_STARTED):
                     #     msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(user_id))
@@ -42,14 +43,14 @@ class RequestController:
             print(r.text)
 
 
-    def __selector(self,message):
-        # try:
-        (self.options[message.getContentMessage()])(message)
-        # except:
-        #     self.erro(message)
+    def __selector(self):
+        try:
+            self.options[self.message.getContentMessage()]()
+        except:
+            self.erro()
 
-    def started(self,message):
-        user_id = message.getClientID()
+    def started(self):
+        user_id = self.message.getClientID()
         msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(user_id))
         data = answerViewTemplates.text(user_id, msgText)
         self.__sendMessage(data)
@@ -57,8 +58,8 @@ class RequestController:
         data = answerViewTemplates.quick_reply(user_id, msgText, ["Cadastrar pergunta", "Responder Pergunta"])
         self.__sendMessage(data)
 
-    def erro(self,message):
-        user_id = message.getClientID()
+    def erro(self):
+        user_id = self.message.getClientID()
         # msgText = message.getContentMessage()
         data = answerViewTemplates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         self.__sendMessage(data)
