@@ -9,7 +9,8 @@ class Strings():
     NO = u"Nao"
     GREETING_TEXT = u"Seja bem vindo ao rava !"
     GREETING_KNOWN_USER = u"Olá {}, tudo bem?"
-    APRESENTATION= "Eu sou o Robô de Auxílio Virtual ao Aprendizado, para os mais íntimos Rava.\nEu auxílio o ensino virtual recebendo perguntas enviadas por professores,encaminho para os alunos e avalio suas respostas, você é um?"
+    APRESENTATION= "Eu sou o Robô de Auxílio Virtual ao Aprendizado, para os mais íntimos Rava.\n" \
+                   "Eu auxílio o ensino virtual recebendo perguntas enviadas por professores, encaminho para os alunos e avalio suas respostas, você é um?"
     BACK = u"Voltar"
     WHAT_TO_DO_NOW = u"O que deseja fazer agora?"
     SELECT_OPTION = u"Entendiii, escolha a opcao abaixo que melhor te atende :)"
@@ -25,32 +26,40 @@ class Strings():
     MORE = u"Mais"
     OK = u"Ok"
     WAIT_TIME = u"Tempo de espera aproximado: {} minutos."
+
     PROFESSOR="Professor"
     ALUNO="Aluno"
+    CRIAR_CURSO="/curso"
+    CRIAR_ATIVIDADE="/atividade"
+    LISTAR_CURSOS="/listcursos"
+    LISTAR_ATIVIDADES="/listatividades"
+    LOGIN_CURSO="/cadastrar"
+    VISUALIZAR_ATIVIDADES="/tarefas"
+    VISUALIZAR_NOTAS="/notas"
 
-    HELP_INFO = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
-                "Professor:\n" \
-                "\curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
-                "\\atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
-                "\listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
-                "\listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
-                "Aluno:\n" \
-                "\cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
-                "\\tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
-                "\\notas -  Exibe notas de tarefas respondidas.\n\n" \
+    HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
+                "Comandos para Professor:\n" \
+                "/curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
+                "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
+                "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
+                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n"
+    HELP_INFO_ALUNO = "Aluno:\n" \
+                "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
+                "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
+                "/notas -  Exibe notas de tarefas respondidas.\n\n" \
                 "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
     ALUNO_INFO =  "Bem vindo, você está na área do aluno, você pode realizar os seguintes comandos:\n" \
-                "\cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
-                "\\tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
-                "\\notas -  Exibe notas de tarefas respondidas.\n\n" \
+                "/cadastrar codcurso - Substitua codcurso pelo codigo do curso que se deseja cadastrar.\n\n" \
+                "/tarefas - Exibe as tarefas em abertos com seus códigos, para responder digite #codigodatarefa resposta. (Obs.: Substitua codigoda tarefa pelo código exibido e resposta por sua resposta)\n\n" \
+                "/notas -  Exibe notas de tarefas respondidas.\n\n" \
                 "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
     PROFESSOR_INFO = "Bem vindo, você está na área do professor, você pode realizar os seguintes comandos:\n" \
-                "\curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
-                "\\atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
-                "\listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
-                "\listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
+                "/curso nomedocurso - Substitua nomedocurso pelo curso que você deseja criar.\n\n" \
+                "/atividade codcurso desc - Substitua codcurso pelo codigo do curso que foi criado e desc pela pergunta desejada.\n\n" \
+                "/listcursos - Informa a lista de curso com seus códigos já criada pelo usuário.\n\n" \
+                "/listatividades - Informa a lista de atividades em aberto já criadas.\n\n" \
 
 
 

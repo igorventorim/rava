@@ -45,7 +45,9 @@ class RequestController:
 
     def help(self,message):
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, Strings.HELP_INFO)
+        data = answerViewTemplates.text(user_id, Strings.HELP_INFO_PROFESSOR)
+        self.__sendMessage(data)
+        data = answerViewTemplates.text(user_id, Strings.HELP_INFO_ALUNO)
         self.__sendMessage(data)
 
     def professor(self,message):
@@ -60,12 +62,44 @@ class RequestController:
 
     def erro(self,message):
         user_id = message.getClientID()
-        # msgText = message.getContentMessage()
         data = answerViewTemplates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         self.__sendMessage(data)
+
+    def criar_curso(self,message):
+        pass
+
+    def criar_atividade(self,message):
+        pass
+
+    def listar_curso(self,message):
+        pass
+
+    def listar_atividades(self,message):
+        pass
+
+    def login_curso(self,message):
+        pass
+
+    def visualizar_atividades(self,message):
+        pass
+
+    def visualizar_notas(self,message):
+        pass
+
+    def info_nova_atividade(self):
+        pass
+
+    def info_feedback(self):
+        pass
 
     options = {Strings.GET_STARTED.upper(): started,
                Strings.HELP.upper(): help,
                Strings.PROFESSOR.upper(): professor,
-               Strings.ALUNO.upper(): aluno
+               Strings.ALUNO.upper(): aluno,
+               Strings.CRIAR_CURSO.upper(): criar_curso,
+               Strings.CRIAR_ATIVIDADE.upper(): criar_atividade,
+               Strings.LISTAR_ATIVIDADES.upper(): listar_atividades,
+               Strings.LOGIN_CURSO.upper(): login_curso,
+               Strings.VISUALIZAR_ATIVIDADES.upper(): visualizar_atividades,
+               Strings.VISUALIZAR_NOTAS.upper(): visualizar_notas
                }
