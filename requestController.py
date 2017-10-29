@@ -11,6 +11,7 @@ class RequestController:
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
+        self.__cursos = []
 
 
     def unpackMessage(self,data):
@@ -77,8 +78,9 @@ class RequestController:
     #TODO: REGISTER COURSE IN THE FILE WITH HIS CREATOR USER
     def __criar_curso(self,message):
         content_message = message.getContentMessage()
+        course_name = content_message[content_message.find(" "):]
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Vamos criar um curso :)")
+        data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name)
         self.__sendMessage(data)
 
     #TODO: REGISTER ACTIVITY IN THE FILE WITH HIS COURSE
