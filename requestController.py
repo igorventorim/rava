@@ -8,11 +8,11 @@ from userData import UserData
 
 class RequestController:
 
-    message = None
+
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
-
+        self.message = None
 
     def unpackMessage(self,data):
         if data["object"] == "page":
