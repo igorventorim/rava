@@ -205,7 +205,7 @@ class RequestController:
             if user_id in course.getStudents():
                 if question_code in course.getQuestions().keys():
                     answer = Answer(response,user_id,question_code)
-                    course.get(question_code).addAnswer(answer=answer)
+                    course.getQuestions().get(question_code).addAnswer(answer=answer)
                     self.__alunos.get(user_id).registerAnswer(answer)
                     data = answerViewTemplates.text(user_id,"Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
                     self.__sendMessage(data)
