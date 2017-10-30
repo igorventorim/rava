@@ -58,7 +58,7 @@ class Course(object):
     def listCourses(cursos, teatcher_id):
         list = ""
         courses=[]
-        for course in cursos:
+        for k,course in cursos.items():
             if course.getTeatcher() == teatcher_id:
                 list += str(course.getCode())+":"+course.getName()+"\n"
                 courses.append(course)
