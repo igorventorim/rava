@@ -204,8 +204,8 @@ class RequestController:
     def __answer(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        course_code = content_message[1:content_message.find("Q")]
-        question_code = content_message[1:content_message.find(" ")]
+        course_code = content_message[1:content_message.find("Q")].upper()
+        question_code = content_message[1:content_message.find(" ")].upper()
         response = content_message[content_message.find(" ")+1:]
         course = Course.getCurso(self.__cursos,course_code)
         print(course_code)
