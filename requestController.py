@@ -232,7 +232,7 @@ class RequestController:
                 self.__sendMessage(data)
 
     def generateStructPNota(self):
-        print json.dumps(self.__cursos)
+        print (json.dumps(self.__cursos))
         pass
 
     __options = {Strings.GET_STARTED.upper(): __started,
