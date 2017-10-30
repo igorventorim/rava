@@ -1,6 +1,9 @@
 class Course:
 
+    numberCourses = 0
+
     def __init__(self, code, name, teatcher_id):
+        Course.numberCourses += 1
         self.__code = code
         self.__name = name
         self.__teatcher_id = teatcher_id
@@ -8,7 +11,8 @@ class Course:
         self.__students = []
 
     def __init__(self, name, teatcher_id):
-        self.__code = name[0]+teatcher_id[0:4]
+        Course.numberCourses += 1
+        self.__code = "CC"+str(Course.numberCourses)
         self.__name = name
         self.__teatcher_id = teatcher_id
         self.__questions = []

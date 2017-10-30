@@ -102,7 +102,7 @@ class RequestController:
         user_id = message.getClientID()
         courses_list = Course.listCourses(self.__cursos,user_id)[1]
         msg = courses_list if len(courses_list) else "Desculpe, Mas você não possui curso cadastrado!"
-        data = answerViewTemplates.text(user_id, "Seus cursos são :"+msg)
+        data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
         self.__sendMessage(data)
 
     def __listar_atividades(self,message):
