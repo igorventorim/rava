@@ -71,7 +71,7 @@ class Strings():
                 "exemplo: /atividade cal01 Qual é a derivada de 2x? \n\n" \
                 "/listcursos    - Lista os cursos criados por você.\n\n" \
                 "/listatividades    - Lista a suas atividades criadas que estão em aberto.\n\n" \
-                "/professor    - Exibe os comandos utilizados para professores.\n\n"
+                "/professor    - Exibe os comandos utilizados para professores.\n\n"\
                 "Qualquer dúvida entre em contato pelo email: xxx@ufes.br\n"
 
 

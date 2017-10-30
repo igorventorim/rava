@@ -2,6 +2,8 @@ from authentication import Authentication
 from message import Message
 import requests
 import answerViewTemplates
+from model.domain.course import Course
+from model.domain.question import Question
 from strings import Strings
 from userData import UserData
 
@@ -75,36 +77,45 @@ class RequestController:
         data = answerViewTemplates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         self.__sendMessage(data)
 
-    #TODO: REGISTER COURSE IN THE FILE WITH HIS CREATOR USER
     def __criar_curso(self,message):
         content_message = message.getContentMessage()
-        course_name = content_message[content_message.find(" "):]
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name)
+        course_name = content_message[content_message.find(" "):]
+        course = Course(name=course_name,teatcher_id=user_id)
+        self.__cursos.append(course)
+        data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
 
-    #TODO: REGISTER ACTIVITY IN THE FILE WITH HIS COURSE
     def __criar_atividade(self,message):
         content_message = message.getContentMessage()
-        curso = None
+        split = message.getContentMessage().split(' ', 1)
+        course = Course.getCurso(self.__cursos,split[1])
+        question = Question("Q"+str(len(course.getQuestions())),split[1:])
+        course.addQuestion(question)
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Vamos criar uma atividade :)")
+        data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
         self.__sendMessage(data)
-        self.__info_nova_atividade(curso)
+        self.__info_nova_atividade(course)
 
-    #TODO: READ FILE COURSES AND SHOW HIS NAME AND CODE
     def __listar_cursos(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Vamos listar os meus cursos criados :)")
+        courses_list = Course.listCourses(self.__cursos,user_id)[1]
+        msg = courses_list if len(courses_list) else "Desculpe, Mas você não possui curso cadastrado!"
+        data = answerViewTemplates.text(user_id, "Seus cursos são :"+msg)
         self.__sendMessage(data)
 
-    # TODO: READ FILE ACTIVITYS AND SHOW HIS NAME AND CODE
     def __listar_atividades(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Vamos listar minhas atividades criadas :)")
-        self.__sendMessage(data)
+        courses_list = Course.listCourses(self.__cursos, user_id)[0]
+        if( len(courses_list) > 0):
+            for course in courses_list:
+                data = answerViewTemplates.text("Questões do curso "+user_id,course.getName()+"\n"+course.getQuestionsToString())
+                self.__sendMessage(data)
+        else:
+            data = answerViewTemplates.text(user_id, "Você não possui nenhum curso cadastrado, por isso não pode ter nenhuma questão cadastrada!")
+            self.__sendMessage(data)
 
     # TODO: REGISTER USER IN THE COURSE
     def __login_curso(self,message):
