@@ -49,7 +49,7 @@ class Course:
     @staticmethod
     def getCurso(cursos,code):
         for course in cursos:
-            if course.getCode() == code:
+            if course.getCode().upper() == code.upper():
                 return course
         return None
 

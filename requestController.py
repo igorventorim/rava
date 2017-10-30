@@ -31,14 +31,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        try:
+        # try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        except:
-            self.__erro(message)
+        # except:
+        #     self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -113,8 +113,8 @@ class RequestController:
         courses_list = Course.listCourses(self.__cursos, user_id)[0]
         if( len(courses_list) > 0):
             for course in courses_list:
-                questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui questões."
-                data = answerViewTemplates.text(user_id, "Questões do curso "+course.getName()+"\n"+course.getQuestionsToString())
+                questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
+                data = answerViewTemplates.text(user_id, "Atividades do curso "+course.getName()+"\n"+course.getQuestionsToString())
                 self.__sendMessage(data)
         else:
             data = answerViewTemplates.text(user_id, "Você não possui nenhum curso cadastrado, por isso não pode ter nenhuma questão cadastrada!")
