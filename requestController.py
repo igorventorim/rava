@@ -4,6 +4,7 @@ import requests
 import answerViewTemplates
 from model.domain.course import Course
 from model.domain.question import Question
+from model.domain.student import Student
 from strings import Strings
 from userData import UserData
 
@@ -13,7 +14,8 @@ class RequestController:
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
-        self.__cursos = []
+        self.__cursos = []   #TODO: CHANGE DICT COURSES
+        self.__alunos = {}
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -134,7 +136,12 @@ class RequestController:
         course = Course.getCurso(self.__cursos,course_code)
 
         if course != None:
+
+            if not user_id in self.__alunos.keys():
+                self.__alunos[user_id] = Student(user_id)
+
             course.addStudent(user_id)
+            self.__alunos.get(user_id).addCourse(course_code)
             data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName())
             self.__sendMessage(data)
         else:
