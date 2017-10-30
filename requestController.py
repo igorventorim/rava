@@ -195,6 +195,9 @@ class RequestController:
         question_code = content_message[content_message.find("Q")+1:content_message.find(" ")]
         response = content_message[content_message.find(" "):]
         course = Course.getCurso(self.__cursos,course_code)
+        print(course_code)
+        print(question_code)
+        print(response)
         if course == None:
             data = answerViewTemplates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
             self.__sendMessage(data)
