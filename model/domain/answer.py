@@ -4,7 +4,7 @@ class Answer:
         self.__answer_text = answer_text
         self.__user_id = user_id
         self.__question_id = question_id
-        self.__feedback = None
+        self.__feedback = ""
 
     def getAnswerText(self):
         return self.__answer_text
