@@ -36,8 +36,8 @@ class Course:
     def getStudents(self):
         return self.__students
 
-    def addStudent(self, student):
-        self.__students.append(student)
+    def addStudent(self, student_id):
+        self.__students.append(student_id)
 
     def getQuestionsToString(self):
         result=""

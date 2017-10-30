@@ -31,14 +31,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        # try:
+        try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        # except:
-        #     self.__erro(message)
+        except:
+            self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -87,6 +87,7 @@ class RequestController:
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
 
+    # V1.0 - OK
     def __criar_atividade(self,message):
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -111,6 +112,7 @@ class RequestController:
         data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
         self.__sendMessage(data)
 
+    # V1.0 - OK
     def __listar_atividades(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -128,8 +130,17 @@ class RequestController:
     def __login_curso(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Me cadastrei em um curso :)")
-        self.__sendMessage(data)
+        course_code = content_message[content_message.find(" "):]
+        course = Course.getCurso(self.__cursos,course_code)
+
+        if course != None:
+            course.addStudent(user_id)
+            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName())
+            self.__sendMessage(data)
+        else:
+            data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
+            self.__sendMessage(data)
+
 
     # TODO: SHOW ACTIVITYS THE USER HAVE FOR ANSWER
     def __visualizar_atividades(self,message):
