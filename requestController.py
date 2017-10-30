@@ -1,3 +1,5 @@
+import json
+
 from authentication import Authentication
 from message import Message
 import requests
@@ -228,6 +230,10 @@ class RequestController:
             else:
                 data = answerViewTemplates.text(user_id,"Você não está cadastrado neste curso.")
                 self.__sendMessage(data)
+
+    def generateStructPNota(self):
+        print json.dumps(self.__cursos)
+        pass
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,

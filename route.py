@@ -53,6 +53,13 @@ def readGreeting():
     print(r)
     return r["data"], 200
 
+@app.route("/pnota")
+def structPNota():
+    r = controller.generateStructPNota()
+    print(r)
+    return r, 200
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
