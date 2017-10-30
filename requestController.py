@@ -8,6 +8,7 @@ from model.domain.answer import Answer
 from model.domain.course import Course
 from model.domain.question import Question
 from model.domain.student import Student
+from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
 
@@ -232,7 +233,8 @@ class RequestController:
                 self.__sendMessage(data)
 
     def generateStructPNota(self):
-        print (json.dumps(self.__cursos))
+        print (json.dumps(self.__cursos, cls=MyEncoder))
+
         pass
 
     __options = {Strings.GET_STARTED.upper(): __started,

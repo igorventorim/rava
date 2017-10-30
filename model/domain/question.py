@@ -1,4 +1,4 @@
-class Question:
+class Question(object):
 
     def __init__(self, code, desc):
         self.__code = code

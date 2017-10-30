@@ -1,4 +1,4 @@
-class Answer:
+class Answer(object):
 
     def __init__(self,answer_text, user_id, question_id):
         self.__answer_text = answer_text

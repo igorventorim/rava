@@ -1,4 +1,4 @@
-class Course:
+class Course(object):
 
     numberCourses = 0
 
