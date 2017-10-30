@@ -18,8 +18,7 @@ class RequestController:
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
-        # self.__cursos = []   #TODO: CHANGE DICT COURSES
-        self.__coursers = {}
+        self.__cursos = []   #TODO: CHANGE DICT COURSES
         self.__alunos = {}
 
     def unpackMessage(self,data):
@@ -89,8 +88,7 @@ class RequestController:
         user_id = message.getClientID()
         course_name = content_message[content_message.find(" ")+1:]
         course = Course(name=course_name,teatcher_id=user_id)
-        # self.__cursos.append(course)
-        self.__coursers[course.getCode()] = course
+        self.__cursos.append(course)
         # print(self.__cursos)
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
@@ -100,8 +98,7 @@ class RequestController:
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
         split = message.getContentMessage().split(' ',2)
-        # course = Course.getCurso(self.__cursos,split[1])
-        course = self.__coursers[split[1].upper()]
+        course = Course.getCurso(self.__cursos,split[1])
         if course != None:
 
             if course.getTeatcher() == user_id:
@@ -121,7 +118,7 @@ class RequestController:
     def __listar_cursos(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        courses_list = Course.listCourses(self.__coursers,user_id)[1]
+        courses_list = Course.listCourses(self.__cursos,user_id)[1]
         msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
         data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
         self.__sendMessage(data)
@@ -130,7 +127,7 @@ class RequestController:
     def __listar_atividades(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        courses_list = Course.listCourses(self.__coursers, user_id)[0]
+        courses_list = Course.listCourses(self.__cursos, user_id)[0]
         if( len(courses_list) > 0):
             for course in courses_list:
                 questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
@@ -145,8 +142,7 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         course_code = content_message[content_message.find(" ")+1:]
-        # course = Course.getCurso(self.__cursos,course_code)
-        course = self.__coursers[course_code]
+        course = Course.getCurso(self.__cursos,course_code)
 
         if course != None:
 
@@ -170,9 +166,8 @@ class RequestController:
             self.__sendMessage(data)
         else:
             for course in self.__alunos.get(user_id).getCourses():
-                # msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
-                msg = "Questões do curso: "+self.__coursers[course].getName()+"\n"
-                for question_id,question in self.__coursers[course].getName().getQuestions().items():
+                msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
+                for question_id,question in Course.getCurso(self.__cursos,course).getQuestions().items():
                     msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
                 self.__sendMessage(data)
@@ -215,8 +210,7 @@ class RequestController:
         course_code = content_message[1:content_message.find("Q")]
         question_code = content_message[1:content_message.find(" ")].upper()
         response = content_message[content_message.find(" ")+1:]
-        # course = Course.getCurso(self.__cursos,course_code)
-        course = self.__coursers[course_code]
+        course = Course.getCurso(self.__cursos,course_code)
         # print(course_code)
         # print(question_code)
         # print(response)
@@ -240,7 +234,7 @@ class RequestController:
 
     def generateStructPNota(self):
         # print (json.dumps(self.__cursos, cls=MyEncoder))
-        return json.dumps({"messenger":self.__coursers}, cls=MyEncoder)
+        return json.dumps({"Messenger": self.__cursos}, cls=MyEncoder)
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
