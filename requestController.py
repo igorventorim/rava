@@ -89,7 +89,7 @@ class RequestController:
         course_name = content_message[content_message.find(" ")+1:]
         course = Course(name=course_name,teatcher_id=user_id)
         self.__cursos.append(course)
-        print(self.__cursos)
+        # print(self.__cursos)
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
 
@@ -211,9 +211,9 @@ class RequestController:
         question_code = content_message[1:content_message.find(" ")].upper()
         response = content_message[content_message.find(" ")+1:]
         course = Course.getCurso(self.__cursos,course_code)
-        print(course_code)
-        print(question_code)
-        print(response)
+        # print(course_code)
+        # print(question_code)
+        # print(response)
         if course == None:
             data = answerViewTemplates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
             self.__sendMessage(data)
@@ -233,9 +233,8 @@ class RequestController:
                 self.__sendMessage(data)
 
     def generateStructPNota(self):
-        print (json.dumps(self.__cursos, cls=MyEncoder))
-
-        pass
+        # print (json.dumps(self.__cursos, cls=MyEncoder))
+        return json.dumps({"Messenger":self.__cursos}, cls=MyEncoder)
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
