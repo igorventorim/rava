@@ -175,9 +175,22 @@ class RequestController:
     def __visualizar_notas(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        pass
+        student = self.__alunos.get(user_id)
+        if student != None:
+            student_answers = student.getAnswers()
+            if( len(student_answers) > 0):
+                for answer in student_answers:
+                    msg = "Pergunta:"+" ... \nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
+                    data = answerViewTemplates.text(user_id, "")
+                    self.__sendMessage(data)
+            else:
+                data = answerViewTemplates.text(user_id, "Você não possui nenhuma resposta cadastrada.")
+                self.__sendMessage(data)
+        else:
+            data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
+            self.__sendMessage(data)
 
-
+    # V1.0 - OK
     def __info_nova_atividade(self,curso):
         for student_id in curso.getStudents():
             data = answerViewTemplates.text(student_id, "Você tem uma nova atividade, para visualizar envie /tarefas")
@@ -187,8 +200,8 @@ class RequestController:
         #TODO: AFTER CORRECTION PNOTA SEND RESULTS FOR USERS
         pass
 
+    # V1.0 - OK
     def __answer(self,message):
-        #TODO: REGISTER ANSWER IN THE SERVER ON STRUCT FOR PNOTA
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         course_code = content_message[1:content_message.find("Q")]
