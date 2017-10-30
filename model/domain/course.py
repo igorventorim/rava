@@ -7,7 +7,7 @@ class Course:
         self.__code = code
         self.__name = name
         self.__teatcher_id = teatcher_id
-        self.__questions = []
+        self.__questions = {}
         self.__students = []
 
     def __init__(self, name, teatcher_id):
@@ -15,7 +15,7 @@ class Course:
         self.__code = "CC"+str(Course.numberCourses)
         self.__name = name
         self.__teatcher_id = teatcher_id
-        self.__questions = []
+        self.__questions = {}
         self.__students = []
 
     def getCode(self):
@@ -31,7 +31,7 @@ class Course:
         return self.__questions
 
     def addQuestion(self,question):
-        self.__questions.append(question)
+        self.__questions[question.getCode()] = question
 
     def getStudents(self):
         return self.__students

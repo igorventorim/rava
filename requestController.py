@@ -2,6 +2,7 @@ from authentication import Authentication
 from message import Message
 import requests
 import answerViewTemplates
+from model.domain.answer import Answer
 from model.domain.course import Course
 from model.domain.question import Question
 from model.domain.student import Student
@@ -163,12 +164,12 @@ class RequestController:
         else:
             for course in self.__alunos.get(user_id).getCourses():
                 msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
-                for question in Course.getCurso(self.__cursos,course).getQuestions():
+                for question_id,question in Course.getCurso(self.__cursos,course).getQuestions().items():
                     msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
                 self.__sendMessage(data)
-        data = answerViewTemplates.text(user_id, "Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
-        self.__sendMessage(data)
+                data = answerViewTemplates.text(user_id,"Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
+                self.__sendMessage(data)
 
     # TODO: SHOW FEEDBACK FOR USER
     def __visualizar_notas(self,message):
@@ -190,8 +191,27 @@ class RequestController:
         #TODO: REGISTER ANSWER IN THE SERVER ON STRUCT FOR PNOTA
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Resposta enviada com sucesso :)")
-        self.__sendMessage(data)
+        course_code = content_message[1:content_message.find("Q")]
+        question_code = content_message[content_message.find("Q")+1:content_message.find(" ")]
+        response = content_message[content_message.find(" "):]
+        course = Course.getCurso(self.__cursos,course_code)
+        if course == None:
+            data = answerViewTemplates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
+            self.__sendMessage(data)
+        else:
+            if user_id in course.getStudents():
+                if question_code in course.getQuestions().keys():
+                    answer = Answer(response,user_id,question_code)
+                    course.get(question_code).addAnswer(answer=answer)
+                    self.__alunos.get(user_id).registerAnswer(answer)
+                    data = answerViewTemplates.text(user_id,"Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
+                    self.__sendMessage(data)
+                else:
+                    data = answerViewTemplates.text(user_id,"Código de questão inválido, confira se digitou o código corretamente.")
+                    self.__sendMessage(data)
+            else:
+                data = answerViewTemplates.text(user_id,"Você não está cadastrado neste curso.")
+                self.__sendMessage(data)
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
