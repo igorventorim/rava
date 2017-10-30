@@ -33,14 +33,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        try:
+        # try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        except:
-            self.__erro(message)
+        # except:
+            # self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -153,8 +153,6 @@ class RequestController:
     def __visualizar_atividades(self,message):
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
-
-        user_id = message.getClientID()
         if not user_id in self.__alunos.keys():
             data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
             self.__sendMessage(data)
@@ -169,6 +167,7 @@ class RequestController:
     # TODO: SHOW FEEDBACK FOR USER
     def __visualizar_notas(self,message):
         content_message = message.getContentMessage()
+        user_id = message.getClientID()
         pass
 
 
