@@ -88,16 +88,20 @@ class RequestController:
         self.__sendMessage(data)
 
     def __criar_atividade(self,message):
-        content_message = message.getContentMessage()
-        split = message.getContentMessage().split(' ', 1)
+        # content_message = message.getContentMessage()
+        user_id = message.getClientID()
+        split = message.getContentMessage().split(' ',2)
         course = Course.getCurso(self.__cursos,split[1])
         print(split[1])
-        question = Question("Q"+str(len(course.getQuestions())),split[1:])
-        course.addQuestion(question)
-        user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
-        self.__sendMessage(data)
-        self.__info_nova_atividade(course)
+        if course != None:
+            question = Question("Q"+str(len(course.getQuestions())),split[2:])
+            course.addQuestion(question)
+            data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
+            self.__sendMessage(data)
+            self.__info_nova_atividade(course)
+        else:
+            data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
+            self.__sendMessage(data)
 
     # V1.0 - OK
     def __listar_cursos(self,message):
