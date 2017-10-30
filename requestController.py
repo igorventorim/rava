@@ -14,6 +14,7 @@ class RequestController:
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
         self.__cursos = []
+        print("VERIFICANDO SE É CRIADO UM CONTROLLER A CADA MENSAGEM...")
 
 
     def unpackMessage(self,data):
@@ -101,7 +102,7 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         courses_list = Course.listCourses(self.__cursos,user_id)[1]
-        msg = courses_list if len(courses_list) else "Desculpe, Mas você não possui curso cadastrado!"
+        msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
         data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
         self.__sendMessage(data)
 
