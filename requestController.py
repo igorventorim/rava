@@ -158,7 +158,7 @@ class RequestController:
             self.__sendMessage(data)
         else:
             for course in self.__alunos.get(user_id).getCourses():
-                msg = "Questões do curso: "+course.getName()+"\n"
+                msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
                 for question in course.getQuestions():
                     msg += question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
