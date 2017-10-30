@@ -96,11 +96,16 @@ class RequestController:
         split = message.getContentMessage().split(' ',2)
         course = Course.getCurso(self.__cursos,split[1])
         if course != None:
-            question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2])
-            course.addQuestion(question)
-            data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
-            self.__sendMessage(data)
-            self.__info_nova_atividade(course)
+
+            if course.getTeatcher() == user_id:
+                question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2])
+                course.addQuestion(question)
+                data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
+                self.__sendMessage(data)
+                self.__info_nova_atividade(course)
+            else:
+                data = answerViewTemplates.text(user_id,"Você não está autorizado a cadastrar questões neste curso!")
+                self.__sendMessage(data)
         else:
             data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
             self.__sendMessage(data)
@@ -148,8 +153,7 @@ class RequestController:
             data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
             self.__sendMessage(data)
 
-
-    # TODO: SHOW ACTIVITYS THE USER HAVE FOR ANSWER
+    # V1.0 - OK
     def __visualizar_atividades(self,message):
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -160,9 +164,11 @@ class RequestController:
             for course in self.__alunos.get(user_id).getCourses():
                 msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
                 for question in Course.getCurso(self.__cursos,course).getQuestions():
-                    msg += question.getDesc()+"\n"
+                    msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
                 self.__sendMessage(data)
+        data = answerViewTemplates.text(user_id, "Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
+        self.__sendMessage(data)
 
     # TODO: SHOW FEEDBACK FOR USER
     def __visualizar_notas(self,message):
