@@ -60,6 +60,6 @@ class Course:
         courses=[]
         for course in cursos:
             if course.getTeatcher() == teatcher_id:
-                list = str(course.getCode())+":"+course.getName()+" "
+                list += str(course.getCode())+":"+course.getName()+"\n"
                 courses.append(course)
         return [courses,list]
