@@ -142,7 +142,7 @@ class RequestController:
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)
-            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName())
+            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+", agora você pode responder as atividades relacionadas a este curso!")
             self.__sendMessage(data)
         else:
             data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
@@ -164,8 +164,9 @@ class RequestController:
         self.__sendMessage(data)
 
     def __info_nova_atividade(self,curso):
-        #TODO: GET IDs REGISTERED IN THE COURSES AND SEND MESSAGE OF NEW ACTIVITY!
-        pass
+        for student_id in curso.getStudents():
+            data = answerViewTemplates.text(student_id, "Você tem uma nova atividade, para visualizar envie /listatividades")
+            self.__sendMessage(data)
 
     def info_feedback(self):
         #TODO: AFTER CORRECTION PNOTA SEND RESULTS FOR USERS
