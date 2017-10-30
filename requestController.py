@@ -93,7 +93,7 @@ class RequestController:
         split = message.getContentMessage().split(' ',2)
         course = Course.getCurso(self.__cursos,split[1])
         if course != None:
-            question = Question("Q"+str(len(course.getQuestions())),split[2:])
+            question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2])
             course.addQuestion(question)
             data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
             self.__sendMessage(data)

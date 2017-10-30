@@ -42,7 +42,7 @@ class Course:
     def getQuestionsToString(self):
         result=""
         for question in self.__questions:
-            result += str(question.getCode()) + question.getDesc()+"\n"
+            result += str(question.getCode()) +":"+ question.getDesc()+"\n"
         return result
 
 
