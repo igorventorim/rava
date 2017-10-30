@@ -41,8 +41,8 @@ class Course(object):
 
     def getQuestionsToString(self):
         result=""
-        for question in self.__questions:
-            result += str(question.getCode()) +":"+ question.getDesc()+"\n"
+        for k,question in self.__questions:
+            result += question.getCode() +":"+ question.getDesc()+"\n"
         return result
 
 
