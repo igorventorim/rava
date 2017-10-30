@@ -142,7 +142,7 @@ class RequestController:
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)
-            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+", agora você pode responder as atividades relacionadas a este curso!")
+            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+"!\nAgora você pode responder as atividades relacionadas a este curso!")
             self.__sendMessage(data)
         else:
             data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
@@ -151,21 +151,30 @@ class RequestController:
 
     # TODO: SHOW ACTIVITYS THE USER HAVE FOR ANSWER
     def __visualizar_atividades(self,message):
-        content_message = message.getContentMessage()
+        # content_message = message.getContentMessage()
         user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Visualizar as atividades dos cursos que estou cadastrado :)")
-        self.__sendMessage(data)
+
+        user_id = message.getClientID()
+        if not user_id in self.__alunos.keys():
+            data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
+            self.__sendMessage(data)
+        else:
+            for course in self.__alunos.get(user_id).getCourses():
+                msg = "Questões do curso: "+course.getName()+"\n"
+                for question in course.getQuestions():
+                    msg += question.getDesc()+"\n"
+                data = answerViewTemplates.text(user_id, msg)
+                self.__sendMessage(data)
 
     # TODO: SHOW FEEDBACK FOR USER
     def __visualizar_notas(self,message):
         content_message = message.getContentMessage()
-        user_id = message.getClientID()
-        data = answerViewTemplates.text(user_id, "Visualizar as notas das atividades que eu respondi :)")
-        self.__sendMessage(data)
+        pass
+
 
     def __info_nova_atividade(self,curso):
         for student_id in curso.getStudents():
-            data = answerViewTemplates.text(student_id, "Você tem uma nova atividade, para visualizar envie /listatividades")
+            data = answerViewTemplates.text(student_id, "Você tem uma nova atividade, para visualizar envie /tarefas")
             self.__sendMessage(data)
 
     def info_feedback(self):

@@ -10,3 +10,6 @@ class Student:
 
     def registerAnswer(self,answer):
         self.__answer.append(answer)
+
+    def getCourses(self):
+        return self.__courses
