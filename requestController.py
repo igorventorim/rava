@@ -82,7 +82,7 @@ class RequestController:
     def __criar_curso(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        course_name = content_message[content_message.find(" "):]
+        course_name = content_message[content_message.find(" ")+1:]
         course = Course(name=course_name,teatcher_id=user_id)
         self.__cursos.append(course)
         print(self.__cursos)
@@ -132,7 +132,7 @@ class RequestController:
     def __login_curso(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        course_code = content_message[content_message.find(" "):]
+        course_code = content_message[content_message.find(" ")+1:]
         print("Codigo do curso:"+course_code)
         course = Course.getCurso(self.__cursos,course_code)
 
