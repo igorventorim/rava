@@ -133,6 +133,7 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         course_code = content_message[content_message.find(" "):]
+        print("Codigo do curso:"+course_code)
         course = Course.getCurso(self.__cursos,course_code)
 
         if course != None:
