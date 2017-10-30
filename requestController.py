@@ -14,8 +14,6 @@ class RequestController:
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
         self.__cursos = []
-        print("VERIFICANDO SE É CRIADO UM CONTROLLER A CADA MENSAGEM...")
-
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -84,6 +82,7 @@ class RequestController:
         course_name = content_message[content_message.find(" "):]
         course = Course(name=course_name,teatcher_id=user_id)
         self.__cursos.append(course)
+        print(self.__cursos)
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
 
