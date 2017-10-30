@@ -171,7 +171,7 @@ class RequestController:
                 data = answerViewTemplates.text(user_id,"Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
                 self.__sendMessage(data)
 
-    # TODO: SHOW FEEDBACK FOR USER
+    # V1.0 - OK
     def __visualizar_notas(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -181,7 +181,7 @@ class RequestController:
             if( len(student_answers) > 0):
                 for answer in student_answers:
                     msg = "Pergunta:"+" ... \nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
-                    data = answerViewTemplates.text(user_id, "")
+                    data = answerViewTemplates.text(user_id, msg)
                     self.__sendMessage(data)
             else:
                 data = answerViewTemplates.text(user_id, "Você não possui nenhuma resposta cadastrada.")
