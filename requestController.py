@@ -76,6 +76,7 @@ class RequestController:
         data = answerViewTemplates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         self.__sendMessage(data)
 
+    # V1.0 - OK
     def __criar_curso(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -97,6 +98,7 @@ class RequestController:
         self.__sendMessage(data)
         self.__info_nova_atividade(course)
 
+    # V1.0 - OK
     def __listar_cursos(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
@@ -111,6 +113,7 @@ class RequestController:
         courses_list = Course.listCourses(self.__cursos, user_id)[0]
         if( len(courses_list) > 0):
             for course in courses_list:
+                questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui questões."
                 data = answerViewTemplates.text(user_id, "Questões do curso "+course.getName()+"\n"+course.getQuestionsToString())
                 self.__sendMessage(data)
         else:
