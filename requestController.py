@@ -31,14 +31,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        try:
+        # try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        except:
-            self.__erro(message)
+        # except:
+        #     self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -92,7 +92,6 @@ class RequestController:
         user_id = message.getClientID()
         split = message.getContentMessage().split(' ',2)
         course = Course.getCurso(self.__cursos,split[1])
-        print(split[1])
         if course != None:
             question = Question("Q"+str(len(course.getQuestions())),split[2:])
             course.addQuestion(question)
