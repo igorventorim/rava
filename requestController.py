@@ -255,7 +255,7 @@ class RequestController:
                     # obj.setRawGradeMin()
                     # obj.setRawGradeMax()
                     # obj.setIdGradeGrades()
-                    obj.setNotaProfessor(None)
+                    # obj.setNotaProfessor(None)
                     obj.setCourseName(curso.getName())
                     obj.setResposta(resposta.getAnswerText())
                     # obj.setFeedback()
