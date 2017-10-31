@@ -6,6 +6,7 @@ import requests
 import answerViewTemplates
 from model.domain.answer import Answer
 from model.domain.course import Course
+from model.domain.object import Object
 from model.domain.question import Question
 from model.domain.student import Student
 from myEncoder import MyEncoder
@@ -234,7 +235,34 @@ class RequestController:
 
     def generateStructPNota(self):
         # print (json.dumps(self.__cursos, cls=MyEncoder))
-        return json.dumps({"Messenger": self.__cursos}, cls=MyEncoder)
+        pNota = {"facebook":{}}
+        # cursos_dict = {}
+        for curso in self.__cursos:
+            pNota["facebook"][curso.getCode()] = {}
+            for atividade in curso.getQuestions():
+                pNota["facebook"][curso.getCode()][atividade.getCode()] = {}
+                for resposta in atividade.getAnswers():
+                    if not resposta.getUserId in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
+                        pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()] = []
+                    # pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append({})
+                    obj = Object()
+                    obj.setCourse(curso.getCode())
+                    obj.setInstanceId(atividade.getCode())
+                    obj.setUserId(resposta.getUserId())
+                    obj.setContextId(curso.getTeatcher())
+                    # obj.setItemId()
+                    # obj.setFileName(None)
+                    # obj.setRawGradeMin()
+                    # obj.setRawGradeMax()
+                    # obj.setIdGradeGrades()
+                    obj.setNotaProfessor(None)
+                    obj.setCourseName(curso.getName())
+                    obj.setResposta(resposta.getAnswerText())
+                    # obj.setFeedback()
+                    # obj.setUrl()
+                    pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append()
+        print(pNota)
+        return json.dumps(pNota, cls=MyEncoder)
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
