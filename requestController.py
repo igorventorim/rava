@@ -250,6 +250,7 @@ class RequestController:
                     obj.setInstanceId(atividade.getCode())
                     obj.setUserId(resposta.getUserId())
                     obj.setContextId(curso.getTeatcher())
+                    obj.setQuestion(atividade.getDesc())
                     # obj.setItemId()
                     # obj.setFileName(None)
                     # obj.setRawGradeMin()
