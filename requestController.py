@@ -239,7 +239,7 @@ class RequestController:
         # cursos_dict = {}
         for curso in self.__cursos:
             pNota["facebook"][curso.getCode()] = {}
-            for atividade in curso.getQuestions():
+            for k,atividade in curso.getQuestions().items():
                 pNota["facebook"][curso.getCode()][atividade.getCode()] = {}
                 for resposta in atividade.getAnswers():
                     if not resposta.getUserId in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
