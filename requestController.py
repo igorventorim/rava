@@ -260,7 +260,7 @@ class RequestController:
                     obj.setResposta(resposta.getAnswerText())
                     # obj.setFeedback()
                     # obj.setUrl()
-                    pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append()
+                    pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append(obj)
         print(pNota)
         return json.dumps(pNota, cls=MyEncoder)
 
