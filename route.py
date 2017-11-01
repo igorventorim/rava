@@ -59,6 +59,11 @@ def structPNota():
     print(r)
     return r, 200
 
+@app.route("/samplesimulation")
+def structPNota():
+    controller.sampleSimulation()
+    return "ok", 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)

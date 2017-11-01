@@ -233,6 +233,18 @@ class RequestController:
                 data = answerViewTemplates.text(user_id,"Você não está cadastrado neste curso.")
                 self.__sendMessage(data)
 
+    def sampleSimulation(self):
+        data = answerViewTemplates.text(1807409562632930, "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
+                                                          "QUESTÃO CC2Q0: Quem descobriu o Brasil?\n"
+                                                          "ST001: Pedrinho\n"
+                                                          "ST002: Dom Pedro\n"
+                                                          "ST009: Pedro Álvares Cabral\n"
+                                                          "ST022: Pedro\n"
+                                                          "ST311: Vasco da Game\n\n"
+                                                          "Para informar a nota, digite #codigodoaluno nota\n"
+                                                          "Exemplo: #ST001 5")
+        self.__sendMessage(data)
+
     def generateStructPNota(self):
         # print (json.dumps(self.__cursos, cls=MyEncoder))
         pNota = {"facebook":{}}
