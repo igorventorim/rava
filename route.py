@@ -60,7 +60,7 @@ def structPNota():
     return r, 200
 
 @app.route("/samplesimulation")
-def structPNota():
+def simulation():
     controller.sampleSimulation()
     return "ok", 200
 
