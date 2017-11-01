@@ -1,6 +1,10 @@
 class Answer(object):
 
+    id = 0
+
     def __init__(self,answer_text, user_id, question_id):
+        id += 1
+        self.__id = id
         self.__answer_text = answer_text
         self.__user_id = user_id
         self.__question_id = question_id
@@ -17,6 +21,9 @@ class Answer(object):
 
     def getFeedback(self):
         return self.__feedback
+
+    def getItemId(self):
+        return self.__id
 
     def addFeedback(self,feedback):
         self.__feedback = feedback

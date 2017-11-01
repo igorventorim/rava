@@ -1,8 +1,11 @@
 class Student(object):
 
+    id = 0
+
     def __init__(self,student_id):
+        id += 1
         self.__student_id = student_id
-        self.__student_code = "XXX"
+        self.__student_code = "ST"+str(id)
         self.__courses = []
         self.__answers = []
 
@@ -17,3 +20,6 @@ class Student(object):
 
     def getAnswers(self):
         return self.__answers
+
+    def getStudentCode(self):
+        return self.__student_code
