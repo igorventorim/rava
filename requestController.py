@@ -255,6 +255,9 @@ class RequestController:
                                           "Exemplo: #ST001 5")
         self.__sendMessage(data)
 
+    def sendMessageTest(self,message):
+        data = answerViewTemplates.text(1807409562632930,message)
+
     def generateStructPNota(self):
         # print (json.dumps(self.__cursos, cls=MyEncoder))
         pNota = {"facebook":{}}
