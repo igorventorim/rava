@@ -66,7 +66,9 @@ def simulation():
 
 @app.route("/test")
 def testSendMessage():
-    controller.sendMessageTest(request.args.get("message"))
+    print(request.args.get("message"))
+    msg = request.args.get("message")
+    controller.sendMessageTest(msg)
     return "ok", 200
 
 

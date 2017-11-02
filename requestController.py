@@ -257,6 +257,7 @@ class RequestController:
 
     def sendMessageTest(self,message):
         data = answerViewTemplates.text(1807409562632930,message)
+        self.__sendMessage(data)
 
     def generateStructPNota(self):
         # print (json.dumps(self.__cursos, cls=MyEncoder))
