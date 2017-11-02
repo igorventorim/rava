@@ -3,9 +3,9 @@ class Student(object):
     id = 0
 
     def __init__(self,student_id):
-        id += 1
+        Student.id += 1
         self.__student_id = student_id
-        self.__student_code = "ST"+str(id)
+        self.__student_code = "ST"+str(Student.id)
         self.__courses = []
         self.__answers = []
 
