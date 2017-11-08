@@ -234,15 +234,29 @@ class RequestController:
                 self.__sendMessage(data)
 
     def sampleSimulation(self):
-        data = answerViewTemplates.text(1807409562632930, "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
-                                                          "QUESTÃO CC2Q0: Quem descobriu o Brasil?\n"
-                                                          "ST001: Pedrinho\n"
-                                                          "ST002: Dom Pedro\n"
-                                                          "ST009: Pedro Álvares Cabral\n"
-                                                          "ST022: Pedro\n"
-                                                          "ST311: Vasco da Game\n\n"
-                                                          "Para informar a nota, digite #codigodoaluno nota\n"
-                                                          "Exemplo: #ST001 5")
+        data = answerViewTemplates.text(1807409562632930,
+                                        # "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
+                                        # "QUESTÃO CC2Q0: Quem descobriu o Brasil?\n"
+                                        # "ST001: Pedrinho\n"
+                                        # "ST002: Dom Pedro\n"
+                                        # "ST009: Pedro Álvares Cabral\n"
+                                        # "ST022: Pedro\n"
+                                        # "ST311: Vasco da Game\n\n"
+                                        # "Para informar a nota, digite #codigodoaluno nota\n"
+                                        # "Exemplo: #ST001 5")
+                                          "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
+                                          "QUESTÃO CC2Q0: Quais são os planetas do sistema solar?\n"
+                                          "ST001: Terra, Marte, Saturno, Plutão, Júpiter, Mercúrio, Vênus, Saturno, Urano e Netuno\n"
+                                          "ST002: Mercúrio, Vênus, Terra, Marte, Júpiter, Saturno, Urano e Netuno\n"
+                                          "ST009: Marte, Saturno, Terra, Vênus, Saturno, Urano e Netuno\n"
+                                          "ST022: Terra, Marte, Vênus, Saturno, Urano e Netuno\n"
+                                          "ST311: Vênus, Saturno, Urano, Terra, Marte e Saturno\n\n"
+                                          "Para informar a nota, digite #codigodoaluno nota\n"
+                                          "Exemplo: #ST001 5")
+        self.__sendMessage(data)
+
+    def sendMessageTest(self,message):
+        data = answerViewTemplates.text(1807409562632930,message)
         self.__sendMessage(data)
 
     def generateStructPNota(self):

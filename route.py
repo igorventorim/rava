@@ -65,6 +65,13 @@ def simulation():
     controller.sampleSimulation()
     return "ok", 200
 
+@app.route("/test")
+def testSendMessage():
+    print(request.args.get("message"))
+    msg = request.args.get("message")
+    controller.sendMessageTest(msg)
+    return "ok", 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
