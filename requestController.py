@@ -292,8 +292,8 @@ class RequestController:
         return json.dumps(pNota, cls=MyEncoder)
 
     def writeData(self):
-       fileCourses = open("/app/courses.json",'w')
-       fileStudents = open("/app/students.json",'w')
+       fileCourses = open("/tmp/courses.json",'w')
+       fileStudents = open("/tmp/students.json",'w')
        courses  = json.dumps(self.__cursos, cls=MyEncoder)
        students = json.dumps(self.__alunos, cls=MyEncoder)
        fileCourses.write(courses)
