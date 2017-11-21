@@ -295,6 +295,16 @@ class RequestController:
         print(pNota)
         return json.dumps(pNota, cls=MyEncoder)
 
+    def writeData(self):
+       fileCourses = open("/tmp/courses.json",'w')
+       fileStudents = open("/tmp/students.json",'w')
+       courses  = json.dumps(self.__cursos, cls=MyEncoder)
+       students = json.dumps(self.__alunos, cls=MyEncoder)
+       fileCourses.write(courses)
+       fileStudents.write(students)
+       fileStudents.close()
+       fileCourses.close()
+
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
                Strings.PROFESSOR.upper(): __professor,

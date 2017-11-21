@@ -59,6 +59,7 @@ def readGreeting():
 @app.route("/pnota")
 def structPNota():
     r = controller.generateStructPNota()
+    controller.writeData()
     print(r)
     return r, 200
 
