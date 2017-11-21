@@ -1,12 +1,15 @@
 # encoding: utf-8
 from flask import Flask, request,render_template, redirect, url_for, session,flash
 import os
+from flask.ext.sqlalchemy import SQLAlchemy
 
 from authentication import Authentication
 from messengerProfile import MessengerProfile
 from requestController import RequestController
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+Authentication.DATABASE = SQLAlchemy(app)
 
 controller =  RequestController()
 

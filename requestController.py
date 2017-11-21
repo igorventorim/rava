@@ -12,9 +12,10 @@ from model.domain.student import Student
 from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
-
+db = Authentication.DATABASE
 
 class RequestController:
+
 
     def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
@@ -148,7 +149,10 @@ class RequestController:
         if course != None:
 
             if not user_id in self.__alunos.keys():
-                self.__alunos[user_id] = Student(user_id)
+                student = Student(user_id)
+                self.__alunos[user_id] = student
+                db.session.add(student)
+                db.session.commit()
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)

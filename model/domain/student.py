@@ -1,5 +1,11 @@
-class Student(object):
+from authentication import Authentication
+db = Authentication.DATABASE
 
+class Student(object,Authentication.DATABASE.Model):
+
+    __tablename__ = "student"
+    Id = db.Column(db.Integer, primary_key = True)
+    student_code = db.Column(db.String(50), unique = True)
     id = 0
 
     def __init__(self,student_id):
@@ -8,6 +14,8 @@ class Student(object):
         self.__student_code = "ST"+str(Student.id)
         self.__courses = []
         self.__answers = []
+        self.Id = student_id
+        self.student_code = "ST"+str(Student.id)
 
     def addCourse(self, course_id):
         self.__courses.append(course_id)
