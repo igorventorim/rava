@@ -19,8 +19,6 @@ class Authentication:
 
     # REDIS_URL = os.environ.get("REDIS_URL")
 
-    DATABASE = None
-
     VERIFY_TOKEN = os.environ["VERIFY_TOKEN"]
 
     PAGE_ACCESS_TOKEN = os.environ["PAGE_ACCESS_TOKEN"]
