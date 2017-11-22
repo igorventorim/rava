@@ -5,12 +5,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 from authentication import Authentication
 from messengerProfile import MessengerProfile
-from requestController import RequestController
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
+from requestController import RequestController
 controller =  RequestController(db)
 
 @app.route('/', methods=['GET'])
