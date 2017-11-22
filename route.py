@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-from __future__ import absolute_import
-
 from flask import Flask, request,render_template, redirect, url_for, session,flash
 import os
 from flask_sqlalchemy import SQLAlchemy
@@ -9,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from authentication import Authentication
 from messengerProfile import MessengerProfile
 
-
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
