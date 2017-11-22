@@ -94,7 +94,7 @@ class RequestController:
         teatcher = Teatcher(teatcher_id=user_id)
         self.__cursos.append(course)
         db.session.add(teatcher)
-        db.session.add(course)
+        # db.session.add(course)
         db.session.commit()
         # print(self.__cursos)
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
