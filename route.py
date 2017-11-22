@@ -1,4 +1,7 @@
 # encoding: utf-8
+
+from __future__ import absolute_import
+
 from flask import Flask, request,render_template, redirect, url_for, session,flash
 import os
 from flask_sqlalchemy import SQLAlchemy
