@@ -77,7 +77,11 @@ def testSendMessage():
     return "ok", 200
 
 
-if __name__ == '__main__':
+@app.route("/generateDB")
+def generate():
     db.create_all()
+    return "ok",200
+
+if __name__ == '__main__':
     app.run(debug=True)
 

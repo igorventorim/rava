@@ -18,6 +18,9 @@ class Student(db.Model):
         self.Id = student_id
         self.student_code = "ST"+str(Student.id)
 
+    def __repr__(self):
+        return '<User %r>' % self.student_code
+
     def addCourse(self, course_id):
         self.__courses.append(course_id)
 
