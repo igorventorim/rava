@@ -39,14 +39,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        # try:
+        try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        # except:
-        #     self.__erro(message)
+        except:
+            self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -151,8 +151,8 @@ class RequestController:
             if not user_id in self.__alunos.keys():
                 student = Student(user_id)
                 self.__alunos[user_id] = student
-                print(db.session.add(student))
-                print(db.session.commit())
+                db.session.add(student)
+                db.session.commit()
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)
