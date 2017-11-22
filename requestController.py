@@ -91,7 +91,11 @@ class RequestController:
         user_id = message.getClientID()
         course_name = content_message[content_message.find(" ")+1:]
         course = Course(name=course_name,teatcher_id=user_id)
+        teatcher = Teatcher(teatcher_id=user_id)
         self.__cursos.append(course)
+        db.session.add(course)
+        db.session.add(teatcher)
+        db.session.commit()
         # print(self.__cursos)
         data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
         self.__sendMessage(data)
@@ -107,6 +111,8 @@ class RequestController:
             if course.getTeatcher() == user_id:
                 question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2])
                 course.addQuestion(question)
+                db.session.add(question)
+                db.session.commit()
                 data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
                 self.__sendMessage(data)
                 self.__info_nova_atividade(course)
@@ -229,6 +235,8 @@ class RequestController:
                     answer = Answer(response,user_id,question_code)
                     course.getQuestions().get(question_code).addAnswer(answer=answer)
                     self.__alunos.get(user_id).registerAnswer(answer)
+                    db.session.add(answer)
+                    db.session.commit()
                     data = answerViewTemplates.text(user_id,"Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
                     self.__sendMessage(data)
                 else:
@@ -296,15 +304,15 @@ class RequestController:
         print(pNota)
         return json.dumps(pNota, cls=MyEncoder)
 
-    def writeData(self):
-       fileCourses = open("/tmp/courses.json",'w')
-       fileStudents = open("/tmp/students.json",'w')
-       courses  = json.dumps(self.__cursos, cls=MyEncoder)
-       students = json.dumps(self.__alunos, cls=MyEncoder)
-       fileCourses.write(courses)
-       fileStudents.write(students)
-       fileStudents.close()
-       fileCourses.close()
+    # def writeData(self):
+    #    fileCourses = open("/tmp/courses.json",'w')
+    #    fileStudents = open("/tmp/students.json",'w')
+    #    courses  = json.dumps(self.__cursos, cls=MyEncoder)
+    #    students = json.dumps(self.__alunos, cls=MyEncoder)
+    #    fileCourses.write(courses)
+    #    fileStudents.write(students)
+    #    fileStudents.close()
+    #    fileCourses.close()
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
