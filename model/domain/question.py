@@ -8,12 +8,13 @@ class Question(db.Model):
     description = db.Column(db.String(1000),nullable=False)
     course_id = db.Column(db.BIGINT,db.ForeignKey('course.id'))
 
-    def __init__(self, code, desc):
+    def __init__(self, code, desc, course_id):
         self.__code = code
         self.__desc = desc
         self.__answers = []
         self.question_code = code
         self.description = desc
+        self.course_id = course_id
 
     def getCode(self):
         return self.__code

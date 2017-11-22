@@ -33,6 +33,8 @@ class Course(db.Model):
         self.name = name
         self.course_code = "CC"+str(Course.numberCourses)
 
+    def getId(self):
+        return self.getId()
 
     def getCode(self):
         return self.__code

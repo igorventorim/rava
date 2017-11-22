@@ -10,6 +10,7 @@ from model.domain.object import Object
 from model.domain.question import Question
 from model.domain.student import Student
 from model.domain.teatcher import Teatcher
+from model.domain.courseStudent import CourseStudent
 from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
@@ -108,11 +109,12 @@ class RequestController:
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
         split = message.getContentMessage().split(' ',2)
-        course = Course.getCurso(self.__cursos,split[1])
+        # course = Course.getCurso(self.__cursos,split[1])
+        course = Course.query.filter_by(course_code=split[1]).first()
         if course != None:
 
             if course.getTeatcher() == user_id:
-                question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2])
+                question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2],course.getId())
                 course.addQuestion(question)
                 db.session.add(question)
                 db.session.commit()
