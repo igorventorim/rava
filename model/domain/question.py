@@ -2,6 +2,7 @@ from route import db
 
 class Question(db.Model):
 
+    __tablename__ = "question"
     id = db.Column(db.BIGINT,autoincrement=True,primary_key=True)
     question_code = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(1000),nullable=False)
