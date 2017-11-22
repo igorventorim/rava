@@ -3,17 +3,18 @@
 
 from route import db
 
-class Teacher(db.Model):
+class Teatcher(db.Model):
 
     __tablename__ = "teatcher"
     Id = db.Column(db.BIGINT, primary_key = True)
     teatcher_code = db.Column(db.String(50), unique = True,nullable=False)
+    # courses = db.relationship('Course', backref='teatcher', lazy = True)
     id = 0
 
     def __init__(self,teatcher_id):
-        Teacher.id += 1
+        Teatcher.id += 1
         self.Id = teatcher_id
-        self.teacher_code = "TC"+str(Teacher.id)
+        self.teacher_code = "TC"+str(Teatcher.id)
 
     def __repr__(self):
         return '<User %r>' % self.student_code
