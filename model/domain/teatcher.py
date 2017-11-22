@@ -5,7 +5,6 @@ class Teatcher(db.Model):
     __tablename__ = "teatcher"
     Id = db.Column(db.BIGINT, primary_key = True)
     teatcher_code = db.Column(db.String(50), unique = True,nullable=False)
-    courses = db.relationship('Course', backref='teatcher', lazy = True)
     id = 0
 
     def __init__(self,teatcher_id):
