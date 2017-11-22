@@ -110,7 +110,7 @@ class RequestController:
         user_id = message.getClientID()
         split = message.getContentMessage().split(' ',2)
         # course = Course.getCurso(self.__cursos,split[1])
-        course = Course.query.filter_by(course_code=split[1]).first()
+        course = Course.query.filter_by(course_code=split[1].upper()).first()
         if course != None:
 
             if course.getTeatcher() == user_id:

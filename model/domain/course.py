@@ -43,7 +43,7 @@ class Course(db.Model):
         return self.__name
 
     def getTeatcher(self):
-        return self.__teatcher_id
+        return self.teatcher_id
 
     def getQuestions(self):
         return self.__questions
