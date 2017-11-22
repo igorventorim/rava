@@ -112,8 +112,7 @@ class RequestController:
         # course = Course.getCurso(self.__cursos,split[1])
         course = Course.query.filter_by(course_code=split[1].upper()).first()
         if course != None:
-            print(str(course.getTeatcher())+"\n"+str(user_id)+"\n\n")
-            if course.getTeatcher() == user_id:
+            if str(course.getTeatcher()) == str(user_id):
                 question = Question(course.getCode()+"Q"+str(len(course.getQuestions())),split[2],course.getId())
                 course.addQuestion(question)
                 db.session.add(question)
