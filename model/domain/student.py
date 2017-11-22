@@ -1,6 +1,6 @@
 # from authentication import Authentication
 # db = Authentication.DATABASE
-from app import db
+from route import db
 
 class Student(object,db.Model):
 
