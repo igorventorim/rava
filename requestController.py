@@ -12,7 +12,9 @@ from model.domain.student import Student
 from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
-db = Authentication.DATABASE
+# db = Authentication.DATABASE
+from app import db
+
 
 class RequestController:
 
