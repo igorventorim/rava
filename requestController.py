@@ -90,15 +90,13 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         course_name = content_message[content_message.find(" ")+1:]
-        course = Course(name=course_name,teatcher_id=user_id)
         teatcher = Teatcher(teatcher_id=user_id)
-        self.__cursos.append(course)
-
         check = Teatcher.query.filter_by(Id=user_id).first()
         if check is None:
             db.session.add(teatcher)
             db.session.commit()
-
+        course = Course(name=course_name, teatcher_id=teatcher.getId())
+        self.__cursos.append(course)
         db.session.add(course)
         db.session.commit()
         # print(self.__cursos)
