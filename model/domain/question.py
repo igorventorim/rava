@@ -6,7 +6,7 @@ class Question(db.Model):
     id = db.Column(db.BIGINT,autoincrement=True,primary_key=True)
     question_code = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(1000),nullable=False)
-    course_id = db.Column(db.BIGINT,db.ForeignKey('course_id'))
+    course_id = db.Column(db.BIGINT,db.ForeignKey('course.id'))
 
     def __init__(self, code, desc):
         self.__code = code
