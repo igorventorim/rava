@@ -81,6 +81,7 @@ def testSendMessage():
 @app.route("/generateDB")
 def generate():
     db.create_all()
+    print(db)
     return "ok",200
 
 if __name__ == '__main__':
