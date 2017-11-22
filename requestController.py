@@ -13,17 +13,16 @@ from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
 # db = Authentication.DATABASE
-from route import db
-
 
 class RequestController:
 
 
-    def __init__(self):
+    def __init__(self,database):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
         self.__cursos = []   #TODO: CHANGE DICT COURSES
         self.__alunos = {}
+        self.db = database
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -153,8 +152,8 @@ class RequestController:
             if not user_id in self.__alunos.keys():
                 student = Student(user_id)
                 self.__alunos[user_id] = student
-                db.session.add(student)
-                db.session.commit()
+                self.db.session.add(student)
+                self.db.session.commit()
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)
