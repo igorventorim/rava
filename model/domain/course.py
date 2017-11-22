@@ -1,4 +1,13 @@
-class Course(object):
+from route import db
+
+class Course(db.Model):
+
+    __tablename__ = "course"
+    id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
+    course_code = db.Column(db.String(50),unique=True,nullable=False)
+    name = db.Column(db.String(100),nullable=False)
+    description = db.Column(db.String(200))
+    teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teatcher.Id'),nullable=False)
 
     numberCourses = 0
 
@@ -9,6 +18,9 @@ class Course(object):
         self.__teatcher_id = teatcher_id
         self.__questions = {}
         self.__students = []
+        self.teatcher_id = teatcher_id
+        self.name = name
+        self.course_code = code
 
     def __init__(self, name, teatcher_id):
         Course.numberCourses += 1
@@ -17,6 +29,10 @@ class Course(object):
         self.__teatcher_id = teatcher_id
         self.__questions = {}
         self.__students = []
+        self.teatcher_id = teatcher_id
+        self.name = name
+        self.course_code = "CC"+str(Course.numberCourses)
+
 
     def getCode(self):
         return self.__code

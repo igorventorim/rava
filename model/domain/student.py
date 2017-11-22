@@ -6,7 +6,7 @@ class Student(db.Model):
 
     __tablename__ = "student"
     Id = db.Column(db.BIGINT, primary_key = True)
-    student_code = db.Column(db.String(50), unique = True)
+    student_code = db.Column(db.String(50), unique = True,nullable=False)
     id = 0
 
     def __init__(self,student_id):

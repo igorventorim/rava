@@ -1,4 +1,14 @@
-class Answer(object):
+from route import db
+
+
+class Answer(db.Model):
+
+    __tablename__ = "answer"
+    Id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
+    answer_text = db.Column(db.String(1000), nullable=False)
+    feedback = db.Column(db.String(1000))
+    student_id = db.Column(db.BIGINT, db.ForeignKey('student_Id'), nullable=False)
+    question_id = db.Column(db.BIGINT, db.ForeignKey('question_id'),nullable=False)
 
     id = 0
 
@@ -9,6 +19,9 @@ class Answer(object):
         self.__user_id = user_id
         self.__question_id = question_id
         self.__feedback = ""
+        self.answer_text = answer_text
+        self.student_id = user_id
+        self.question_id = question_id
 
     def getAnswerText(self):
         return self.__answer_text
