@@ -7,7 +7,7 @@ class Course(db.Model):
     course_code = db.Column(db.String(50),unique=True,nullable=False)
     name = db.Column(db.String(100),nullable=False)
     description = db.Column(db.String(200))
-    # teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teatcher.Id'),nullable=False)
+    teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teatcher.Id'),nullable=False)
 
     numberCourses = 0
 

@@ -9,6 +9,7 @@ from model.domain.course import Course
 from model.domain.object import Object
 from model.domain.question import Question
 from model.domain.student import Student
+from model.domain.teatcher import Teatcher
 from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
