@@ -10,7 +10,7 @@ class Teatcher(db.Model):
     def __init__(self,teatcher_id):
         Teatcher.id += 1
         self.Id = teatcher_id
-        self.teacher_code = "TC"+str(Teatcher.id)
+        self.teatcher_code = "TC"+str(Teatcher.id)
 
     def __repr__(self):
         return '<User %r>' % self.student_code
