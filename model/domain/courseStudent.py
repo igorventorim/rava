@@ -2,7 +2,7 @@ from route import db
 
 class CourseStudent(db.Model):
 
-    __table__ = "courseStudent"
+    __tablename__ = "courseStudent"
     course_id = db.Column(db.BIGINT,db.ForeignKey('course.id'),primary_key=True)
     student_id = db.Column(db.BIGINT,db.ForeignKey('student.Id'),primary_key=True)
 
