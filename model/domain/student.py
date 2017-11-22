@@ -1,7 +1,8 @@
-from authentication import Authentication
-db = Authentication.DATABASE
+# from authentication import Authentication
+# db = Authentication.DATABASE
+from app import db
 
-class Student(object,Authentication.DATABASE.Model):
+class Student(object,db.Model):
 
     __tablename__ = "student"
     Id = db.Column(db.Integer, primary_key = True)
