@@ -95,7 +95,7 @@ class RequestController:
         if check is None:
             db.session.add(teatcher)
             db.session.commit()
-        course = Course(name=course_name, teatcher_id=teatcher.getId())
+        course = Course(name=course_name, teatcher_id=user_id)
         self.__cursos.append(course)
         db.session.add(course)
         db.session.commit()
