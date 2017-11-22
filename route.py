@@ -1,7 +1,7 @@
 # encoding: utf-8
 from flask import Flask, request,render_template, redirect, url_for, session,flash
 import os
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 from authentication import Authentication
 from messengerProfile import MessengerProfile
