@@ -39,14 +39,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        try:
+        # try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        except:
-            self.__erro(message)
+        # except:
+        #     self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
