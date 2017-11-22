@@ -37,7 +37,7 @@ class Course(db.Model):
         return self.getId()
 
     def getCode(self):
-        return self.__code
+        return self.course_code
 
     def getName(self):
         return self.__name
