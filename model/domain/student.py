@@ -5,7 +5,7 @@ from route import db
 class Student(db.Model):
 
     __tablename__ = "student"
-    Id = db.Column(db.Integer, primary_key = True)
+    Id = db.Column(db.BIGINT, primary_key = True)
     student_code = db.Column(db.String(50), unique = True)
     id = 0
 
