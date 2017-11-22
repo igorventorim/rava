@@ -2,7 +2,7 @@
 # db = Authentication.DATABASE
 from route import db
 
-class Student(object,db.Model):
+class Student(db.Model):
 
     __tablename__ = "student"
     Id = db.Column(db.Integer, primary_key = True)

@@ -12,17 +12,17 @@ from model.domain.student import Student
 from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
+from route import db
 # db = Authentication.DATABASE
 
 class RequestController:
 
 
-    def __init__(self,database):
+    def __init__(self):
         self.__PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
         self.__HEADERS = {"Content-Type": "application/json"}
         self.__cursos = []   #TODO: CHANGE DICT COURSES
         self.__alunos = {}
-        self.db = database
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -152,8 +152,8 @@ class RequestController:
             if not user_id in self.__alunos.keys():
                 student = Student(user_id)
                 self.__alunos[user_id] = student
-                self.db.session.add(student)
-                self.db.session.commit()
+                db.session.add(student)
+                db.session.commit()
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)

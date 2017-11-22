@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 from requestController import RequestController
-controller =  RequestController(db)
+controller =  RequestController()
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -78,5 +78,6 @@ def testSendMessage():
 
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True)
 
