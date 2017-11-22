@@ -13,7 +13,6 @@ from myEncoder import MyEncoder
 from strings import Strings
 from userData import UserData
 from route import db
-# db = Authentication.DATABASE
 
 class RequestController:
 
