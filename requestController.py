@@ -151,8 +151,8 @@ class RequestController:
             if not user_id in self.__alunos.keys():
                 student = Student(user_id)
                 self.__alunos[user_id] = student
-                db.session.add(student)
-                db.session.commit()
+                print(db.session.add(student))
+                print(db.session.commit())
 
             course.addStudent(user_id)
             self.__alunos.get(user_id).addCourse(course_code)
