@@ -45,11 +45,11 @@ class Course(db.Model):
     def getTeatcher(self):
         return self.teatcher_id
 
-    def getQuestions(self):
-        return self.__questions
-
-    def addQuestion(self,question):
-        self.__questions[question.getCode()] = question
+    # def getQuestions(self):
+    #     return self.__questions
+    #
+    # def addQuestion(self,question):
+    #     self.__questions[question.getCode()] = question
 
     def getStudents(self):
         return self.__students
@@ -57,11 +57,11 @@ class Course(db.Model):
     def addStudent(self, student_id):
         self.__students.append(student_id)
 
-    def getQuestionsToString(self):
-        result=""
-        for k,question in self.__questions.items():
-            result += question.getCode() +":"+ question.getDesc()+"\n"
-        return result
+    # def getQuestionsToString(self):
+    #     result=""
+    #     for k,question in self.__questions.items():
+    #         result += question.getCode() +":"+ question.getDesc()+"\n"
+    #     return result
 
 
     @staticmethod
