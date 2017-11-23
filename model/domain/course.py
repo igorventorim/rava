@@ -40,7 +40,7 @@ class Course(db.Model):
         return self.course_code
 
     def getName(self):
-        return self.__name
+        return self.name
 
     def getTeatcher(self):
         return self.teatcher_id

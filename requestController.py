@@ -161,13 +161,16 @@ class RequestController:
         # course = Course.getCurso(self.__cursos,course_code)
         course = Course.query.filter_by(course_code=course_code.upper()).first()
         if course != None:
-            check = Student.query.filter_by(Id=user_id).first()
-            if check == None:
+            student = Student.query.filter_by(Id=user_id).first()
+            if student == None:
                 student = Student(user_id)
                 # self.__alunos[user_id] = student
                 db.session.add(student)
                 db.session.commit()
 
+            courseStudent = CourseStudent(user_id,course.getId())
+            db.session.add(courseStudent)
+            db.session.commit()
             # course.addStudent(user_id)
             # self.__alunos.get(user_id).addCourse(course_code)
             data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+"!\nAgora você pode responder as atividades relacionadas a este curso!")
