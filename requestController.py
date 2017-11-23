@@ -122,7 +122,7 @@ class RequestController:
                 db.session.commit()
                 data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
                 self.__sendMessage(data)
-                self.__info_nova_atividade(course)
+                # self.__info_nova_atividade(course)
             else:
                 data = answerViewTemplates.text(user_id,"Você não está autorizado a cadastrar questões neste curso!")
                 self.__sendMessage(data)
