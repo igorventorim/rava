@@ -158,18 +158,18 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         course_code = content_message[content_message.find(" ")+1:]
-        course = Course.getCurso(self.__cursos,course_code)
-
+        # course = Course.getCurso(self.__cursos,course_code)
+        course = Course.query.filter_by(course_code=course_code.upper()).first()
         if course != None:
-
-            if not user_id in self.__alunos.keys():
+            check = Student.query.filter_by(Id=user_id).first()
+            if check == None:
                 student = Student(user_id)
-                self.__alunos[user_id] = student
+                # self.__alunos[user_id] = student
                 db.session.add(student)
                 db.session.commit()
 
-            course.addStudent(user_id)
-            self.__alunos.get(user_id).addCourse(course_code)
+            # course.addStudent(user_id)
+            # self.__alunos.get(user_id).addCourse(course_code)
             data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+"!\nAgora você pode responder as atividades relacionadas a este curso!")
             self.__sendMessage(data)
         else:
@@ -229,12 +229,13 @@ class RequestController:
         course_code = content_message[1:content_message.upper().find("Q")]
         question_code = content_message[1:content_message.find(" ")].upper()
         response = content_message[content_message.find(" ")+1:]
-        course = Course.getCurso(self.__cursos,course_code)
+        # course = Course.getCurso(self.__cursos,course_code)
+        course = Course.query.filter_by(course_code=course_code.upper()).first()
         # print(course_code)
         # print(question_code)
         # print(response)
         if course == None:
-            data = answerViewTemplates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
+            data = answerViewTemplates.text(user_id, "Código de curso inválido, confira se digitou o código corretamente.")
             self.__sendMessage(data)
         else:
             if user_id in course.getStudents():
