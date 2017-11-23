@@ -113,7 +113,8 @@ class RequestController:
         course = Course.query.filter_by(course_code=split[1].upper()).first()
         if course != None:
             if str(course.getTeatcher()) == str(user_id):
-                question = Question(course.getCode()+"Q"+str(len(Question.query.filter_by(course_id=course.getId()).all())+1),split[2],course.getId())
+                course_id = course.getId()
+                question = Question(course.getCode()+"Q"+str(len(Question.query.filter_by(course_id=course_id).all())+1),split[2],course_id)
                 course.addQuestion(question)
                 db.session.add(question)
                 db.session.commit()
