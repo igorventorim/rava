@@ -115,7 +115,8 @@ class RequestController:
             if str(course.getTeatcher()) == str(user_id):
                 course_id = course.getId()
                 questionNumber = len(Question.query.filter_by(course_id=course_id).all()) + 1
-                question = Question(course.getCode()+"Q"+str(len(questionNumber),split[2],course_id))
+                # questionNumber = Question.query.filter_by(course_id=course_id).count() + 1
+                question = Question(course.getCode()+"Q"+str(questionNumber,split[2],course_id))
                 course.addQuestion(question)
                 db.session.add(question)
                 db.session.commit()
