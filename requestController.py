@@ -114,7 +114,7 @@ class RequestController:
         if course != None:
             if str(course.getTeatcher()) == str(user_id):
                 course_id = course.getId()
-                questionNumber = len(Question.query.filter_by(course_id=course_id).all()) + 1
+                questionNumber = len(Question.query.filter_by(course_id=course_id).all()) + 1   # VAI DAR PAU, PENSAR EM LÓGICA MELHOR
                 # questionNumber = Question.query.filter_by(course_id=course_id).count() + 1
                 question = Question(course.getCode()+"Q"+str(questionNumber),split[2],course_id)
                 # course.addQuestion(question)
@@ -122,7 +122,7 @@ class RequestController:
                 db.session.commit()
                 data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
                 self.__sendMessage(data)
-                # self.__info_nova_atividade(course)
+                self.__info_nova_atividade(course_id)
             else:
                 data = answerViewTemplates.text(user_id,"Você não está autorizado a cadastrar questões neste curso!")
                 self.__sendMessage(data)
@@ -135,6 +135,7 @@ class RequestController:
         content_message = message.getContentMessage()
         user_id = message.getClientID()
         courses_list = Course.listCourses(self.__cursos,user_id)[1]
+        courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
         msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
         data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
         self.__sendMessage(data)
@@ -143,7 +144,7 @@ class RequestController:
     def __listar_atividades(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        courses_list = Course.listCourses(self.__cursos, user_id)[0]
+        courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
         if( len(courses_list) > 0):
             for course in courses_list:
                 questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
@@ -183,26 +184,28 @@ class RequestController:
     def __visualizar_atividades(self,message):
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
-        if not user_id in self.__alunos.keys():
+        coursesActivate = CourseStudent.query.filter_by(student_id=user_id).first()
+        if coursesActivate == []:
             data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
             self.__sendMessage(data)
         else:
-            for course in self.__alunos.get(user_id).getCourses():
-                msg = "Questões do curso: "+Course.getCurso(self.__cursos,course).getName()+"\n"
-                for question_id,question in Course.getCurso(self.__cursos,course).getQuestions().items():
+            for course in coursesActivate:
+                msg = "Questões do curso: "+course.getName()+"\n"
+                for question in Question.query.filter_by(course_id=course.getId()):
                     msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
                 self.__sendMessage(data)
-                data = answerViewTemplates.text(user_id,"Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
-                self.__sendMessage(data)
+            data = answerViewTemplates.text(user_id,"Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
+            self.__sendMessage(data)
 
     # V1.0 - OK
     def __visualizar_notas(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        student = self.__alunos.get(user_id)
+        # student = self.__alunos.get(user_id)
+        student = Student.query.filter_by(id=user_id).first()
         if student != None:
-            student_answers = student.getAnswers()
+            student_answers = Answer.query.filter_by(student_id=user_id)
             if( len(student_answers) > 0):
                 for answer in student_answers:
                     msg = "Pergunta:"+" ... \nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
@@ -216,9 +219,9 @@ class RequestController:
             self.__sendMessage(data)
 
     # V1.0 - OK
-    def __info_nova_atividade(self,curso):
-        for student_id in curso.getStudents():
-            data = answerViewTemplates.text(student_id, "Você tem uma nova atividade, para visualizar envie /tarefas")
+    def __info_nova_atividade(self,curso_id):
+        for courseStudent in CourseStudent.query.filter_by(course_id=curso_id).all():
+            data = answerViewTemplates.text(courseStudent.getStudentId(), "Você tem uma nova atividade, para visualizar envie /tarefas")
             self.__sendMessage(data)
 
     def info_feedback(self):
@@ -241,11 +244,18 @@ class RequestController:
             data = answerViewTemplates.text(user_id, "Código de curso inválido, confira se digitou o código corretamente.")
             self.__sendMessage(data)
         else:
-            if user_id in course.getStudents():
-                if question_code in course.getQuestions().keys():
-                    answer = Answer(response,user_id,question_code)
-                    course.getQuestions().get(question_code).addAnswer(answer=answer)
-                    self.__alunos.get(user_id).registerAnswer(answer)
+            courseStudents = CourseStudent.query.filter_by(course_id=course.getId()).all()
+            studentInCourse = False
+            for courseStudent in courseStudents:
+                if courseStudent.getStudentId() == user_id:
+                    studentInCourse = True
+                    break
+            if studentInCourse:
+                question = Question.query.filter_by(question_code=question_code).first()
+                if question != None:
+                    answer = Answer(response,user_id,question.getId())
+                    # course.getQuestions().get(question_code).addAnswer(answer=answer)
+                    # self.__alunos.get(user_id).registerAnswer(answer)
                     db.session.add(answer)
                     db.session.commit()
                     data = answerViewTemplates.text(user_id,"Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
@@ -315,15 +325,6 @@ class RequestController:
         print(pNota)
         return json.dumps(pNota, cls=MyEncoder)
 
-    # def writeData(self):
-    #    fileCourses = open("/tmp/courses.json",'w')
-    #    fileStudents = open("/tmp/students.json",'w')
-    #    courses  = json.dumps(self.__cursos, cls=MyEncoder)
-    #    students = json.dumps(self.__alunos, cls=MyEncoder)
-    #    fileCourses.write(courses)
-    #    fileStudents.write(students)
-    #    fileStudents.close()
-    #    fileCourses.close()
 
     __options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
@@ -339,3 +340,10 @@ class RequestController:
                Strings.CMD_ALUNO.upper(): __aluno,
                Strings.CMD_PROFESSOR.upper(): __professor
                }
+
+
+    def coursesToStr(self,cursos):
+        list = ""
+        for course in cursos:
+                list += str(course.getCode()) + ":" + course.getName() + "\n"
+        return list

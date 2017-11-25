@@ -7,12 +7,12 @@ class Course(db.Model):
     course_code = db.Column(db.String(50),unique=True,nullable=False)
     name = db.Column(db.String(100),nullable=False)
     description = db.Column(db.String(200))
-    teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teatcher.Id'),nullable=False)
+    teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teacher.Id'),nullable=False)
 
-    numberCourses = 0
+    # numberCourses = 0
 
     def __init__(self, code, name, teatcher_id):
-        Course.numberCourses += 1
+        # Course.numberCourses += 1
         self.__code = code
         self.__name = name
         self.__teatcher_id = teatcher_id
@@ -23,15 +23,15 @@ class Course(db.Model):
         self.course_code = code
 
     def __init__(self, name, teatcher_id):
-        Course.numberCourses += 1
-        self.__code = "CC"+str(Course.numberCourses)
+        # Course.numberCourses += 1
+        # self.__code = "CC"+str(Course.numberCourses)
         self.__name = name
         self.__teatcher_id = teatcher_id
         self.__questions = {}
         self.__students = []
         self.teatcher_id = teatcher_id
         self.name = name
-        self.course_code = "CC"+str(Course.numberCourses)
+        self.course_code = "CC"+str(self.__getLastId()+1)
 
     def getId(self):
         return self.id
@@ -44,6 +44,12 @@ class Course(db.Model):
 
     def getTeatcher(self):
         return self.teatcher_id
+
+    def __getLastId(self):
+        id = Course.query.orde_by(Course.id.desc()).first()
+        if( id is None):
+            return 0
+        return id
 
     # def getQuestions(self):
     #     return self.__questions

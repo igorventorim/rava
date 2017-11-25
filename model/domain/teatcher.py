@@ -2,16 +2,15 @@ from route import db
 
 class Teatcher(db.Model):
 
-    __tablename__ = "teatcher"
-    Id = db.Column(db.BIGINT, primary_key = True)
+    __tablename__ = "teacher"
+    id = db.Column(db.BIGINT, primary_key = True)
     teatcher_code = db.Column(db.String(50), unique = True,nullable=False)
     # courses = db.relationship('Course', backref='teatcher',lazy=True)
-    id = 0
 
     def __init__(self,teatcher_id):
-        Teatcher.id += 1
-        self.Id = teatcher_id
-        self.teatcher_code = "TC"+str(Teatcher.id)
+        # Teatcher.id = 1
+        self.id = teatcher_id
+        self.teatcher_code = "TC"+str(self.__getLastId()+1)
 
     def __repr__(self):
         return '<User %r>' % self.student_code
@@ -27,3 +26,9 @@ class Teatcher(db.Model):
 
     def getId(self):
         return self.Id
+
+    def __getLastId(self):
+        id = Teatcher.query.orde_by(Teatcher.id.desc()).first()
+        if( id is None):
+            return 0
+        return id

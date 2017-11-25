@@ -4,17 +4,17 @@ from route import db
 class Answer(db.Model):
 
     __tablename__ = "answer"
-    Id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
+    id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
     answer_text = db.Column(db.String(1000), nullable=False)
     feedback = db.Column(db.String(1000))
     student_id = db.Column(db.BIGINT, db.ForeignKey('student.Id'), nullable=False)
     question_id = db.Column(db.BIGINT, db.ForeignKey('question.id'),nullable=False)
 
-    id = 0
+    # id = 0
 
     def __init__(self,answer_text, user_id, question_id):
-        Answer.id += 1
-        self.__id = Answer.id
+        # Answer.id += 1
+        # self.__id = self.__getLastId()+1
         self.__answer_text = answer_text
         self.__user_id = user_id
         self.__question_id = question_id
@@ -40,3 +40,9 @@ class Answer(db.Model):
 
     def addFeedback(self,feedback):
         self.__feedback = feedback
+
+    # def __getLastId(self):
+    #     id = Answer.query.orde_by(Answer.id.desc()).first()
+    #     if( id is None):
+    #         return 0
+    #     return id

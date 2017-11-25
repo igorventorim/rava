@@ -16,11 +16,14 @@ class Question(db.Model):
         self.description = desc
         self.course_id = course_id
 
+    def getId(self):
+        return self.id
+
     def getCode(self):
-        return self.__code
+        return self.question_code
 
     def getDesc(self):
-        return self.__desc
+        return self.description
 
     def getAnswers(self):
         return self.__answers

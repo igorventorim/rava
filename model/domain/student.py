@@ -5,18 +5,18 @@ from route import db
 class Student(db.Model):
 
     __tablename__ = "student"
-    Id = db.Column(db.BIGINT, primary_key = True)
+    id = db.Column(db.BIGINT, primary_key = True)
     student_code = db.Column(db.String(50), unique = True,nullable=False)
-    id = 0
+    # id = 0
 
     def __init__(self,student_id):
-        Student.id += 1
+        # Student.id += 1
         self.__student_id = student_id
-        self.__student_code = "ST"+str(Student.id)
+        # self.__student_code = "ST"+str(self.__getLastId()+1)
         self.__courses = []
         self.__answers = []
-        self.Id = student_id
-        self.student_code = "ST"+str(Student.id)
+        self.id = student_id
+        self.student_code = "ST"+str(self.__getLastId()+1)
 
     def __repr__(self):
         return '<User %r>' % self.student_code
@@ -35,3 +35,9 @@ class Student(db.Model):
 
     def getStudentCode(self):
         return self.__student_code
+
+    def __getLastId(self):
+        id = Student.query.orde_by(Student.id.desc()).first()
+        if( id is None):
+            return 0
+        return id
