@@ -7,7 +7,7 @@ class Answer(db.Model):
     id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
     answer_text = db.Column(db.String(1000), nullable=False)
     feedback = db.Column(db.String(1000))
-    student_id = db.Column(db.BIGINT, db.ForeignKey('student.Id'), nullable=False)
+    student_id = db.Column(db.BIGINT, db.ForeignKey('student.id'), nullable=False)
     question_id = db.Column(db.BIGINT, db.ForeignKey('question.id'),nullable=False)
 
     # id = 0
