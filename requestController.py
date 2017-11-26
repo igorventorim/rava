@@ -190,7 +190,8 @@ class RequestController:
             data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
             self.__sendMessage(data)
         else:
-            for course in coursesActivate:
+            for ca in coursesActivate:
+                course = Course.query.filter_by(id=ca.getCourseId())
                 msg = "Questões do curso: "+course.getName()+"\n"
                 for question in Question.query.filter_by(course_id=course.getId()):
                     msg += question.getCode()+":"+question.getDesc()+"\n"
