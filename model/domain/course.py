@@ -46,7 +46,7 @@ class Course(db.Model):
         return self.teatcher_id
 
     def __getLastId(self):
-        id = Course.query.orde_by(Course.id.desc()).first()
+        id = Course.query.order_by(Course.id.desc()).first()
         if( id is None):
             return 0
         return id
