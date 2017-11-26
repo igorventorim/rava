@@ -211,10 +211,10 @@ class RequestController:
             if( len(student_answers) > 0):
                 for answer in student_answers:
                     question = Question.query.filter_by(id=answer.getQuestionId()).first()
-                    if question != None:
-                        msg = "Pergunta:"+ str(question.getDesc()) +"\nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
-                        data = answerViewTemplates.text(user_id, msg)
-                        self.__sendMessage(data)
+                    feedback = answer.getFeedback() if answer.getFeedback() != None else ""
+                    msg = "Pergunta:"+ question.getDesc() +"\nResposta:"+answer.getAnswerText()+"\n\nNota:"+feedback
+                    data = answerViewTemplates.text(user_id, msg)
+                    self.__sendMessage(data)
             else:
                 data = answerViewTemplates.text(user_id, "Você não possui nenhuma resposta cadastrada.")
                 self.__sendMessage(data)
