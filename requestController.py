@@ -207,10 +207,11 @@ class RequestController:
         # student = self.__alunos.get(user_id)
         student = Student.query.filter_by(id=user_id).first()
         if student != None:
-            student_answers = Answer.query.filter_by(student_id=user_id)
+            student_answers = Answer.query.filter_by(student_id=user_id).all()
             if( len(student_answers) > 0):
                 for answer in student_answers:
-                    msg = "Pergunta:"+" ... \nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
+                    question = Question.query.filter_by(id=answer.getQuestionId()).first()
+                    msg = "Pergunta:"+ question.getDesc() +"\nResposta:"+answer.getAnswerText()+"\n\nNota:"+answer.getFeedback()
                     data = answerViewTemplates.text(user_id, msg)
                     self.__sendMessage(data)
             else:

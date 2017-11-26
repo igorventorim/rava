@@ -30,7 +30,7 @@ class Answer(db.Model):
         return self.__user_id
 
     def getQuestionId(self):
-        return self.__question_id
+        return self.question_id
 
     def getFeedback(self):
         return self.__feedback
