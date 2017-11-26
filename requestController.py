@@ -170,7 +170,7 @@ class RequestController:
                 db.session.add(student)
                 db.session.commit()
 
-            courseStudent = CourseStudent(user_id,course.getId())
+            courseStudent = CourseStudent(student_id=user_id,course_id=course.getId())
             db.session.add(courseStudent)
             db.session.commit()
             # course.addStudent(user_id)
