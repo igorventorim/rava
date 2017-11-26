@@ -92,7 +92,7 @@ class RequestController:
         user_id = message.getClientID()
         course_name = content_message[content_message.find(" ")+1:]
         teatcher = Teatcher(teatcher_id=user_id)
-        check = Teatcher.query.filter_by(Id=user_id).first()
+        check = Teatcher.query.filter_by(id=user_id).first()
         if check is None:
             db.session.add(teatcher)
             db.session.commit()
@@ -162,7 +162,7 @@ class RequestController:
         # course = Course.getCurso(self.__cursos,course_code)
         course = Course.query.filter_by(course_code=course_code.upper()).first()
         if course != None:
-            student = Student.query.filter_by(Id=user_id).first()
+            student = Student.query.filter_by(id=user_id).first()
             if student == None:
                 student = Student(user_id)
                 # self.__alunos[user_id] = student
