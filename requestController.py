@@ -191,7 +191,7 @@ class RequestController:
             self.__sendMessage(data)
         else:
             for ca in coursesActivate:
-                course = Course.query.filter_by(id=ca.getCourseId())
+                course = Course.query.filter_by(id=ca.getCourseId()).first()
                 msg = "Questões do curso: "+course.getName()+"\n"
                 for question in Question.query.filter_by(course_id=course.getId()):
                     msg += question.getCode()+":"+question.getDesc()+"\n"
