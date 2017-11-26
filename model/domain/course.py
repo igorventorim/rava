@@ -69,7 +69,7 @@ class Course(db.Model):
         # for k,question in Question.query.filter_by(question_code=self.getCode()):
         #     result += question.getCode() +":"+ question.getDesc()+"\n"
         # return result
-        questions = Question.query.filter_by(question_code=self.getCode()).all()
+        questions = Question.query.filter_by(course_code=self.getCode().upper()).all()
         for question in questions:
             result += question.getCode()+":"+question.getDesc()+"\n"
         return result
