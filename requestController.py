@@ -144,7 +144,8 @@ class RequestController:
     def __listar_atividades(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
+        # courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
+        courses_list = Course.query.filter_by(teatcher_id=user_id).all()
         if( len(courses_list) > 0):
             for course in courses_list:
                 questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
