@@ -28,7 +28,7 @@ class Teatcher(db.Model):
         return self.Id
 
     def __getLastId(self):
-        id = Teatcher.query.order_by(Teatcher.id.desc()).first()
+        id = Teatcher.query.order_by(Teatcher.id.desc()).first().getId()
         if( id is None):
             return 0
         return id
