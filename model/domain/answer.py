@@ -24,7 +24,7 @@ class Answer(db.Model):
         self.question_id = question_id
 
     def getAnswerText(self):
-        return self.__answer_text
+        return self.answer_text
 
     def getUserId(self):
         return self.__user_id
