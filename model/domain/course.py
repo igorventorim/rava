@@ -49,7 +49,7 @@ class Course(db.Model):
         id = Course.query.order_by(Course.id.desc()).first()
         if( id is None):
             return 0
-        return id
+        return id.getId()
 
     # def getQuestions(self):
     #     return self.__questions

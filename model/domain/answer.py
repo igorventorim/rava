@@ -41,8 +41,11 @@ class Answer(db.Model):
     def addFeedback(self,feedback):
         self.__feedback = feedback
 
-    # def __getLastId(self):
-    #     id = Answer.query.orde_by(Answer.id.desc()).first()
-    #     if( id is None):
-    #         return 0
-    #     return id
+    def getId(self):
+        return self.id
+
+    def __getLastId(self):
+        id = Answer.query.order_by(Answer.id.desc()).first()
+        if( id is None):
+            return 0
+        return id.getId()

@@ -25,10 +25,10 @@ class Teatcher(db.Model):
         return self.teacher_code
 
     def getId(self):
-        return self.Id
+        return self.id
 
     def __getLastId(self):
-        id = Teatcher.query.order_by(Teatcher.id.desc()).first().getId()
+        id = Teatcher.query.order_by(Teatcher.id.desc()).first()
         if( id is None):
             return 0
-        return id
+        return id.getId()

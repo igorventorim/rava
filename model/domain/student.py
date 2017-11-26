@@ -36,8 +36,11 @@ class Student(db.Model):
     def getStudentCode(self):
         return self.__student_code
 
+    def getId(self):
+        return self.id
+
     def __getLastId(self):
         id = Student.query.order_by(Student.id.desc()).first()
         if( id is None):
             return 0
-        return id
+        return id.getId()
