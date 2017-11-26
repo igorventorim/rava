@@ -33,7 +33,7 @@ class Answer(db.Model):
         return self.question_id
 
     def getFeedback(self):
-        return self.__feedback
+        return self.feedback
 
     def getItemId(self):
         return self.__id
