@@ -240,9 +240,6 @@ class RequestController:
         response = content_message[content_message.find(" ")+1:]
         # course = Course.getCurso(self.__cursos,course_code)
         course = Course.query.filter_by(course_code=course_code.upper()).first()
-        # print(course_code)
-        # print(question_code)
-        # print(response)
         if course == None:
             data = answerViewTemplates.text(user_id, "Código de curso inválido, confira se digitou o código corretamente.")
             self.__sendMessage(data)
@@ -250,7 +247,7 @@ class RequestController:
             courseStudents = CourseStudent.query.filter_by(course_id=course.getId()).all()
             studentInCourse = False
             for courseStudent in courseStudents:
-                if courseStudent.getStudentId() == user_id:
+                if str(courseStudent.getStudentId()) == str(user_id):
                     studentInCourse = True
                     break
             if studentInCourse:
