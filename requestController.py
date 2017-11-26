@@ -185,7 +185,7 @@ class RequestController:
     def __visualizar_atividades(self,message):
         # content_message = message.getContentMessage()
         user_id = message.getClientID()
-        coursesActivate = CourseStudent.query.filter_by(student_id=user_id).first()
+        coursesActivate = CourseStudent.query.filter_by(student_id=user_id).all()
         if coursesActivate == []:
             data = answerViewTemplates.text(user_id, "Você não está cadastrado em nenhum curso.")
             self.__sendMessage(data)
