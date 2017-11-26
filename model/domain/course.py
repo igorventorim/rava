@@ -1,3 +1,4 @@
+from model.domain.question import Question
 from route import db
 
 class Course(db.Model):
@@ -63,12 +64,15 @@ class Course(db.Model):
     def addStudent(self, student_id):
         self.__students.append(student_id)
 
-    # def getQuestionsToString(self):
-    #     result=""
-    #     for k,question in self.__questions.items():
-    #         result += question.getCode() +":"+ question.getDesc()+"\n"
-    #     return result
-
+    def getQuestionsToString(self):
+        result=""
+        # for k,question in Question.query.filter_by(question_code=self.getCode()):
+        #     result += question.getCode() +":"+ question.getDesc()+"\n"
+        # return result
+        questions = Question.query.filter_by(question_code=self.getCode()).all()
+        for question in questions:
+            result += question.getCode()+":"+question.getDesc()+"\n"
+        return result
 
     @staticmethod
     def getCurso(cursos,code):
