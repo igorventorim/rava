@@ -298,12 +298,14 @@ class RequestController:
         # print (json.dumps(self.__cursos, cls=MyEncoder))
         pNota = {"facebook":{}}
         # cursos_dict = {}
-        for curso in self.__cursos:
+        for curso in Course.query.all():
             pNota["facebook"][curso.getCode()] = {}
-            for k,atividade in curso.getQuestions().items():
+
+            for atividade in Question.query.filter_by(course_id=curso.getId()).all():
                 pNota["facebook"][curso.getCode()][atividade.getCode()] = {}
-                for resposta in atividade.getAnswers():
-                    if not resposta.getUserId in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
+
+                for resposta in Answer.query.filter_by(question_id=atividade.getId()):
+                    if not resposta.getStudentId() in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
                         pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()] = []
                     # pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append({})
                     obj = Object()

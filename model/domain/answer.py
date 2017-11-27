@@ -44,6 +44,9 @@ class Answer(db.Model):
     def getId(self):
         return self.id
 
+    def getStudentId(self):
+        return self.student_id
+
     def __getLastId(self):
         id = Answer.query.order_by(Answer.id.desc()).first()
         if( id is None):
