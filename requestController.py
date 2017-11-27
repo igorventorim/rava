@@ -295,20 +295,20 @@ class RequestController:
         self.__sendMessage(data)
 
     def generateStructPNota(self):
-        # print (json.dumps(self.__cursos, cls=MyEncoder))
         pNota = {"facebook":{}}
-        # cursos_dict = {}
-        for curso in self.__cursos:
+        for curso in Course.query.all():
             pNota["facebook"][curso.getId()] = {}
-            for k,atividade in curso.getQuestions().items():
+
+            for atividade in Question.query.filter_by(course_id=curso.getId()).all():
                 pNota["facebook"][curso.getId()][atividade.getId()] = {}
-                for resposta in atividade.getAnswers():
-                    if not resposta.getUserId in pNota["facebook"][curso.getId()][atividade.getId()].keys():
-                        pNota["facebook"][curso.getId()][atividade.getId()][resposta.getUserId()] = []
+
+                for resposta in Answer.query.filter_by(question_id=atividade.getId()):
+                    if not resposta.getStudentId() in pNota["facebook"][curso.getId()][atividade.getId()].keys():
+                        pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()] = []
                     obj = Object()
                     obj.setCourse(curso.getId())
                     obj.setInstanceId(atividade.getId())
-                    obj.setUserId(resposta.getUserId())
+                    obj.setUserId(resposta.getStudentId())
                     obj.setContextId(curso.getTeatcher())
                     obj.setQuestion(atividade.getDesc())
                     obj.setItemId(resposta.getId())
@@ -321,8 +321,8 @@ class RequestController:
                     obj.setResposta(resposta.getAnswerText())
                     # obj.setFeedback()
                     # obj.setUrl()
-                    pNota["facebook"][curso.getId()][atividade.getId()][resposta.getUserId()].append(obj)
-        print(pNota)
+
+                    pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()].append(obj)
         return json.dumps(pNota, cls=MyEncoder)
 
 

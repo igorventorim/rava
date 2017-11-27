@@ -9,6 +9,7 @@ class Answer(db.Model):
     feedback = db.Column(db.String(1000))
     student_id = db.Column(db.BIGINT, db.ForeignKey('student.id'), nullable=False)
     question_id = db.Column(db.BIGINT, db.ForeignKey('question.id'),nullable=False)
+    review = db.Column(db.Boolean,default=False)
 
     # id = 0
 
@@ -43,6 +44,9 @@ class Answer(db.Model):
 
     def getId(self):
         return self.id
+
+    def getStudentId(self):
+        return self.student_id
 
     def __getLastId(self):
         id = Answer.query.order_by(Answer.id.desc()).first()
