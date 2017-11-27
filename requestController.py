@@ -306,12 +306,12 @@ class RequestController:
                     if not resposta.getStudentId() in pNota["facebook"][curso.getId()][atividade.getId()].keys():
                         pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()] = []
                     obj = Object()
-                    obj.setCourse(curso.getId())
-                    obj.setInstanceId(atividade.getId())
-                    obj.setUserId(resposta.getStudentId())
-                    obj.setContextId(curso.getTeatcher())
-                    obj.setQuestion(atividade.getDesc())
-                    obj.setItemId(resposta.getId())
+                    obj.setCourse(str(curso.getId()))
+                    obj.setInstanceId(str(atividade.getId()))
+                    obj.setUserId(str(resposta.getStudentId()))
+                    obj.setContextId(str(curso.getTeatcher()))
+                    obj.setQuestion(str(atividade.getDesc()))
+                    obj.setItemId(str(resposta.getId()))
                     obj.setFileName("facebook")
                     obj.setRawGradeMin("0.00000")
                     obj.setRawGradeMax("100.00000")
