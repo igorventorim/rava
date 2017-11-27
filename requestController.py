@@ -41,14 +41,14 @@ class RequestController:
 
 
     def __selector(self,message):
-        # try:
+        try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             if(cmd[0] != "#"):
                 self.__options[cmd.upper()](self,message)
             else:
                 self.__answer(message)
-        # except:
-        #     self.__erro(message)
+        except:
+            self.__erro(message)
 
     # V1.0 - OK
     def __started(self,message):
@@ -299,30 +299,29 @@ class RequestController:
         pNota = {"facebook":{}}
         # cursos_dict = {}
         for curso in self.__cursos:
-            pNota["facebook"][curso.getCode()] = {}
+            pNota["facebook"][curso.getId()] = {}
             for k,atividade in curso.getQuestions().items():
-                pNota["facebook"][curso.getCode()][atividade.getCode()] = {}
+                pNota["facebook"][curso.getId()][atividade.getId()] = {}
                 for resposta in atividade.getAnswers():
-                    if not resposta.getUserId in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
-                        pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()] = []
-                    # pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append({})
+                    if not resposta.getUserId in pNota["facebook"][curso.getId()][atividade.getId()].keys():
+                        pNota["facebook"][curso.getId()][atividade.getId()][resposta.getUserId()] = []
                     obj = Object()
-                    obj.setCourse(curso.getCode())
-                    obj.setInstanceId(atividade.getCode())
+                    obj.setCourse(curso.getId())
+                    obj.setInstanceId(atividade.getId())
                     obj.setUserId(resposta.getUserId())
                     obj.setContextId(curso.getTeatcher())
                     obj.setQuestion(atividade.getDesc())
-                    # obj.setItemId()
-                    # obj.setFileName(None)
-                    # obj.setRawGradeMin()
-                    # obj.setRawGradeMax()
-                    # obj.setIdGradeGrades()
-                    # obj.setNotaProfessor(None)
+                    obj.setItemId(resposta.getId())
+                    obj.setFileName("facebook")
+                    obj.setRawGradeMin("0.00000")
+                    obj.setRawGradeMax("100.00000")
+                    obj.setIdGradeGrades("0")
+                    obj.setNotaProfessor("-1.00000")
                     obj.setCourseName(curso.getName())
                     obj.setResposta(resposta.getAnswerText())
                     # obj.setFeedback()
                     # obj.setUrl()
-                    pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append(obj)
+                    pNota["facebook"][curso.getId()][atividade.getId()][resposta.getUserId()].append(obj)
         print(pNota)
         return json.dumps(pNota, cls=MyEncoder)
 
