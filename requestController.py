@@ -306,12 +306,12 @@ class RequestController:
 
                 for resposta in Answer.query.filter_by(question_id=atividade.getId()):
                     if not resposta.getStudentId() in pNota["facebook"][curso.getCode()][atividade.getCode()].keys():
-                        pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()] = []
+                        pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getStudentId()] = []
                     # pNota["facebook"][curso.getCode()][atividade.getCode()][resposta.getUserId()].append({})
                     obj = Object()
                     obj.setCourse(curso.getCode())
                     obj.setInstanceId(atividade.getCode())
-                    obj.setUserId(resposta.getUserId())
+                    obj.setUserId(resposta.getStudentId())
                     obj.setContextId(curso.getTeatcher())
                     obj.setQuestion(atividade.getDesc())
                     # obj.setItemId()
