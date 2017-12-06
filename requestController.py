@@ -297,10 +297,10 @@ class RequestController:
     def generateStructPNota(self):
         pNota = {"facebook":{}}
         for curso in Course.query.all():
-            pNota["facebook"][curso.getId()] = {}
+            # pNota["facebook"][curso.getId()] = {}
 
             for atividade in Question.query.filter_by(course_id=curso.getId()).all():
-                pNota["facebook"][curso.getId()][atividade.getId()] = {}
+                # pNota["facebook"][curso.getId()][atividade.getId()] = {}
 
                 for resposta in Answer.query.filter_by(question_id=atividade.getId()):
                     if not resposta.getStudentId() in pNota["facebook"][curso.getId()][atividade.getId()].keys():
