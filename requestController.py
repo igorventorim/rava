@@ -323,10 +323,19 @@ class RequestController:
                     # obj.setUrl()
                     pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()].append(obj)
 
-            if not bool(pNota["facebook"][curso.getId()]):
-                pNota["facebook"].pop(curso.getId())
+                # if not bool(pNota["facebook"][curso.getId()][atividade.getId()]):
+                #     pNota["facebook"][curso.getId()].pop(atividade.getId())
+                self.removeElementVoid(pNota["facebook"][curso.getId()],atividade.getId())
 
+            # if not bool(pNota["facebook"][curso.getId()]):
+            #     pNota["facebook"].pop(curso.getId())
+            self.removeElementVoid(pNota["facebook"],curso.getId())
         return json.dumps(pNota, cls=MyEncoder)
+
+
+    def removeElementVoid(self,dict,key):
+        if not bool(dict[key]):
+            dict.pop(key)
 
 
     __options = {Strings.GET_STARTED.upper(): __started,
