@@ -228,9 +228,10 @@ class RequestController:
             data = answerViewTemplates.text(courseStudent.getStudentId(), "Você tem uma nova atividade, para visualizar envie /tarefas")
             self.__sendMessage(data)
 
-    def info_feedback(self):
-        #TODO: AFTER CORRECTION PNOTA SEND RESULTS FOR USERS
-        pass
+    def info_feedback(self,answer):
+        # TODO: AFTER CORRECTION PNOTA SEND RESULTS FOR USERS
+        # pass
+        data = answerViewTemplates.text(answer.getStudentId(),"Saiu a nota da atividade :"+answer.getAnswerText())
 
     # V1.0 - OK
     def __answer(self,message):
@@ -315,7 +316,7 @@ class RequestController:
                     obj.setFileName("facebook")
                     obj.setRawGradeMin("0.00000")
                     obj.setRawGradeMax("100.00000")
-                    obj.setIdGradeGrades("0")
+                    obj.setIdGradeGrades(str(resposta.getId()))
                     obj.setNotaProfessor("-1.00000")
                     obj.setCourseName(curso.getName())
                     obj.setResposta(resposta.getAnswerText())
@@ -323,12 +324,8 @@ class RequestController:
                     # obj.setUrl()
                     pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()].append(obj)
 
-                # if not bool(pNota["facebook"][curso.getId()][atividade.getId()]):
-                #     pNota["facebook"][curso.getId()].pop(atividade.getId())
                 self.removeElementVoid(pNota["facebook"][curso.getId()],atividade.getId())
 
-            # if not bool(pNota["facebook"][curso.getId()]):
-            #     pNota["facebook"].pop(curso.getId())
             self.removeElementVoid(pNota["facebook"],curso.getId())
         return json.dumps(pNota, cls=MyEncoder)
 
@@ -359,3 +356,16 @@ class RequestController:
         for course in cursos:
                 list += str(course.getCode()) + ":" + course.getName() + "\n"
         return list
+
+    def updateAnswers(self,data):
+        for response in data:
+            idAnswer = response["id_grade_grades"]
+            # nota = response["nota"]
+            feedback = response["feedback"]
+            answer = Answer.query.filter_by(id=idAnswer).first()
+            answer.feedback = feedback
+            # answer.nota = nota
+            db.session.commit()
+            self.info_feedback()
+
+        print("OK")

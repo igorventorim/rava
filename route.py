@@ -32,6 +32,10 @@ def webhook():
     controller.unpackMessage(request.get_json())
     return "ok", 200
 
+@app.route('/response', methods=['POST'])
+def updateAnswers():
+    controller.updateAnswers(request.get_json())
+    return "ok", 200
 
 @app.route("/home")
 def home():

@@ -9,6 +9,7 @@ class Answer(db.Model):
     feedback = db.Column(db.String(1000))
     student_id = db.Column(db.BIGINT, db.ForeignKey('student.id'), nullable=False)
     question_id = db.Column(db.BIGINT, db.ForeignKey('question.id'),nullable=False)
+    nota = db.Column(db.DECIMAL)
     review = db.Column(db.Boolean,default=False)
 
     # id = 0
@@ -53,3 +54,6 @@ class Answer(db.Model):
         if( id is None):
             return 0
         return id.getId()
+
+    def getNota(self):
+        return self.nota
