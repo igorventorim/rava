@@ -360,11 +360,11 @@ class RequestController:
     def updateAnswers(self,data):
         for response in data:
             idAnswer = response["id_grade_grades"]
-            # nota = response["nota"]
+            nota = response["nota"]
             feedback = response["feedback"]
             answer = Answer.query.filter_by(id=idAnswer).first()
             answer.feedback = feedback
-            # answer.nota = nota
+            answer.nota = nota
             db.session.commit()
             self.info_feedback()
 
