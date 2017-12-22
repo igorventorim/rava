@@ -364,6 +364,7 @@ class RequestController:
             answer.feedback = feedback
             answer.nota = nota
             db.session.commit()
-            self.info_feedback()
+            self.info_feedback(answer)
+
 
         print("OK")
