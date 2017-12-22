@@ -229,8 +229,6 @@ class RequestController:
             self.__sendMessage(data)
 
     def info_feedback(self,answer):
-        # TODO: AFTER CORRECTION PNOTA SEND RESULTS FOR USERS
-        # pass
         data = answerViewTemplates.text(answer.getStudentId(),"Saiu a nota da atividade :"+answer.getAnswerText())
 
     # V1.0 - OK
