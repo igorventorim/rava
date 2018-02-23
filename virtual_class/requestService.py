@@ -5,18 +5,18 @@ from messenger.message import Message
 import requests
 from messenger import answerViewTemplates
 from virtual_class.model.domain.answer import Answer
-from virtual_class.model.domain import Course
-from virtual_class.model.domain import Object
+from virtual_class.model.domain.course import Course
+from virtual_class.model.domain.object import Object
 from virtual_class.model.domain.question import Question
 from virtual_class.model.domain.student import Student
-from virtual_class.model.domain import Teatcher
+from virtual_class.model.domain.teatcher import Teatcher
 from virtual_class.model.domain.courseStudent import CourseStudent
 from utils.myEncoder import MyEncoder
 from utils.strings import Strings
 from messenger.userData import UserData
 from route import db
 
-class RequestController:
+class RequestService:
 
 
     def __init__(self):
