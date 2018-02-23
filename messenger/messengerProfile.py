@@ -1,6 +1,6 @@
 import requests
-from authentication import Authentication
-from strings import Strings
+from config.authentication import Authentication
+from utils.strings import Strings
 import json
 
 

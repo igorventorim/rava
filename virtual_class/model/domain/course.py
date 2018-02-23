@@ -1,4 +1,4 @@
-from model.domain.question import Question
+from virtual_class.model.domain.question import Question
 from route import db
 
 class Course(db.Model):

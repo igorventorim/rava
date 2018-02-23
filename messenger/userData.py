@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from authentication import Authentication
+from config.authentication import Authentication
 
 
 class UserData:

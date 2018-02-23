@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-from flask import Flask, request,render_template, redirect, url_for, session,flash
+from flask import Flask, request
 import os
 from flask_sqlalchemy import SQLAlchemy
 
-from authentication import Authentication
-from messengerProfile import MessengerProfile
+from config.authentication import Authentication
+from messenger.messengerProfile import MessengerProfile
 
 SQLAlchemy.SQLALCHEMY_TRACK_MODIFICATIONS = False
 app = Flask(__name__)
@@ -13,8 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from requestController import RequestController
-controller =  RequestController()
+from virtual_class.requestController import RequestController
+controller = RequestController()
 
 @app.route('/', methods=['GET'])
 def verify():

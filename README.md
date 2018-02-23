@@ -1,2 +1,2 @@
-# RAVA
-Robô de Auxílio Virtual ao Aprendizado (R.A.V.A)
+# rAVA
+robô de Auxílio Virtual e Aprendizado (R.A.V.A)

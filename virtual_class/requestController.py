@@ -1,19 +1,19 @@
 import json
 
-from authentication import Authentication
-from message import Message
+from config.authentication import Authentication
+from messenger.message import Message
 import requests
-import answerViewTemplates
-from model.domain.answer import Answer
-from model.domain.course import Course
-from model.domain.object import Object
-from model.domain.question import Question
-from model.domain.student import Student
-from model.domain.teatcher import Teatcher
-from model.domain.courseStudent import CourseStudent
-from myEncoder import MyEncoder
-from strings import Strings
-from userData import UserData
+from messenger import answerViewTemplates
+from virtual_class.model.domain.answer import Answer
+from virtual_class.model.domain import Course
+from virtual_class.model.domain import Object
+from virtual_class.model.domain.question import Question
+from virtual_class.model.domain.student import Student
+from virtual_class.model.domain import Teatcher
+from virtual_class.model.domain.courseStudent import CourseStudent
+from utils.myEncoder import MyEncoder
+from utils.strings import Strings
+from messenger.userData import UserData
 from route import db
 
 class RequestController:
@@ -101,7 +101,7 @@ class RequestController:
         db.session.add(course)
         db.session.commit()
         # print(self.__cursos)
-        data = answerViewTemplates.text(user_id, "Voce criou o curso "+course_name+", seu código de curso é "+str(course.getCode()))
+        data = answerViewTemplates.text(user_id, "Voce criou o curso " + course_name + ", seu código de curso é " + str(course.getCode()))
         self.__sendMessage(data)
 
     # V1.0 - OK
@@ -120,14 +120,14 @@ class RequestController:
                 # course.addQuestion(question)
                 db.session.add(question)
                 db.session.commit()
-                data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: "+str(question.getCode()))
+                data = answerViewTemplates.text(user_id, "Questão criada com sucesso. Question code: " + str(question.getCode()))
                 self.__sendMessage(data)
                 self.__info_nova_atividade(course_id)
             else:
-                data = answerViewTemplates.text(user_id,"Você não está autorizado a cadastrar questões neste curso!")
+                data = answerViewTemplates.text(user_id, "Você não está autorizado a cadastrar questões neste curso!")
                 self.__sendMessage(data)
         else:
-            data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
+            data = answerViewTemplates.text(user_id, "Código de curso inválido, confira se informou o código corretamente")
             self.__sendMessage(data)
 
     # V1.0 - OK
@@ -137,7 +137,7 @@ class RequestController:
         courses_list = Course.listCourses(self.__cursos,user_id)[1]
         courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
         msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
-        data = answerViewTemplates.text(user_id, "Seus cursos são :\n"+msg)
+        data = answerViewTemplates.text(user_id, "Seus cursos são :\n" + msg)
         self.__sendMessage(data)
 
     # V1.0 - OK
@@ -149,7 +149,7 @@ class RequestController:
         if( len(courses_list) > 0):
             for course in courses_list:
                 questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
-                data = answerViewTemplates.text(user_id, "Atividades do curso "+str(course.getName())+"\n"+questions)
+                data = answerViewTemplates.text(user_id, "Atividades do curso " + str(course.getName()) + "\n" + questions)
                 self.__sendMessage(data)
         else:
             data = answerViewTemplates.text(user_id, "Você não possui nenhum curso cadastrado, por isso não pode ter nenhuma questão cadastrada!")
@@ -175,10 +175,10 @@ class RequestController:
             db.session.commit()
             # course.addStudent(user_id)
             # self.__alunos.get(user_id).addCourse(course_code)
-            data = answerViewTemplates.text(user_id, "Bem vindo ao curso "+course.getName()+"!\nAgora você pode responder as atividades relacionadas a este curso!")
+            data = answerViewTemplates.text(user_id, "Bem vindo ao curso " + course.getName() + "!\nAgora você pode responder as atividades relacionadas a este curso!")
             self.__sendMessage(data)
         else:
-            data = answerViewTemplates.text(user_id,"Código de curso inválido, confira se informou o código corretamente")
+            data = answerViewTemplates.text(user_id, "Código de curso inválido, confira se informou o código corretamente")
             self.__sendMessage(data)
 
     # V1.0 - OK
@@ -197,7 +197,7 @@ class RequestController:
                     msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answerViewTemplates.text(user_id, msg)
                 self.__sendMessage(data)
-            data = answerViewTemplates.text(user_id,"Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
+            data = answerViewTemplates.text(user_id, "Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
             self.__sendMessage(data)
 
     # V1.0 - OK
@@ -229,7 +229,7 @@ class RequestController:
             self.__sendMessage(data)
 
     def info_feedback(self,answer):
-        data = answerViewTemplates.text(answer.getStudentId(),"Saiu a nota da atividade :"+answer.getAnswerText())
+        data = answerViewTemplates.text(answer.getStudentId(), "Saiu a nota da atividade :" + answer.getAnswerText())
 
     # V1.0 - OK
     def __answer(self,message):
@@ -258,26 +258,17 @@ class RequestController:
                     # self.__alunos.get(user_id).registerAnswer(answer)
                     db.session.add(answer)
                     db.session.commit()
-                    data = answerViewTemplates.text(user_id,"Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
+                    data = answerViewTemplates.text(user_id, "Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
                     self.__sendMessage(data)
                 else:
-                    data = answerViewTemplates.text(user_id,"Código de questão inválido, confira se digitou o código corretamente.")
+                    data = answerViewTemplates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
                     self.__sendMessage(data)
             else:
-                data = answerViewTemplates.text(user_id,"Você não está cadastrado neste curso.")
+                data = answerViewTemplates.text(user_id, "Você não está cadastrado neste curso.")
                 self.__sendMessage(data)
 
     def sampleSimulation(self):
         data = answerViewTemplates.text(1807409562632930,
-                                        # "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
-                                        # "QUESTÃO CC2Q0: Quem descobriu o Brasil?\n"
-                                        # "ST001: Pedrinho\n"
-                                        # "ST002: Dom Pedro\n"
-                                        # "ST009: Pedro Álvares Cabral\n"
-                                        # "ST022: Pedro\n"
-                                        # "ST311: Vasco da Game\n\n"
-                                        # "Para informar a nota, digite #codigodoaluno nota\n"
-                                        # "Exemplo: #ST001 5")
                                           "Por favor, nos informe as notas para a seguintes respostas, informando o código do aluno e sua nota:\n\n"
                                           "QUESTÃO CC2Q0: Quais são os planetas do sistema solar?\n"
                                           "ST001: Terra, Marte, Saturno, Plutão, Júpiter, Mercúrio, Vênus, Saturno, Urano e Netuno\n"
@@ -290,7 +281,7 @@ class RequestController:
         self.__sendMessage(data)
 
     def sendMessageTest(self,message):
-        data = answerViewTemplates.text(1807409562632930,message)
+        data = answerViewTemplates.text(1807409562632930, message)
         self.__sendMessage(data)
 
     def generateStructPNota(self):
