@@ -1,0 +1,16 @@
+Salada
+Maruípe: Cenoura e Tomate
+Goiabeiras: Alface e Tomate
+
+	Prato Principal
+Pernil Grelhado
+
+	Opção
+Maruípe: Omelete de Forno
+Goiabeiras: Ovos Mexidos
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Farofa de Maçã

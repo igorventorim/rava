@@ -1,0 +1,14 @@
+Salada
+Alface e Tomate
+
+	Prato Principal
+Carne Ensopada com Paio
+
+	Opção
+Quibe Vegetariano com Queijo
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Macarrão ao Alho e Óleo

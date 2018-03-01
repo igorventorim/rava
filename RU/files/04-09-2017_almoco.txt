@@ -1,0 +1,16 @@
+Salada
+Maruípe: Tomate e Acelga
+Goiabeiras: Tomate e Repolho Bicolor
+
+	Prato Principal
+Bife de Panela
+
+	Opção
+Maruípe: Proteína de Soja Refogada
+Goiabeiras: Refogado de Grãos (Ervilha, Lentilha, Grão-de-bico e Soja)
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Polenta

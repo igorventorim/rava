@@ -1,0 +1,16 @@
+Salada
+Couve e Tomate
+
+	Prato Principal
+Carne Ensopada
+
+	Opção
+Torta de Arroz com Cenoura e Queijo
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Purê de Cará
+
+	Suco de Goiaba

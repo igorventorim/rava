@@ -1,0 +1,14 @@
+Salada
+Alface e Couve
+
+	Prato Principal
+Pernil Grelhado
+
+	Opção
+Torta de Legumes
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Farofa de Maçã

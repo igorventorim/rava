@@ -1,0 +1,15 @@
+Salada
+Tomate e Cenoura
+
+	Prato Principal
+Bife de Panela
+
+	Opção
+Maruípe: Omelete de Forno
+Goiabeiras: Ovos Mexidos
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Canjiquinha

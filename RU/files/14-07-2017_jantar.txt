@@ -1,0 +1,19 @@
+Salada
+Couve e Tomate
+
+	Prato Principal
+Pernil Grelhado
+
+	Opção
+Omelete de Frios
+
+	Opção Vegetariana
+Proteína de Soja Refogada
+
+	Acompanhamento
+Arroz Branco, Arroz Integral e Feijão
+
+	Guarnição
+Espaguete ao Alho e Óleo
+
+	Suco de Abacaxi
