@@ -24,3 +24,5 @@ class Authentication:
     PAGE_ACCESS_TOKEN = os.environ["PAGE_ACCESS_TOKEN"]
 
     ZONE = "America/Sao_Paulo"
+
+    WIT_TOKEN = "DA2RHEIJKAKYNKEI6NHD3BKLUGNVX2KS"

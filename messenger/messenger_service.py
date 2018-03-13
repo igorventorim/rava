@@ -5,7 +5,7 @@ from messenger import answer_view_templates
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
 from atribuna.atribuna_service import AtribunaService
-
+from wit import Wit
 import requests
 
 class MessengerService:
@@ -16,7 +16,7 @@ class MessengerService:
         service_virtual_class = VirtualClassService()
         service_atribuna = AtribunaService()
         service_ru = RUService()
-
+        self.client = Wit(Authentication.WIT_TOKEN)
         self.__options.update(service_virtual_class.options)
         self.__options.update(service_atribuna.options)
         self.__options.update(service_ru.options)
@@ -42,17 +42,19 @@ class MessengerService:
         data = answer_view_templates.text(1807409562632930, message)
         MessengerService.sendMessage(data)
 
+    def __selector(self,message):
+        try:
+            cmd = message.getContentMessage().split(' ', 1)[0]
+            self.client.get_message(message.getContentMessage())
+            print(self.client.get_intents())
+            self.__options[cmd.upper()](self,message)
+        except:
+            self.__erro(message)
+
     def __erro(self, message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         MessengerService.sendMessage(data)
-
-    def __selector(self,message):
-        try:
-            cmd = message.getContentMessage().split(' ', 1)[0]
-            self.__options[cmd.upper()](self,message)
-        except:
-            self.__erro(message)
 
 
 

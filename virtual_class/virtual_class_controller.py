@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from flask import request, Blueprint
-from route import db
+from app import db
 from virtual_class.virtual_class_service import VirtualClassService
 from messenger.messenger_service import MessengerService
 

@@ -1,5 +1,5 @@
 from virtual_class.model.domain.question import Question
-from route import db
+from app import db
 
 class Course(db.Model):
 

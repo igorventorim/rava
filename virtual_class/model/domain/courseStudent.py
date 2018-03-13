@@ -1,4 +1,4 @@
-from route import db
+from app import db
 
 class CourseStudent(db.Model):
 

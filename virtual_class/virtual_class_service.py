@@ -11,7 +11,7 @@ from virtual_class.model.domain.courseStudent import CourseStudent
 from utils.my_encoder import MyEncoder
 from utils.strings import Strings
 from messenger.user_data import UserData
-from route import db
+from app import db
 class VirtualClassService:
 
 
@@ -245,9 +245,6 @@ class VirtualClassService:
                                           "Exemplo: #ST001 5")
         MessengerService.sendMessage(data)
 
-    # def sendMessageTest(self,message):
-    #     data = answer_view_templates.text(1807409562632930, message)
-    #     self.__sendMessage(data)
 
     def generateStructPNota(self):
         pNota = {"facebook":{}}
