@@ -12,8 +12,6 @@ from utils.my_encoder import MyEncoder
 from utils.strings import Strings
 from messenger.user_data import UserData
 from route import db
-from messenger import messenger_service
-
 class VirtualClassService:
 
 
@@ -26,30 +24,30 @@ class VirtualClassService:
         user_id = message.getClientID()
         msgText = Strings.GREETING_KNOWN_USER.format(UserData().getFirstNameClient(user_id))
         data = answer_view_templates.text(user_id, msgText)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
         msgText = Strings.APRESENTATION
         data = answer_view_templates.quick_reply(user_id, msgText, [Strings.PROFESSOR, Strings.ALUNO])
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __help(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.HELP_INFO_PROFESSOR)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
         data = answer_view_templates.text(user_id, Strings.HELP_INFO_ALUNO)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __professor(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.PROFESSOR_INFO)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __aluno(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.ALUNO_INFO)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
 
 
@@ -69,7 +67,7 @@ class VirtualClassService:
         db.session.commit()
         # print(self.__cursos)
         data = answer_view_templates.text(user_id, "Voce criou o curso " + course_name + ", seu código de curso é " + str(course.getCode()))
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __criar_atividade(self,message):
@@ -88,14 +86,14 @@ class VirtualClassService:
                 db.session.add(question)
                 db.session.commit()
                 data = answer_view_templates.text(user_id, "Questão criada com sucesso. Question code: " + str(question.getCode()))
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
                 self.__info_nova_atividade(course_id)
             else:
                 data = answer_view_templates.text(user_id, "Você não está autorizado a cadastrar questões neste curso!")
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
         else:
             data = answer_view_templates.text(user_id, "Código de curso inválido, confira se informou o código corretamente")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __listar_cursos(self,message):
@@ -105,7 +103,7 @@ class VirtualClassService:
         courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
         msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
         data = answer_view_templates.text(user_id, "Seus cursos são :\n" + msg)
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __listar_atividades(self,message):
@@ -117,10 +115,10 @@ class VirtualClassService:
             for course in courses_list:
                 questions = course.getQuestionsToString() if course.getQuestionsToString() != "" else "Este curso ainda não possui atividades cadastradas."
                 data = answer_view_templates.text(user_id, "Atividades do curso " + str(course.getName()) + "\n" + questions)
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
         else:
             data = answer_view_templates.text(user_id, "Você não possui nenhum curso cadastrado, por isso não pode ter nenhuma questão cadastrada!")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __login_curso(self,message):
@@ -143,10 +141,10 @@ class VirtualClassService:
             # course.addStudent(user_id)
             # self.__alunos.get(user_id).addCourse(course_code)
             data = answer_view_templates.text(user_id, "Bem vindo ao curso " + course.getName() + "!\nAgora você pode responder as atividades relacionadas a este curso!")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
         else:
             data = answer_view_templates.text(user_id, "Código de curso inválido, confira se informou o código corretamente")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __visualizar_atividades(self,message):
@@ -155,7 +153,7 @@ class VirtualClassService:
         coursesActivate = CourseStudent.query.filter_by(student_id=user_id).all()
         if coursesActivate == []:
             data = answer_view_templates.text(user_id, "Você não está cadastrado em nenhum curso.")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
         else:
             for ca in coursesActivate:
                 course = Course.query.filter_by(id=ca.getCourseId()).first()
@@ -163,9 +161,9 @@ class VirtualClassService:
                 for question in Question.query.filter_by(course_id=course.getId()):
                     msg += question.getCode()+":"+question.getDesc()+"\n"
                 data = answer_view_templates.text(user_id, msg)
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
             data = answer_view_templates.text(user_id, "Para responder uma questão digite #códigodaquestão e sua resposta.\nExemplo: \nPergunta: #cc50q3 Quem descobriu o Brasil?\nResposta: #cc1q0 Pedrinho")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __visualizar_notas(self,message):
@@ -181,19 +179,19 @@ class VirtualClassService:
                     feedback = answer.getFeedback() if answer.getFeedback() != None else ""
                     msg = "Pergunta:"+ question.getDesc() +"\nResposta:"+answer.getAnswerText()+"\n\nNota:"+feedback
                     data = answer_view_templates.text(user_id, msg)
-                    messenger_service.MessengerService.sendMessage(data)
+                    MessengerService.sendMessage(data)
             else:
                 data = answer_view_templates.text(user_id, "Você não possui nenhuma resposta cadastrada.")
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
         else:
             data = answer_view_templates.text(user_id, "Você não está cadastrado em nenhum curso.")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     # V1.0 - OK
     def __info_nova_atividade(self,curso_id):
         for courseStudent in CourseStudent.query.filter_by(course_id=curso_id).all():
             data = answer_view_templates.text(courseStudent.getStudentId(), "Você tem uma nova atividade, para visualizar envie /tarefas")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
 
     def info_feedback(self,answer):
         data = answer_view_templates.text(answer.getStudentId(), "Saiu a nota da atividade :" + answer.getAnswerText())
@@ -209,7 +207,7 @@ class VirtualClassService:
         course = Course.query.filter_by(course_code=course_code.upper()).first()
         if course == None:
             data = answer_view_templates.text(user_id, "Código de curso inválido, confira se digitou o código corretamente.")
-            messenger_service.MessengerService.sendMessage(data)
+            MessengerService.sendMessage(data)
         else:
             courseStudents = CourseStudent.query.filter_by(course_id=course.getId()).all()
             studentInCourse = False
@@ -226,13 +224,13 @@ class VirtualClassService:
                     db.session.add(answer)
                     db.session.commit()
                     data = answer_view_templates.text(user_id, "Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
-                    messenger_service.MessengerService.sendMessage(data)
+                    MessengerService.sendMessage(data)
                 else:
                     data = answer_view_templates.text(user_id, "Código de questão inválido, confira se digitou o código corretamente.")
-                    messenger_service.MessengerService.sendMessage(data)
+                    MessengerService.sendMessage(data)
             else:
                 data = answer_view_templates.text(user_id, "Você não está cadastrado neste curso.")
-                messenger_service.MessengerService.sendMessage(data)
+                MessengerService.sendMessage(data)
 
     def sampleSimulation(self):
         data = answer_view_templates.text(1807409562632930,
@@ -245,7 +243,7 @@ class VirtualClassService:
                                           "ST311: Vênus, Saturno, Urano, Terra, Marte e Saturno\n\n"
                                           "Para informar a nota, digite #codigodoaluno nota\n"
                                           "Exemplo: #ST001 5")
-        messenger_service.MessengerService.sendMessage(data)
+        MessengerService.sendMessage(data)
 
     # def sendMessageTest(self,message):
     #     data = answer_view_templates.text(1807409562632930, message)
@@ -326,3 +324,4 @@ class VirtualClassService:
 
 
         print("OK")
+from messenger.messenger_service import MessengerService
