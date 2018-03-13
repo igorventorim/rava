@@ -45,7 +45,7 @@ class MessengerService:
     def __selector(self,message):
         try:
             cmd = message.getContentMessage().split(' ', 1)[0]
-            result = self.client.get_message(message.getContentMessage())
+            result = self.client.message(message=message.getContentMessage())
             print(self.client.get_corpus())
             print(result)
             self.__options[cmd.upper()](self,message)
