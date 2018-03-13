@@ -4,12 +4,14 @@ from flask import Flask, request, Blueprint
 from config.authentication import Authentication
 from virtual_class.requestService import RequestService
 from messenger.messengerProfile import MessengerProfile
+from route import app
 
 controller = RequestService()
 
-messenger_blueprint = Blueprint('messenger_blueprint',__name__)
+# messenger_blueprint = Blueprint('messenger_blueprint',__name__)
 
-@messenger_blueprint.route('/', methods=['GET'])
+# @messenger_blueprint.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
     # the 'hub.challenge' value it receives in the query arguments
@@ -20,16 +22,19 @@ def verify():
 
     return home()
 
-@messenger_blueprint.route('/', methods=['POST'])
+# @messenger_blueprint.route('/', methods=['POST'])
+@app.route('/', methods=['POST'])
 def webhook():
     controller.unpackMessage(request.get_json())
     return "ok", 200
 
-@messenger_blueprint.route("/home")
+# @messenger_blueprint.route("/home")
+@app.route("/home")
 def home():
     return "<h1>Robo de Auxilio Virtual ao Aprendizado!</hi>"
 
-@messenger_blueprint.route("/registerStartedButton")
+# @messenger_blueprint.route("/registerStartedButton")
+@app.route("/registerStartedButton")
 def registerStartedButton():
      r = MessengerProfile().createStartedButton()
      if(r == True):
@@ -37,7 +42,8 @@ def registerStartedButton():
      else:
         return "erro", 200
 
-@messenger_blueprint.route("/registerMsgGreeting")
+# @messenger_blueprint.route("/registerMsgGreeting")
+@app.route("/registerMsgGreeting")
 def registerMsgGreeting():
     r= MessengerProfile().createGreeting()
     if (r == True):
@@ -45,7 +51,8 @@ def registerMsgGreeting():
     else:
         return "erro", 200
 
-@messenger_blueprint.route("/readGreeting")
+# @messenger_blueprint.route("/readGreeting")
+@app.route("/readGreeting")
 def readGreeting():
     r = MessengerProfile().readGreeting()
     print(r)
