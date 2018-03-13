@@ -1,11 +1,12 @@
 # encoding: utf-8
 
 from flask import request, Blueprint
-from route import db
+
 
 from route import app
 
 comunicador_blueprint = Blueprint('comunicador_blueprint',__name__)
+from route import db
 from virtual_class.requestService import RequestService
 
 # @app.route("/pnota")
