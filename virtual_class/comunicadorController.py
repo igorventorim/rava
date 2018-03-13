@@ -2,6 +2,7 @@
 
 from flask import request, Blueprint
 from virtual_class.requestService import RequestService
+from route import db
 
 controller = RequestService()
 
