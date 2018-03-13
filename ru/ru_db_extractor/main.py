@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from myEncoder import MyEncoder
-from cardapio import Cardapio
+from utils.my_encoder import MyEncoder
+from ru.ru_db_extractor.cardapio import Cardapio
 import requests
 from bs4 import BeautifulSoup
 import os
