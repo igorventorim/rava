@@ -4,6 +4,8 @@ from flask import Flask, request
 import os
 from flask_sqlalchemy import SQLAlchemy
 from virtual_class.requestService import RequestService
+from virtual_class.comunicadorController import comunicador_blueprint
+from messenger.messengerController import messenger_blueprint
 # from config.authentication import Authentication
 # from messenger.messengerProfile import MessengerProfile
 
@@ -12,11 +14,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
+app.register_blueprint(comunicador_blueprint)
+app.register_blueprint(messenger_blueprint)
 
 controller = RequestService()
-db.create_all()
-print(db)
+# db.create_all()
+# print(db)
 
 # @app.route('/', methods=['GET'])
 # def verify():
@@ -84,11 +87,11 @@ print(db)
 #     controller.sendMessageTest(msg)
 #     return "ok", 200
 
-# @app.route("/generateDB")
-# def generate():
-#     db.create_all()
-#     print(db)
-#     return "ok",200
+@app.route("/generateDB")
+def generate():
+    db.create_all()
+    print(db)
+    return "ok",200
 
 if __name__ == '__main__':
     app.run(debug=True)
