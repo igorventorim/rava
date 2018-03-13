@@ -45,8 +45,9 @@ class MessengerService:
     def __selector(self,message):
         try:
             cmd = message.getContentMessage().split(' ', 1)[0]
-            self.client.get_message(message.getContentMessage())
+            result = self.client.get_message(message.getContentMessage())
             print(self.client.get_intents())
+            print(result)
             self.__options[cmd.upper()](self,message)
         except:
             self.__erro(message)
