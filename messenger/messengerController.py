@@ -7,7 +7,7 @@ from messenger.messengerProfile import MessengerProfile
 
 controller = RequestService()
 
-messenger_blueprint = Blueprint('messenger_page',__name__)
+messenger_blueprint = Blueprint('messenger_blueprint',__name__)
 
 @messenger_blueprint.route('/', methods=['GET'])
 def verify():

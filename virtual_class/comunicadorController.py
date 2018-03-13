@@ -5,7 +5,7 @@ from virtual_class.requestService import RequestService
 
 controller = RequestService()
 
-comunicador_blueprint = Blueprint('comunicador_page',__name__)
+comunicador_blueprint = Blueprint('comunicador_blueprint',__name__)
 
 @comunicador_blueprint.route("/pnota")
 def structPNota():
