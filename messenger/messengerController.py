@@ -6,9 +6,10 @@ from virtual_class.requestService import RequestService
 from messenger.messengerProfile import MessengerProfile
 # from route import app
 
-controller = RequestService()
+
 
 messenger_blueprint = Blueprint('messenger_blueprint',__name__)
+controller = RequestService()
 
 # @app.route('/', methods=['GET'])
 @messenger_blueprint.route('/', methods=['GET'])
