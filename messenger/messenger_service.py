@@ -47,7 +47,7 @@ class MessengerService:
             cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message=message.getContentMessage())
             # print(self.client.get_corpus())
-            print(str(result))
+            print(str(result)+"\n\n\n")
             self.__options[cmd.upper()](self,message)
         except:
             self.__erro(message)
