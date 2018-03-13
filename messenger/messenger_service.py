@@ -46,7 +46,7 @@ class MessengerService:
         try:
             cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.get_message(message.getContentMessage())
-            print(self.client.get_intents())
+            print(self.client.get_corpus())
             print(result)
             self.__options[cmd.upper()](self,message)
         except:
