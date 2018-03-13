@@ -2,14 +2,10 @@
 
 from flask import request, Blueprint
 from config.authentication import Authentication
-
 from messenger.messengerProfile import MessengerProfile
-# from route import app
-
-
+from virtual_class.requestService import RequestService
 
 messenger_blueprint = Blueprint('messenger_blueprint',__name__)
-from virtual_class.requestService import RequestService
 
 # @app.route('/', methods=['GET'])
 @messenger_blueprint.route('/', methods=['GET'])
