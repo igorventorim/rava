@@ -46,8 +46,9 @@ class MessengerService:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result)
-            print("AQUI:"+cmd)
+            # print("AQUI:"+cmd)
             self.__options[cmd.upper()](self,message)
+
         # except:
         #     self.__erro(message)
 
