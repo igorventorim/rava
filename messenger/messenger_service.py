@@ -12,13 +12,13 @@ class MessengerService:
 
     def __init__(self):
         self.__options = {}
-        service_virtual_class = VirtualClassService()
-        service_atribuna = AtribunaService()
-        service_ru = RUService()
+        self.service_virtual_class = VirtualClassService()
+        self.service_atribuna = AtribunaService()
+        self.service_ru = RUService()
         self.client = Wit(Authentication.WIT_TOKEN)
-        self.__options.update(service_virtual_class.options)
-        self.__options.update(service_atribuna.options)
-        self.__options.update(service_ru.options)
+        self.__options.update(self.service_virtual_class.options)
+        self.__options.update(self.service_atribuna.options)
+        self.__options.update(self.service_ru.options)
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -47,7 +47,7 @@ class MessengerService:
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result)
             # print("AQUI:"+cmd)
-            self.__options[cmd.upper()](self,message)
+            self.selectModule(cmd.upper()).options[cmd.upper()](self,message)
 
         # except:
         #     self.__erro(message)
@@ -70,5 +70,12 @@ class MessengerService:
                    chave = key
             return entidades[chave][0]['value']
 
-
-
+    def selectModule(self, element):
+        if element in self.service_virtual_class.options:
+            return self.service_virtual_class
+        elif element in self.service_ru.options:
+            return self.service_ru
+        elif element in self.service_atribuna:
+            return self.service_atribuna
+        else:
+            return None

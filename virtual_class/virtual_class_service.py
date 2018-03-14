@@ -16,8 +16,8 @@ class VirtualClassService:
 
 
     def __init__(self):
-        self.cursos = []   #TODO: CHANGE DICT COURSES
-        self.alunos = {}
+        self.__cursos = []   #TODO: CHANGE DICT COURSES
+        self.__alunos = {}
 
     # V1.0 - OK
     def __started(self,message):
@@ -62,7 +62,7 @@ class VirtualClassService:
             db.session.add(teatcher)
             db.session.commit()
         course = Course(name=course_name, teatcher_id=user_id)
-        self.cursos.append(course)
+        self.__cursos.append(course)
         db.session.add(course)
         db.session.commit()
         # print(self.__cursos)
@@ -99,7 +99,7 @@ class VirtualClassService:
     def __listar_cursos(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        courses_list = Course.listCourses(self.cursos, user_id)[1]
+        courses_list = Course.listCourses(self.__cursos,user_id)[1]
         courses_list = self.coursesToStr(Course.query.filter_by(teatcher_id=user_id).all())
         msg = courses_list if len(courses_list) else "Desculpe, mas você não possui curso cadastrado!"
         data = answer_view_templates.text(user_id, "Seus cursos são :\n" + msg)
