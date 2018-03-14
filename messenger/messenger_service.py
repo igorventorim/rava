@@ -47,7 +47,7 @@ class MessengerService:
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result)
             # print("AQUI:"+cmd)
-            self.options[cmd.upper()](self.selectModule(cmd.upper()),message)
+            self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
 
         # except:
         #     self.__erro(message)
