@@ -29,7 +29,7 @@ class Strings():
 
     PROFESSOR="Professor"
     ALUNO="Aluno"
-    CMD_CRIAR_CURSO="/curso"
+    CMD_CRIAR_CURSO="criar_curso"
     CMD_CRIAR_ATIVIDADE="/atividade"
     CMD_LISTAR_CURSOS="/listcursos"
     CMD_LISTAR_ATIVIDADES="/listatividades"

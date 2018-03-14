@@ -55,7 +55,7 @@ class VirtualClassService:
     def __criar_curso(self,message):
         content_message = message.getContentMessage()
         user_id = message.getClientID()
-        course_name = content_message[content_message.find(" ")+1:]
+        course_name = content_message[content_message.find("curso")+len("curso")+1:]
         teatcher = Teatcher(teatcher_id=user_id)
         check = Teatcher.query.filter_by(id=user_id).first()
         if check is None:

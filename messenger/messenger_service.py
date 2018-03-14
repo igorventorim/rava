@@ -10,7 +10,6 @@ import requests
 
 class MessengerService:
 
-
     def __init__(self):
         self.__options = {}
         service_virtual_class = VirtualClassService()
@@ -44,12 +43,9 @@ class MessengerService:
 
     def __selector(self,message):
         try:
-            cmd = message.getContentMessage().split(' ', 1)[0]
+            # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
-            # print(self.client.get_corpus())
-            print(str(result['entities']))
-            print(result)
-
+            cmd = self.__handleResponseWit(result)
             self.__options[cmd.upper()](self,message)
         except:
             self.__erro(message)
@@ -59,8 +55,18 @@ class MessengerService:
         data = answer_view_templates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         MessengerService.sendMessage(data)
 
-
-
+    def __handleResponseWit(self,response):
+        entidades = response['entities']
+        if entidades == {}:
+            return ""
+        else:
+            max = 0
+            chave = ""
+            for key, value in entidades.items():
+               if value[0]['confidence'] > max:
+                   max = value[0]['confidence']
+                   chave = key
+            return entidades[chave][0]['value']
 
 
 
