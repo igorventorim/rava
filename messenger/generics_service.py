@@ -21,8 +21,8 @@ class GenericsService:
         data = answer_view_templates.text(user_id, Strings.RESPOSTA_AGRADECIMENTO)
         MessengerService.sendMessage(data)
 
-    options = {Strings.CMD_PERGUNTA_SAUDACAO: __comoestou,
-               Strings.CMD_AGRADECIMENTO: __agradecimento,
-               Strings.CMD_APRESENTACAO: __apresentacao}
+    options = {Strings.CMD_PERGUNTA_SAUDACAO.upper(): __comoestou,
+               Strings.CMD_AGRADECIMENTO.upper(): __agradecimento,
+               Strings.CMD_APRESENTACAO.upper(): __apresentacao}
 
 from messenger.messenger_service import MessengerService

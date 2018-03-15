@@ -16,7 +16,7 @@ class RUService:
         data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
         MessengerService.sendMessage(data)
 
-    options = {Strings.CMD_CARDAPIO: visualizar_cardapio,
-               Strings.CMD_PRATO: visualizar_prato}
+    options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
+               Strings.CMD_PRATO.upper(): visualizar_prato}
 
 from messenger.messenger_service import MessengerService
