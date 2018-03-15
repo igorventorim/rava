@@ -1,5 +1,4 @@
 from utils.strings import Strings
-from messenger.messenger_service import MessengerService
 from messenger import answer_view_templates
 
 class RUService:
@@ -19,3 +18,5 @@ class RUService:
 
     options = {Strings.CMD_CARDAPIO: visualizar_cardapio,
                Strings.CMD_PRATO: visualizar_prato}
+
+from messenger.messenger_service import MessengerService

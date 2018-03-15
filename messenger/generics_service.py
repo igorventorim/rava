@@ -1,5 +1,4 @@
 from utils.strings import Strings
-from messenger.messenger_service import MessengerService
 from messenger import answer_view_templates
 
 class GenericsService:
@@ -25,3 +24,5 @@ class GenericsService:
     options = {Strings.CMD_PERGUNTA_SAUDACAO: __comoestou,
                Strings.CMD_AGRADECIMENTO: __agradecimento,
                Strings.CMD_APRESENTACAO: __apresentacao}
+
+from messenger.messenger_service import MessengerService
