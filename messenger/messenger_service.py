@@ -72,9 +72,9 @@ class MessengerService:
             return self.service_virtual_class
         elif element in self.service_ru.options:
             return self.service_ru
-        elif element in self.service_atribuna:
+        elif element in self.service_atribuna.options:
             return self.service_atribuna
-        elif element in self.service_generics:
+        elif element in self.service_generics.options:
             return self.service_generics
         else:
             return None
