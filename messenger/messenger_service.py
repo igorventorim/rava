@@ -2,10 +2,6 @@ from utils.strings import Strings
 from messenger.message import Message
 from config.authentication import Authentication
 from messenger import answer_view_templates
-from virtual_class.virtual_class_service import VirtualClassService
-from ru.ru_service import RUService
-from atribuna.atribuna_service import AtribunaService
-from messenger.generics_service import GenericsService
 from wit import Wit
 import requests
 
@@ -82,3 +78,8 @@ class MessengerService:
             return self.service_generics
         else:
             return None
+
+from virtual_class.virtual_class_service import VirtualClassService
+from ru.ru_service import RUService
+from atribuna.atribuna_service import AtribunaService
+from messenger.generics_service import GenericsService
