@@ -1,28 +1,65 @@
 import threading
 import time
+from bs4 import BeautifulSoup
+import requests
+import datetime
+import re
 
 
 class SincData(object):
-    """ Threading example class
-    The run() method will be started and it will run in the background
-    until the application exits.
-    """
 
-    def __init__(self, interval=1):
-        """ Constructor
-        :type interval: int
-        :param interval: Check interval, in seconds
-        """
+    def __init__(self, interval=1800,tipo="almoco"):
+
         self.interval = interval
+        self.tipo = tipo
 
         thread = threading.Thread(target=self.run, args=())
-        thread.daemon = True                            # Daemonize thread
+        # thread.daemon = True                            # Daemonize thread
         thread.start()                                  # Start the execution
 
+    def getType(self,tipo):
+        if "almo" in tipo.lower():
+            return "Almoço"
+        else:
+            return "Jantar"
+
     def run(self):
-        """ Method that runs forever """
+
+        _URL = "http://ru.ufes.br/cardapio/"
         while True:
-            # Do something
-            print('Doing something imporant in the background')
+
+            now = datetime.datetime.now()
+            if(now.hour > 6 and now.hour < 15):
+                self.tipo = "Almoço"
+            elif(now.hour > 15 and now.hour < 23):
+                self.tipo = "Jantar"
+
+            searchURL = _URL + str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+            print(searchURL)
+
+            r = requests.get(searchURL)
+            soup = BeautifulSoup(r.content, "html5lib")
+
+            itens = soup.find("div", class_='view-display-id-page_1')
+            if (itens != None):
+                refeicoes = itens.find("div", class_='view-content')
+                if (refeicoes != None):
+
+                    for refeicao in refeicoes.children:
+                        if (refeicao.find("views-field-title") == None):
+                            tipo = refeicao.find("div", class_="views-field-title").find("span", class_="field-content")
+                            tipo = self.getType(tipo.get_text())
+                            if(tipo == self.tipo):
+                                cardapio = refeicao.find("div", class_="views-field-body").find_all("div",class_="field-content")
+                                menu = tipo + "\n"# + "- Data: "+ str(now.day) + "/" + str(now.year) + "/" + str(now.month) + "\n"
+                                for element in cardapio:
+                                    menu += re.sub(' +',' ',element.get_text())+"\n"
+                                print(menu)
+
+                    print("Request " + searchURL + " realizado com sucesso!")
+                else:
+                    print("NÃO POSTARAM O CARDAPIO AINDA!!!")
+
+            print('Rodando em background')
 
             time.sleep(self.interval)

@@ -62,7 +62,7 @@ class MessengerService:
             max = 0
             chave = ""
             for key, value in entidades.items():
-               if value[0]['confidence'] > max:
+               if value[0]['confidence'] > max and value[0]['confidence'] > 0.6:
                    max = value[0]['confidence']
                    chave = key
             return entidades[chave][0]['value']

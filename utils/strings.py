@@ -50,6 +50,8 @@ class Strings():
 
     CMD_PRATO = "cmd_prato"
     CMD_CARDAPIO = "cmd_cardapio"
+    CMD_SPAM_RU = "cmd_spam_ru"
+    CMD_DELETE_SPAM_RU = "cmd_delete_spam_ru"
 
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
