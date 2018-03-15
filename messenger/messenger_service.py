@@ -5,6 +5,7 @@ from messenger import answer_view_templates
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
 from atribuna.atribuna_service import AtribunaService
+from messenger.generics_service import GenericsService
 from wit import Wit
 import requests
 
@@ -15,10 +16,12 @@ class MessengerService:
         self.service_virtual_class = VirtualClassService()
         self.service_atribuna = AtribunaService()
         self.service_ru = RUService()
+        self.service_generics = GenericsService()
         self.client = Wit(Authentication.WIT_TOKEN)
         self.__options.update(self.service_virtual_class.options)
         self.__options.update(self.service_atribuna.options)
         self.__options.update(self.service_ru.options)
+        self.__options.update(self.service_generics.options)
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -42,15 +45,13 @@ class MessengerService:
         MessengerService.sendMessage(data)
 
     def __selector(self,message):
-        # try:
+        try:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result)
-            # print("AQUI:"+cmd)
             self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
-
-        # except:
-        #     self.__erro(message)
+        except:
+            self.__erro(message)
 
     def __erro(self, message):
         user_id = message.getClientID()
@@ -77,5 +78,7 @@ class MessengerService:
             return self.service_ru
         elif element in self.service_atribuna:
             return self.service_atribuna
+        elif element in self.service_generics:
+            return self.service_generics
         else:
             return None

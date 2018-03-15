@@ -9,8 +9,13 @@ class Strings():
     NO = u"Nao"
     GREETING_TEXT = u"Seja bem vindo ao rava !"
     GREETING_KNOWN_USER = u"Olá {}, tudo bem?"
-    APRESENTATION= "Eu sou o Robô de Auxílio Virtual ao Aprendizado, para os mais íntimos Rava.\n" \
-                   "Eu auxílio o ensino virtual recebendo perguntas enviadas por professores, encaminho para os alunos e avalio suas respostas, você é um?"
+    APRESENTATION= "Eu sou o Robô de Auxílio Virtual e Aprendizado, para os mais íntimos rAVA.\n" \
+                   "Hoje eu tenho informações do restaurante universitário da Universidade Federal do Espírito Santo, se você quiser informações me pergunte :)"
+
+    RESPOSTA_AGRADECIMENTO = "Foi um prazer poder ajudá-lo."
+    RESPOSTA_COMO_ESTOU = "Estou ótimo, obrigado por perguntar."
+    RESPOSTA_CARDAPIO = "Ainda não descobri, quando eu descobri eu te falo..."
+    RESPOSTA_PRATO = "Ainda não descobri, quando eu descobri eu te falo..."
     BACK = u"Voltar"
     WHAT_TO_DO_NOW = u"O que deseja fazer agora?"
     SELECT_OPTION = u"Entendiii, escolha a opcao abaixo que melhor te atende :)"
@@ -38,6 +43,14 @@ class Strings():
     CMD_VISUALIZAR_NOTAS="/notas"
     CMD_PROFESSOR="/professor"
     CMD_ALUNO="/aluno"
+
+    CMD_PERGUNTA_SAUDACAO="pergunta_saudacao"
+    CMD_AGRADECIMENTO="agradecimento"
+    CMD_APRESENTACAO="cmd_apresentacao"
+
+    CMD_PRATO = "cmd_prato"
+    CMD_CARDAPIO = "cmd_cardapio"
+
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
                 "Comandos para Professor:\n" \
