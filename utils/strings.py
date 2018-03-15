@@ -16,6 +16,8 @@ class Strings():
     RESPOSTA_COMO_ESTOU = "Estou ótimo, obrigado por perguntar."
     RESPOSTA_CARDAPIO = "Ainda não descobri, quando eu descobri eu te falo..."
     RESPOSTA_PRATO = "Ainda não descobri, quando eu descobri eu te falo..."
+    RESPOSTA_REGISTRO_SPAM_RU = "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, caso queira se descadastrar é só falar :)."
+    RESPOSTA_REMOVE_SPAM_RU = "Tudo bem, não te incomodarei mais com isso."
     BACK = u"Voltar"
     WHAT_TO_DO_NOW = u"O que deseja fazer agora?"
     SELECT_OPTION = u"Entendiii, escolha a opcao abaixo que melhor te atende :)"

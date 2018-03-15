@@ -18,11 +18,16 @@ class RUService:
 
     def register_spam_ru(self,message):
         user_id = message.getClientID()
-        pass
+        #TODO: Construir lógica do cadastro
+        data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
+        MessengerService.sendMessage(data)
 
     def unregister_spam_ru(self,message):
         user_id = message.getClientID()
-        pass
+        data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
+        # TODO: Construir lógica do descadastro
+        MessengerService.sendMessage(data)
+
 
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,
