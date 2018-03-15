@@ -41,12 +41,12 @@ class MessengerService:
         MessengerService.sendMessage(data)
 
     def __selector(self,message):
-        # try:
+        try:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result)
             self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
-        # except:
+        except:
             self.__erro(message)
 
     def __erro(self, message):
