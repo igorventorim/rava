@@ -23,7 +23,7 @@ class GenericsService:
 
     def __saudacao(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_AGRADECIMENTO)
+        data = answer_view_templates.text(user_id, Strings.RESPOSTA_SAUDACAO)
         MessengerService.sendMessage(data)
 
     options = {Strings.CMD_PERGUNTA_SAUDACAO.upper(): __comoestou,
