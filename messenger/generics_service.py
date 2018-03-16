@@ -1,5 +1,6 @@
 from utils.strings import Strings
 from messenger import answer_view_templates
+from messenger.user_data import UserData
 
 class GenericsService:
 
@@ -23,7 +24,7 @@ class GenericsService:
 
     def __saudacao(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_SAUDACAO)
+        data = answer_view_templates.text(user_id, Strings.CMD_SAUDACAO.format(UserData().getFirstNameClient(user_id)))
         MessengerService.sendMessage(data)
 
     options = {Strings.CMD_PERGUNTA_SAUDACAO.upper(): __comoestou,
