@@ -12,13 +12,6 @@ class Strings():
     APRESENTATION= "Eu sou o Robô de Auxílio Virtual e Aprendizado, para os mais íntimos rAVA.\n" \
                    "Hoje eu tenho informações do restaurante universitário da Universidade Federal do Espírito Santo, se você quiser informações me pergunte :)"
 
-    RESPOSTA_AGRADECIMENTO = "Foi um prazer poder ajudá-lo."
-    RESPOSTA_COMO_ESTOU = "Estou ótimo, obrigado por perguntar."
-    RESPOSTA_CARDAPIO = "Ainda não descobri, quando eu descobri eu te falo..."
-    RESPOSTA_PRATO = "Ainda não descobri, quando eu descobri eu te falo..."
-    RESPOSTA_REGISTRO_SPAM_RU = "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, caso queira se descadastrar é só falar :)."
-    RESPOSTA_REMOVE_SPAM_RU = "Tudo bem, não te incomodarei mais com isso."
-    RESPOSTA_SAUDACAO = "E aí {}, que bom te ver por aqui, em que eu posso te ajudar?"
     BACK = u"Voltar"
     WHAT_TO_DO_NOW = u"O que deseja fazer agora?"
     SELECT_OPTION = u"Entendiii, escolha a opcao abaixo que melhor te atende :)"
@@ -51,6 +44,8 @@ class Strings():
     CMD_AGRADECIMENTO="agradecimento"
     CMD_APRESENTACAO="cmd_apresentacao"
     CMD_SAUDACAO="cmd_saudacao"
+    CMD_DESPEDIDA="cmd_despedida"
+    CMD_IDADE="cmd_idade"
 
     CMD_PRATO = "cmd_prato"
     CMD_CARDAPIO = "cmd_cardapio"
@@ -118,6 +113,24 @@ class Strings():
     NUMBER5= u"5"
     # except things
     APOLOGIZE_USER_FOR_ERROR = "Desculpe, não entendi. Caso tenha dúvida em quais comandos utilizar digite: /help"
+
+    response_general = {
+        CMD_PERGUNTA_SAUDACAO: "Estou ótimo, obrigado por perguntar.",
+        CMD_AGRADECIMENTO: "Foi um prazer poder ajudá-lo.",
+        CMD_APRESENTACAO: "Eu sou o Robô de Auxílio Virtual e Aprendizado, para os mais íntimos rAVA.\n" \
+                   "Hoje eu tenho informações do restaurante universitário da Universidade Federal do Espírito Santo, se você quiser informações me pergunte :)",
+        CMD_SAUDACAO: "E aí {}, que bom te ver por aqui, em que eu posso te ajudar?",
+        CMD_DESPEDIDA: "Até mais!",
+        CMD_IDADE: "Nós robôs não comemoramos aniversário, por isso não tenho uma idade, mas se fosse para escolher uma, acho que gostaria de ter 18."
+    }
+
+    response_ru = {
+        CMD_PRATO: "Ainda não descobri, quando eu descobrir eu te falo...",
+        CMD_CARDAPIO: "Ainda não descobri, quando eu descobrir eu te falo...",
+        CMD_SPAM_RU: "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, caso queira se descadastrar é só falar :).",
+        CMD_DELETE_SPAM_RU: "Tudo bem, não te incomodarei mais com isso."
+    }
+
 
     # TO DO
     @staticmethod 

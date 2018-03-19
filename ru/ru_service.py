@@ -8,23 +8,23 @@ class RUService:
 
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_CARDAPIO)
+        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_CARDAPIO])
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
+        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_PRATO])
         MessengerService.sendMessage(data)
 
     def register_spam_ru(self,message):
         user_id = message.getClientID()
         #TODO: Construir lógica do cadastro
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
+        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
         MessengerService.sendMessage(data)
 
     def unregister_spam_ru(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.RESPOSTA_PRATO)
+        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_DELETE_SPAM_RU])
         # TODO: Construir lógica do descadastro
         MessengerService.sendMessage(data)
 
