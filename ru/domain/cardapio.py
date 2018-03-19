@@ -3,6 +3,7 @@ from app import db
 class Cardapio(db.Model):
 
     __tablename__ = "cardapio"
+
     id = db.Column(db.BIGINT, primary_key=True, autoincrement=True)
     texto = db.Column(db.String(800), nullable=False)
     tipo = db.Column(db.Integer, nullable=False)

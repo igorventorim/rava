@@ -2,6 +2,7 @@ from utils.strings import Strings
 from messenger import answer_view_templates
 from app import db
 from ru.domain.person import Person
+from ru.domain.cardapio import Cardapio
 
 class RUService:
 
@@ -11,6 +12,7 @@ class RUService:
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_CARDAPIO])
+
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
