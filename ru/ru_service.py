@@ -41,6 +41,6 @@ class RUService:
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,
                Strings.CMD_SPAM_RU.upper(): register_spam_ru,
-               Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru}
+               Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru }
 
 from messenger.messenger_service import MessengerService
