@@ -1,5 +1,3 @@
-import threading
-import time
 from bs4 import BeautifulSoup
 import requests
 import datetime
@@ -8,14 +6,9 @@ from config.configuration import Configuration
 from ru.domain.cardapio import Cardapio
 class SincData():
 
-    def __init__(self, interval=10,tipo="almoco"):
-
-        self.interval = interval
-        self.tipo = tipo
-
-        # thread = threading.Thread(target=self.run, args=())
-        # # thread.daemon = True                            # Daemonize thread
-        # thread.start()                                  # Start the execution
+    def __init__(self):
+        self.tipo = None
+        pass
 
     def getType(self,tipo):
         if "almo" in tipo.lower():
@@ -26,7 +19,6 @@ class SincData():
     def run(self):
 
         _URL = "http://ru.ufes.br/cardapio/"
-        # while True:
 
         now = datetime.datetime.now()
         if(now.hour > 6 and now.hour < 16):
@@ -51,7 +43,7 @@ class SincData():
                     if (refeicao.find("views-field-title") == None):
                         tipo = refeicao.find("div", class_="views-field-title").find("span", class_="field-content")
                         tipo = self.getType(tipo.get_text())
-                        # print(tipo == self.tipo)
+
                         if(tipo == self.tipo):
                             cardapio = refeicao.find("div", class_="views-field-body").find_all("div",class_="field-content")
                             menu = tipo + " - Data: "+ str(now.day) + "/" + str(now.month) + "/" + str(now.year) + "\n"
@@ -73,7 +65,3 @@ class SincData():
                 print("Request " + searchURL + " realizado com sucesso!")
             else:
                 print("NÃO POSTARAM O CARDAPIO AINDA!!!")
-
-        print('Rodando em background')
-
-            # time.sleep(self.interval)
