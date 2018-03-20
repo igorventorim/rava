@@ -4,13 +4,10 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 import re
-from ru.domain.cardapio import Cardapio
-from app import db
-
 
 class SincData(object):
 
-    def __init__(self, interval=60,tipo="almoco"):
+    def __init__(self, interval=10,tipo="almoco"):
 
         self.interval = interval
         self.tipo = tipo
@@ -33,10 +30,10 @@ class SincData(object):
             now = datetime.datetime.now()
             if(now.hour > 6 and now.hour < 15):
                 self.tipo = "Almoço"
-                tipo = 1
+                type = 1
             elif(now.hour > 15 and now.hour < 23):
                 self.tipo = "Jantar"
-                tipo = 2
+                type = 2
 
             searchURL = _URL + str(now.year) + "-" + str(now.month) + "-" + str(now.day)
             print(searchURL)
@@ -55,17 +52,17 @@ class SincData(object):
                             tipo = self.getType(tipo.get_text())
                             if(tipo == self.tipo):
                                 cardapio = refeicao.find("div", class_="views-field-body").find_all("div",class_="field-content")
-                                menu = tipo  + "- Data: "+ str(now.day) + "/" + str(now.year) + "/" + str(now.month) + "\n"
+                                menu = tipo + " - Data: "+ str(now.day) + "/" + str(now.month) + "/" + str(now.year) + "\n"
                                 for element in cardapio:
                                     menu += re.sub(' +',' ',element.get_text())+"\n"
 
-                                check = Cardapio.query.filter_by(data=now.date(),tipo=tipo).first()
+                                check = Cardapio.query.filter_by(data=now.date(),tipo=type).first()
 
                                 if check is None:
                                     cardapio = Cardapio()
                                     cardapio.set_data(now.date())
                                     cardapio.set_texto(menu)
-                                    cardapio.set_tipo(tipo)
+                                    cardapio.set_tipo(type)
                                     db.session.add(cardapio)
                                     db.session.commit()
 
@@ -78,3 +75,6 @@ class SincData(object):
             print('Rodando em background')
 
             time.sleep(self.interval)
+
+from app import db
+from ru.domain.cardapio import Cardapio
