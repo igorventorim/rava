@@ -3,6 +3,7 @@ from messenger import answer_view_templates
 from app import db
 from ru.domain.person import Person
 from ru.domain.cardapio import Cardapio
+import datetime
 
 class RUService:
 
@@ -39,6 +40,15 @@ class RUService:
             db.session.commit()
         MessengerService.sendMessage(data)
 
+    def sendMenus(self):
+        people = Person.query.all()
+        datenow = datetime.datetime.now()
+        tipo = 1 if datenow.hour < 15 else 2
+        saudacao = "Bom dia! Isso é o que temos para hoje no almoço do RU:\n" if datenow.hour < 13 else "Boa tarde! Isso é o que temos para hoje na janta do RU:\n"
+        cardapio = Cardapio.query.filter_by(data=datenow.date(),tipo=tipo).first()
+        for person in people:
+            data = answer_view_templates.text(person.get_id(), saudacao + cardapio.get_texto())
+            MessengerService.sendMessage(data)
 
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,
