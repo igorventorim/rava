@@ -1,19 +1,20 @@
-from app import db
+# from app import db
+from config.configuration import Configuration
 
-class Cardapio(db.Model):
+class Cardapio(Configuration.db.Model):
 
     __tablename__ = "cardapio"
 
-    id = db.Column(db.BIGINT, primary_key=True, autoincrement=True)
-    texto = db.Column(db.String(800), nullable=False)
-    tipo = db.Column(db.Integer, nullable=False)
-    data = db.Column(db.Date, nullable=False)
-    salada = db.Column(db.String(150))
-    prato = db.Column(db.String(150))
-    acompanhamento = db.Column(db.String(150))
-    guarnicao = db.Column(db.String(150))
-    sobremesa = db.Column(db.String(150))
-    suco = db.Column(db.String(150))
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key=True, autoincrement=True)
+    texto = Configuration.db.Column(Configuration.db.String(800), nullable=False)
+    tipo = Configuration.db.Column(Configuration.db.Integer, nullable=False)
+    data = Configuration.db.Column(Configuration.db.Date, nullable=False)
+    salada = Configuration.db.Column(Configuration.db.String(150))
+    prato = Configuration.db.Column(Configuration.db.String(150))
+    acompanhamento = Configuration.db.Column(Configuration.db.String(150))
+    guarnicao = Configuration.db.Column(Configuration.db.String(150))
+    sobremesa = Configuration.db.Column(Configuration.db.String(150))
+    suco = Configuration.db.Column(Configuration.db.String(150))
 
     def get_id(self):
         return self.id

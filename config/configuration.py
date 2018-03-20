@@ -2,7 +2,7 @@
 
 import os
 
-class Authentication:
+class Configuration:
 
     # DEV: 0 - PROD: 1
     AMBIENTE = 1
@@ -15,4 +15,6 @@ class Authentication:
 
     WIT_TOKEN = os.environ["WIT_TOKEN"] if AMBIENTE else "L7HSK2267XRKO3LIV74ZMIP7RHA7QXBP"
 
-    DATABASE_URL = os.environ['DATABASE_URL'] if AMBIENTE else "postgres://rqgfhrkhkdoilb:9340a3429174c2ee3d47da003de88cf40882c5cb4626c612f83617d0d868433b@ec2-54-83-35-31.compute-1.amazonaws.com:5432/d4jc8iv6u03o2v"
+    DATABASE_URL = os.environ['DATABASE_URL'] if AMBIENTE else "postgres://iventorim:senhanti@localhost:5432/rava"
+
+    db = None

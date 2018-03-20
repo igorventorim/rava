@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 import re
-
+from config.configuration import Configuration
+from ru.domain.cardapio import Cardapio
 class SincData(object):
 
     def __init__(self, interval=10,tipo="almoco"):
@@ -28,7 +29,7 @@ class SincData(object):
         while True:
 
             now = datetime.datetime.now()
-            if(now.hour > 6 and now.hour < 15):
+            if(now.hour > 6 and now.hour < 16):
                 self.tipo = "Almoço"
                 type = 1
             elif(now.hour > 15 and now.hour < 23):
@@ -50,6 +51,7 @@ class SincData(object):
                         if (refeicao.find("views-field-title") == None):
                             tipo = refeicao.find("div", class_="views-field-title").find("span", class_="field-content")
                             tipo = self.getType(tipo.get_text())
+                            print(tipo == self.tipo)
                             if(tipo == self.tipo):
                                 cardapio = refeicao.find("div", class_="views-field-body").find_all("div",class_="field-content")
                                 menu = tipo + " - Data: "+ str(now.day) + "/" + str(now.month) + "/" + str(now.year) + "\n"
@@ -63,10 +65,10 @@ class SincData(object):
                                     cardapio.set_data(now.date())
                                     cardapio.set_texto(menu)
                                     cardapio.set_tipo(type)
-                                    db.session.add(cardapio)
-                                    db.session.commit()
+                                    Configuration.db.session.add(cardapio)
+                                    Configuration.db.session.commit()
+                                    print(menu)
 
-                                print(menu)
 
                     print("Request " + searchURL + " realizado com sucesso!")
                 else:
@@ -75,6 +77,3 @@ class SincData(object):
             print('Rodando em background')
 
             time.sleep(self.interval)
-
-from app import db
-from ru.domain.cardapio import Cardapio

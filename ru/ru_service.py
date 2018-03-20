@@ -1,9 +1,10 @@
 from utils.strings import Strings
 from messenger import answer_view_templates
-from app import db
+# from app import db
 from ru.domain.person import Person
 from ru.domain.cardapio import Cardapio
 import datetime
+from config.configuration import Configuration
 
 class RUService:
 
@@ -26,8 +27,8 @@ class RUService:
         person = Person(user_id)
         check = Person.query.filter_by(id=user_id).first()
         if(check is None):
-            db.session.add(person)
-            db.session.commit()
+            Configuration.db.session.add(person)
+            Configuration.db.session.commit()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
         MessengerService.sendMessage(data)
 
@@ -36,8 +37,8 @@ class RUService:
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_DELETE_SPAM_RU])
         person = Person.query.filter_by(id=user_id).first()
         if(person != None):
-            db.session.delete(person)
-            db.session.commit()
+            Configuration.db.session.delete(person)
+            Configuration.db.session.commit()
         MessengerService.sendMessage(data)
 
     def sendMenus(self):

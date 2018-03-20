@@ -1,11 +1,11 @@
-from app import db
-
-class Person(db.Model):
+# from app import db
+from config.configuration import Configuration
+class Person(Configuration.db.Model):
 
     __tablename__ = "person"
 
-    id = db.Column(db.BIGINT, primary_key=True)
-    name = db.Column(db.String(100))
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key=True)
+    name = Configuration.db.Column(Configuration.db.String(100))
 
     def __init__(self, person_id):
         self.id = person_id

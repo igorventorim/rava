@@ -1,14 +1,16 @@
 from virtual_class.model.domain.question import Question
-from app import db
+# from app import db
+from config.configuration import Configuration
 
-class Course(db.Model):
+
+class Course(Configuration.db.Model):
 
     __tablename__ = "course"
-    id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
-    course_code = db.Column(db.String(50),unique=True,nullable=False)
-    name = db.Column(db.String(100),nullable=False)
-    description = db.Column(db.String(200))
-    teatcher_id = db.Column(db.BIGINT, db.ForeignKey('teacher.id'),nullable=False)
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key = True, autoincrement=True)
+    course_code = Configuration.db.Column(Configuration.db.String(50), unique=True, nullable=False)
+    name = Configuration.db.Column(Configuration.db.String(100), nullable=False)
+    description = Configuration.db.Column(Configuration.db.String(200))
+    teatcher_id = Configuration.db.Column(Configuration.db.BIGINT, Configuration.db.ForeignKey('teacher.id'), nullable=False)
 
     # numberCourses = 0
 

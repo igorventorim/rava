@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 from flask import request, Blueprint
-from config.authentication import Authentication
+from config.configuration import Configuration
 from messenger.messenger_profile import MessengerProfile
-from virtual_class.virtual_class_service import VirtualClassService
 from messenger.messenger_service import MessengerService
 
 
@@ -18,7 +17,7 @@ def verify():
     # when the endpoint is registered as a webhook, it must echo back
     # the 'hub.challenge' value it receives in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == Authentication.VERIFY_TOKEN:
+        if not request.args.get("hub.verify_token") == Configuration.VERIFY_TOKEN:
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 

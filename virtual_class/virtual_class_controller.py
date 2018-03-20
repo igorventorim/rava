@@ -1,10 +1,9 @@
 # encoding: utf-8
 
 from flask import request, Blueprint
-from app import db
 from virtual_class.virtual_class_service import VirtualClassService
 from messenger.messenger_service import MessengerService
-
+from config.configuration import Configuration
 virtual_class_blueprint = Blueprint('virtual_class_blueprint', __name__)
 
 #AÇÕES RELACIONADAS AO MÓDULO DE SALA DE AULA VIRTUAL
@@ -41,6 +40,6 @@ def updateAnswers():
 
 @virtual_class_blueprint.route("/generateDB")
 def generate():
-    db.create_all()
-    print(db)
+    Configuration.db.create_all()
+    print(Configuration.db)
     return "ok",200

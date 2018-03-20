@@ -1,12 +1,13 @@
 # from authentication import Authentication
-# db = Authentication.DATABASE
-from app import db
+# db = Configuration.DATABASE
+# from app import db
+from config.configuration import Configuration
 
-class Student(db.Model):
+class Student(Configuration.db.Model):
 
     __tablename__ = "student"
-    id = db.Column(db.BIGINT, primary_key = True)
-    student_code = db.Column(db.String(50), unique = True,nullable=False)
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key = True)
+    student_code = Configuration.db.Column(Configuration.db.String(50), unique = True, nullable=False)
     # id = 0
 
     def __init__(self,student_id):

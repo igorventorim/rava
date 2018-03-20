@@ -1,12 +1,13 @@
-from app import db
+# from app import db
+from config.configuration import Configuration
 
-class Question(db.Model):
+class Question(Configuration.db.Model):
 
     __tablename__ = "question"
-    id = db.Column(db.BIGINT,autoincrement=True,primary_key=True)
-    question_code = db.Column(db.String(50), unique=True, nullable=False)
-    description = db.Column(db.String(1000),nullable=False)
-    course_id = db.Column(db.BIGINT,db.ForeignKey('course.id'))
+    id = Configuration.db.Column(Configuration.db.BIGINT, autoincrement=True, primary_key=True)
+    question_code = Configuration.db.Column(Configuration.db.String(50), unique=True, nullable=False)
+    description = Configuration.db.Column(Configuration.db.String(1000), nullable=False)
+    course_id = Configuration.db.Column(Configuration.db.BIGINT, Configuration.db.ForeignKey('course.id'))
 
     def __init__(self, code, desc, course_id):
         self.__code = code

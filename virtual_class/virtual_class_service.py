@@ -11,7 +11,8 @@ from virtual_class.model.domain.courseStudent import CourseStudent
 from utils.my_encoder import MyEncoder
 from utils.strings import Strings
 from messenger.user_data import UserData
-from app import db
+# from app import db
+from config.configuration import Configuration
 class VirtualClassService:
 
 
@@ -59,12 +60,12 @@ class VirtualClassService:
         teatcher = Teatcher(teatcher_id=user_id)
         check = Teatcher.query.filter_by(id=user_id).first()
         if check is None:
-            db.session.add(teatcher)
-            db.session.commit()
+            Configuration.db.session.add(teatcher)
+            Configuration.db.session.commit()
         course = Course(name=course_name, teatcher_id=user_id)
         self.cursos.append(course)
-        db.session.add(course)
-        db.session.commit()
+        Configuration.db.session.add(course)
+        Configuration.db.session.commit()
         # print(self.__cursos)
         data = answer_view_templates.text(user_id, "Voce criou o curso " + course_name + ", seu código de curso é " + str(course.getCode()))
         MessengerService.sendMessage(data)
@@ -83,8 +84,8 @@ class VirtualClassService:
                 # questionNumber = Question.query.filter_by(course_id=course_id).count() + 1
                 question = Question(course.getCode()+"Q"+str(questionNumber),split[2],course_id)
                 # course.addQuestion(question)
-                db.session.add(question)
-                db.session.commit()
+                Configuration.db.session.add(question)
+                Configuration.db.session.commit()
                 data = answer_view_templates.text(user_id, "Questão criada com sucesso. Question code: " + str(question.getCode()))
                 MessengerService.sendMessage(data)
                 self.__info_nova_atividade(course_id)
@@ -132,12 +133,12 @@ class VirtualClassService:
             if student == None:
                 student = Student(user_id)
                 # self.__alunos[user_id] = student
-                db.session.add(student)
-                db.session.commit()
+                Configuration.db.session.add(student)
+                Configuration.db.session.commit()
 
             courseStudent = CourseStudent(student_id=user_id,course_id=course.getId())
-            db.session.add(courseStudent)
-            db.session.commit()
+            Configuration.db.session.add(courseStudent)
+            Configuration.db.session.commit()
             # course.addStudent(user_id)
             # self.__alunos.get(user_id).addCourse(course_code)
             data = answer_view_templates.text(user_id, "Bem vindo ao curso " + course.getName() + "!\nAgora você pode responder as atividades relacionadas a este curso!")
@@ -221,8 +222,8 @@ class VirtualClassService:
                     answer = Answer(response,user_id,question.getId())
                     # course.getQuestions().get(question_code).addAnswer(answer=answer)
                     # self.__alunos.get(user_id).registerAnswer(answer)
-                    db.session.add(answer)
-                    db.session.commit()
+                    Configuration.db.session.add(answer)
+                    Configuration.db.session.commit()
                     data = answer_view_templates.text(user_id, "Resposta enviada com sucesso. Você receberá uma mensagem quando sua resposta for corrigida.")
                     MessengerService.sendMessage(data)
                 else:
@@ -316,7 +317,7 @@ class VirtualClassService:
             answer = Answer.query.filter_by(id=idAnswer).first()
             answer.feedback = feedback
             answer.nota = nota
-            db.session.commit()
+            Configuration.db.session.commit()
             self.info_feedback(answer)
 
 

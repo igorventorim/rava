@@ -1,6 +1,6 @@
 from utils.strings import Strings
 from messenger.message import Message
-from config.authentication import Authentication
+from config.configuration import Configuration
 from messenger import answer_view_templates
 from wit import Wit
 import requests
@@ -13,7 +13,7 @@ class MessengerService:
         self.service_atribuna = AtribunaService()
         self.service_ru = RUService()
         self.service_generics = GenericsService()
-        self.client = Wit(Authentication.WIT_TOKEN)
+        self.client = Wit(Configuration.WIT_TOKEN)
         self.__options.update(self.service_virtual_class.options)
         self.__options.update(self.service_atribuna.options)
         self.__options.update(self.service_ru.options)
@@ -29,7 +29,7 @@ class MessengerService:
 
     @staticmethod
     def sendMessage(data):
-        PARAMS = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
+        PARAMS = {"access_token": Configuration.PAGE_ACCESS_TOKEN}
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=PARAMS, headers=HEADERS, data=data)
         if r.status_code != 200:

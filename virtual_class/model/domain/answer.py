@@ -1,16 +1,17 @@
-from app import db
+# from app import db
+from config.configuration import Configuration
 
 
-class Answer(db.Model):
+class Answer(Configuration.db.Model):
 
     __tablename__ = "answer"
-    id = db.Column(db.BIGINT, primary_key = True, autoincrement=True)
-    answer_text = db.Column(db.String(1000), nullable=False)
-    feedback = db.Column(db.String(1000))
-    student_id = db.Column(db.BIGINT, db.ForeignKey('student.id'), nullable=False)
-    question_id = db.Column(db.BIGINT, db.ForeignKey('question.id'),nullable=False)
-    nota = db.Column(db.DECIMAL)
-    review = db.Column(db.Boolean,default=False)
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key = True, autoincrement=True)
+    answer_text = Configuration.db.Column(Configuration.db.String(1000), nullable=False)
+    feedback = Configuration.db.Column(Configuration.db.String(1000))
+    student_id = Configuration.db.Column(Configuration.db.BIGINT, Configuration.db.ForeignKey('student.id'), nullable=False)
+    question_id = Configuration.db.Column(Configuration.db.BIGINT, Configuration.db.ForeignKey('question.id'), nullable=False)
+    nota = Configuration.db.Column(Configuration.db.DECIMAL)
+    review = Configuration.db.Column(Configuration.db.Boolean, default=False)
 
     # id = 0
 

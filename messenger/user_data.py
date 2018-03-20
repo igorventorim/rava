@@ -2,14 +2,14 @@ import json
 
 import requests
 
-from config.authentication import Authentication
+from config.configuration import Configuration
 
 
 class UserData:
 
     def requestUser(self,client_id):
         params = {"fields": "first_name,last_name,profile_pic,locale,timezone,gender",
-                  "access_token": Authentication.PAGE_ACCESS_TOKEN}
+                  "access_token": Configuration.PAGE_ACCESS_TOKEN}
         return json.loads(requests.get("https://graph.facebook.com/v2.6/"+str(client_id), params=params).text)
 
     def getFirstNameClient(self,client_id):

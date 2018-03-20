@@ -1,10 +1,11 @@
-from app import db
+# from app import db
+from config.configuration import Configuration
 
-class Teatcher(db.Model):
+class Teatcher(Configuration.db.Model):
 
     __tablename__ = "teacher"
-    id = db.Column(db.BIGINT, primary_key = True)
-    teatcher_code = db.Column(db.String(50), unique = True,nullable=False)
+    id = Configuration.db.Column(Configuration.db.BIGINT, primary_key = True)
+    teatcher_code = Configuration.db.Column(Configuration.db.String(50), unique = True, nullable=False)
     # courses = db.relationship('Course', backref='teatcher',lazy=True)
 
     def __init__(self,teatcher_id):

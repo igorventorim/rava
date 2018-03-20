@@ -1,5 +1,5 @@
 import requests
-from config.authentication import Authentication
+from config.configuration import Configuration
 from utils.strings import Strings
 import json
 
@@ -10,7 +10,7 @@ class MessengerProfile():
     def __init__(self):
         self.__urlProfile = "https://graph.facebook.com/v2.6/me/messenger_profile"
         self.__headers = {"Content-Type": "application/json"}
-        self.__params = {"access_token": Authentication.PAGE_ACCESS_TOKEN}
+        self.__params = {"access_token": Configuration.PAGE_ACCESS_TOKEN}
 
 
 
@@ -23,7 +23,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def checkStartedButton(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN,"fields":"get_started"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "get_started"}
         result = json.loads(requests.get(self.__urlProfile,params=params).text)
         return result
 
@@ -42,7 +42,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def readGreeting(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "greeting"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "greeting"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
@@ -99,7 +99,7 @@ class MessengerProfile():
         return result["result"] == "sucess"
 
     def readMenu(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "persistent_menu"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "persistent_menu"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
@@ -120,7 +120,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def readDomainWhiteList(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "whitelisted_domains"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "whitelisted_domains"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
@@ -149,7 +149,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def readTargetAudience(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "target_audience"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "target_audience"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
@@ -171,7 +171,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def readAccountLinkingURL(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "account_linking_url"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "account_linking_url"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
@@ -203,7 +203,7 @@ class MessengerProfile():
         return result["result"] == "success"
 
     def readPaymentSettings(self):
-        params = {"access_token": Authentication.PAGE_ACCESS_TOKEN, "fields": "payment_settings"}
+        params = {"access_token": Configuration.PAGE_ACCESS_TOKEN, "fields": "payment_settings"}
         result = json.loads(requests.get(self.__urlProfile, params=params).text)
         return result
 
