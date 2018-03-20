@@ -5,7 +5,7 @@ import os
 class Configuration:
 
     # DEV: 0 - PROD: 1
-    AMBIENTE = 1
+    AMBIENTE = 0
 
     VERIFY_TOKEN = os.environ["VERIFY_TOKEN"] if AMBIENTE else "Robo de Auxilio Virtual ao Aprendizado"
 
