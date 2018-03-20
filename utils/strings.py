@@ -112,7 +112,7 @@ class Strings():
     NUMBER4= u"4"
     NUMBER5= u"5"
     # except things
-    APOLOGIZE_USER_FOR_ERROR = "Desculpe, não entendi. Caso tenha dúvida em quais comandos utilizar digite: /help"
+    APOLOGIZE_USER_FOR_ERROR = "Desculpe, não entendi. Caso tenha alguma dúvida me peça ajuda!"
 
     response_general = {
         CMD_PERGUNTA_SAUDACAO: "Estou ótimo, obrigado por perguntar.",
