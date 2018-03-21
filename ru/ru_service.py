@@ -14,7 +14,14 @@ class RUService:
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_CARDAPIO])
-
+        datenow = datetime.datetime.now()
+        tipo = 1 if datenow.hour < 15 else 2
+        cardapio = Cardapio.query.filter_by(data=datenow.date(), tipo=tipo).first()
+        msg = "O que temos para hoje é ...\n"
+        if (cardapio is None):
+            print("Cardapio não encontrado para hoje...")
+            return
+        data = answer_view_templates.text(user_id, msg + cardapio.get_texto())
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
@@ -48,8 +55,7 @@ class RUService:
         saudacao = "Bom dia! Isso é o que temos para hoje no almoço do RU:\n" if datenow.hour < 13 else "Boa tarde! Isso é o que temos para hoje na janta do RU:\n"
         cardapio = Cardapio.query.filter_by(data=datenow.date(),tipo=tipo).first()
         if(cardapio is None):
-            print(str(datenow.date())+" "+str(tipo))
-            print("Não Encontrei cardapio...")
+            print("Cardapio não encontrado para hoje...")
             return
         for person in people:
             data = answer_view_templates.text(person.get_id(), saudacao + cardapio.get_texto())
