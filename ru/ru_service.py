@@ -48,6 +48,7 @@ class RUService:
         saudacao = "Bom dia! Isso é o que temos para hoje no almoço do RU:\n" if datenow.hour < 13 else "Boa tarde! Isso é o que temos para hoje na janta do RU:\n"
         cardapio = Cardapio.query.filter_by(data=datenow.date(),tipo=tipo).first()
         if(cardapio is None):
+            print(str(datenow.date())+" "+str(tipo))
             print("Não Encontrei cardapio...")
             return
         for person in people:
