@@ -47,6 +47,8 @@ class RUService:
         tipo = 1 if datenow.hour < 15 else 2
         saudacao = "Bom dia! Isso é o que temos para hoje no almoço do RU:\n" if datenow.hour < 13 else "Boa tarde! Isso é o que temos para hoje na janta do RU:\n"
         cardapio = Cardapio.query.filter_by(data=datenow.date(),tipo=tipo).first()
+        if(cardapio is None):
+            return
         for person in people:
             data = answer_view_templates.text(person.get_id(), saudacao + cardapio.get_texto())
             MessengerService.sendMessage(data)
