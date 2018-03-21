@@ -21,7 +21,7 @@ class SincData():
         _URL = "http://ru.ufes.br/cardapio/"
 
         now = datetime.datetime.now()
-        if(now.hour > 6 and now.hour < 16):
+        if(now.hour > 6 and now.hour < 15):
             self.tipo = "Almoço"
             type = 1
         elif(now.hour < 23):
