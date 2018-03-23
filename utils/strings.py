@@ -51,7 +51,7 @@ class Strings():
     CMD_CARDAPIO = "cmd_cardapio"
     CMD_SPAM_RU = "cmd_spam_ru"
     CMD_DELETE_SPAM_RU = "cmd_delete_spam_ru"
-    CMD_SPAM_RU_REGISTERED = "cmd_spam_ru_registered"
+    CMD_SPAM_RU_REGISTERED = "Uai, você já está recebendo minhas mensagens!"
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
                 "Comandos para Professor:\n" \
@@ -128,7 +128,6 @@ class Strings():
         CMD_PRATO: "Ainda não descobri, quando eu descobrir eu te falo...",
         CMD_CARDAPIO: "Ainda não descobri, quando eu descobrir eu te falo...",
         CMD_SPAM_RU: "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, caso queira se descadastrar é só falar :).",
-        CMD_SPAM_RU_REGISTERED: "Uai, você já está recebendo minhas mensagens!",
         CMD_DELETE_SPAM_RU: "Tudo bem, não te incomodarei mais com isso."
     }
 

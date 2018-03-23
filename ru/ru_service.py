@@ -21,8 +21,6 @@ class RUService:
             print("Cardapio não encontrado para hoje...")
             return
         data = answer_view_templates.text(user_id, msg + cardapio.get_texto())
-        people = Person.query.all()
-        print(people)
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
@@ -39,7 +37,7 @@ class RUService:
             Configuration.db.session.commit()
             data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
         else:
-            data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU_REGISTERED])
+            data = answer_view_templates.text(user_id, Strings.CMD_SPAM_RU_REGISTERED)
         MessengerService.sendMessage(data)
 
     def unregister_spam_ru(self,message):
