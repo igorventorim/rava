@@ -13,7 +13,6 @@ class RUService:
 
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_CARDAPIO])
         datenow = datetime.datetime.now()
         tipo = 1 if datenow.hour < 15 else 2
         cardapio = Cardapio.query.filter_by(data=datenow.date(), tipo=tipo).first()
@@ -36,7 +35,9 @@ class RUService:
         if(check is None):
             Configuration.db.session.add(person)
             Configuration.db.session.commit()
-        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
+            data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
+        else:
+            data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU_REGISTERED])
         MessengerService.sendMessage(data)
 
     def unregister_spam_ru(self,message):
