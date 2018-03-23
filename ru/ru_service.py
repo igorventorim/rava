@@ -21,6 +21,8 @@ class RUService:
             print("Cardapio não encontrado para hoje...")
             return
         data = answer_view_templates.text(user_id, msg + cardapio.get_texto())
+        people = Person.query.all()
+        print(people)
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
