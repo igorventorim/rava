@@ -44,7 +44,7 @@ class MessengerService:
         try:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
-            cmd = self.__handleResponseWit(result)
+            cmd = self.__handleResponseWit(result,message)
             self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
         except:
             self.__erro(message)
@@ -54,7 +54,7 @@ class MessengerService:
         data = answer_view_templates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
         MessengerService.sendMessage(data)
 
-    def __handleResponseWit(self,response):
+    def __handleResponseWit(self,response,message):
         entidades = response['entities']
         if entidades == {}:
             return ""
@@ -65,6 +65,7 @@ class MessengerService:
                if value[0]['confidence'] > max and value[0]['confidence'] > 0.55:
                    max = value[0]['confidence']
                    chave = key
+            message.setEntities(entidades)
             return entidades[chave][0]['value']
 
     def selectModule(self, element):

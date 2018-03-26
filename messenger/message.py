@@ -5,6 +5,7 @@ class Message:
         self.__isMessage = "message" in self.__messaging_event
         self.__isPostback = "postback" in self.__messaging_event
         self.__content_message = self.__getPayloadOrText()
+        self.__entities = None
 
     def __getPayloadOrText(self): # just to instanciate the above
         if self.__isMessage:
@@ -34,3 +35,9 @@ class Message:
 
     def __getPostbackPayload(self):
         return self.__messaging_event["postback"]["payload"]
+
+    def setEntities(self,entities):
+        self.__entities = entities
+
+    def getEntities(self):
+        return self.__entities

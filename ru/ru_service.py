@@ -13,7 +13,10 @@ class RUService:
 
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
-        datenow = datetime.datetime.now()
+        if message.getEntities()['datetime'] != None:
+            datenow = datetime.strptime(message.getEntities()['datetime'][0]['value'])
+        else:
+            datenow = datetime.datetime.now()
         tipo = 1 if datenow.hour < 15 else 2
         cardapio = Cardapio.query.filter_by(data=datenow.date(), tipo=tipo).first()
         msg = "O que temos para hoje é ...\n"
