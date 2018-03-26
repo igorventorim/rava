@@ -15,15 +15,19 @@ class RUService:
         user_id = message.getClientID()
         if message.getEntities()['datetime'] != None:
             datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10],"%Y-%m-%d")
+            msg = "Este foi o cardápio do dia...\n"
         else:
             datenow = datetime.datetime.now()
+            msg = "O que temos para hoje é ...\n"
         tipo = 1 if datenow.hour < 15 else 2
         cardapio = Cardapio.query.filter_by(data=datenow.date(), tipo=tipo).first()
-        msg = "O que temos para hoje é ...\n"
+
         if (cardapio is None):
-            print("Cardapio não encontrado para hoje...")
-            return
-        data = answer_view_templates.text(user_id, msg + cardapio.get_texto())
+            print("Cardapio não encontrado para o dia...")
+            msg = "Desculpe, ainda não consegui encontrar cardápio para este dia :("
+        else:
+            msg = msg + cardapio.get_texto()
+        data = answer_view_templates.text(user_id, msg)
         MessengerService.sendMessage(data)
 
     def visualizar_prato(self,message):
