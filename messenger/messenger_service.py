@@ -41,12 +41,12 @@ class MessengerService:
         MessengerService.sendMessage(data)
 
     def __selector(self,message):
-        # try:
+        try:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result,message)
             self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
-        # except:
+        except:
             self.__erro(message)
 
     def __erro(self, message):
@@ -61,11 +61,11 @@ class MessengerService:
         else:
             max = 0
             chave = ""
+            message.setEntities(entidades)
             for key, value in entidades.items():
                if value[0]['confidence'] > max and value[0]['confidence'] > 0.55:
                    max = value[0]['confidence']
                    chave = key
-            message.setEntities(entidades)
             return entidades[chave][0]['value']
 
     def selectModule(self, element):
