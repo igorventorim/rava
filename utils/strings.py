@@ -127,7 +127,7 @@ class Strings():
     response_ru = {
         CMD_PRATO: "Ainda não descobri, quando eu descobrir eu te falo...",
         CMD_CARDAPIO: "Ainda não descobri, quando eu descobrir eu te falo...",
-        CMD_SPAM_RU: "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, para que você possa receber curta nossa página. Caso queira se descadastrar é só falar :).",
+        CMD_SPAM_RU: "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, para que você possa receber é preciso que você tenha curtido nossa página. Caso queira se descadastrar é só falar :).",
         CMD_DELETE_SPAM_RU: "Tudo bem, não te incomodarei mais com isso."
     }
 
