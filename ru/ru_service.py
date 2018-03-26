@@ -14,7 +14,7 @@ class RUService:
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
         if message.getEntities()['datetime'] != None:
-            datenow = datetime.strptime(message.getEntities()['datetime'][0]['value'])
+            datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10],"%Y-%m-%d")
         else:
             datenow = datetime.datetime.now()
         tipo = 1 if datenow.hour < 15 else 2
