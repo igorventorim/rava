@@ -10,7 +10,8 @@ class Strings():
     GREETING_TEXT = u"Seja bem vindo ao rava !"
     GREETING_KNOWN_USER = u"Olá {}, tudo bem?"
     APRESENTATION= "Eu sou o Robô de Auxílio Virtual e Aprendizado, para os mais íntimos rAVA.\n" \
-                   "Hoje eu tenho informações do restaurante universitário da Universidade Federal do Espírito Santo, se você quiser informações me pergunte :)"
+                   "Hoje eu tenho informações do restaurante universitário da Universidade Federal do Espírito Santo, se você quiser informações me pergunte :)\n\n" \
+                   "Caso queira receber o cardápio de restaurante universitário diariamente, me peça!"
 
     BACK = u"Voltar"
     WHAT_TO_DO_NOW = u"O que deseja fazer agora?"
@@ -46,6 +47,7 @@ class Strings():
     CMD_SAUDACAO="cmd_saudacao"
     CMD_DESPEDIDA="cmd_despedida"
     CMD_IDADE="cmd_idade"
+    CMD_PRICE="cmd_price"
 
     CMD_PRATO = "cmd_prato"
     CMD_CARDAPIO = "cmd_cardapio"
@@ -128,7 +130,8 @@ class Strings():
         CMD_PRATO: "Ainda não descobri, quando eu descobrir eu te falo...",
         CMD_CARDAPIO: "Ainda não descobri, quando eu descobrir eu te falo...",
         CMD_SPAM_RU: "É para já, te cadastrei, a partir de agora te enviarei mensagens com o cardápio do RU Ufes todos os dias, para que você possa receber é preciso que você tenha curtido nossa página. Caso queira se descadastrar é só falar :).",
-        CMD_DELETE_SPAM_RU: "Tudo bem, não te incomodarei mais com isso."
+        CMD_DELETE_SPAM_RU: "Tudo bem, não te incomodarei mais com isso.",
+        CMD_PRICE: "Estudantes 100% - Isento *\n Estudantes*  - R$ 5,00\n Outros - R$ 9,50\n "
     }
 
 

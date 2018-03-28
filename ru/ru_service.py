@@ -69,9 +69,15 @@ class RUService:
             data = answer_view_templates.text(person.get_id(), saudacao + cardapio.get_texto())
             MessengerService.sendMessage(data)
 
+    def cost(self,message):
+        user_id = message.getClientID()
+        data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_PRICE])
+        MessengerService.sendMessage(data)
+
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,
                Strings.CMD_SPAM_RU.upper(): register_spam_ru,
-               Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru }
+               Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru,
+               Strings.CMD_PRICE.upper(): cost}
 
 from messenger.messenger_service import MessengerService
