@@ -14,7 +14,7 @@ class RUService:
 
     def visualizar_cardapio(self,message):
         user_id = message.getClientID()
-        if message.getEntities()['datetime'] != None:
+        if 'datetime' in message.getEntities():
             datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10],"%Y-%m-%d")
             msg = "Este foi o cardápio do dia...\n"
         else:
