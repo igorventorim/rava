@@ -5,6 +5,7 @@ from ru.domain.person import Person
 from ru.domain.cardapio import Cardapio
 import datetime
 from config.configuration import Configuration
+import requests
 
 class RUService:
 
@@ -73,6 +74,13 @@ class RUService:
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_PRICE])
         MessengerService.sendMessage(data)
+
+    def get_search_keyword_ru(self,texto):
+        _url = Configuration.URL_API_NLP+"extractSKru"
+        _data = {'texto':texto}
+        _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
+        result = requests.post(url=_url,auth=_credentials,data=_data)
+        print(result)
 
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,

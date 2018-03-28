@@ -18,3 +18,9 @@ class Configuration:
     DATABASE_URL = os.environ['DATABASE_URL'] if AMBIENTE else "postgres://iventorim:senhanti@localhost:5432/rava"
 
     db = None
+
+    URL_API_NLP = "https://api-ventorim.herokuapp.com/"
+
+    USER_API_NLP = 'rava-ufes'
+
+    PASSWORD_API_NLP = '123456'
