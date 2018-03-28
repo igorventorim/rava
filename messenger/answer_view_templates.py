@@ -34,3 +34,14 @@ def text(client_id, text):
             "text": text
         }
     })
+
+def textPublish(client_id, text):
+	return json.dumps({
+        "recipient": {
+            "id": client_id
+        },
+        "message": {
+            "text": text
+        },
+        "tag": "NON_PROMOTIONAL_SUBSCRIPTION"
+    })

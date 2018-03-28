@@ -67,7 +67,7 @@ class RUService:
             print("Cardapio não encontrado para hoje...")
             return
         for person in people:
-            data = answer_view_templates.text(person.get_id(), saudacao + cardapio.get_texto())
+            data = answer_view_templates.textPublish(person.get_id(), saudacao + cardapio.get_texto())
             MessengerService.sendMessage(data)
 
     def cost(self,message):
