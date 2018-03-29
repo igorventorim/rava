@@ -63,7 +63,7 @@ class MessengerService:
             chave = ""
             message.setEntities(entidades)
             for key, value in entidades.items():
-               if key == 'datetime':
+               if key != 'intent':
                 continue
                elif value[0]['confidence'] > max and value[0]['confidence'] > 0.55:
                    max = value[0]['confidence']
