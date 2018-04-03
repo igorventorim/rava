@@ -14,10 +14,12 @@ Configuration.db = db
 from virtual_class.virtual_class_controller import virtual_class_blueprint
 from messenger.messenger_controller import messenger_blueprint
 from ru.ru_controller import ru_blueprint
+from cine.cine_controller import cine_blueprint
 
 app.register_blueprint(virtual_class_blueprint)
 app.register_blueprint(messenger_blueprint)
 app.register_blueprint(ru_blueprint)
+app.register_blueprint(cine_blueprint)
 
 if __name__ == '__main__':
     app.run(debug=True)

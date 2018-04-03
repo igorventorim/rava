@@ -20,7 +20,6 @@ def __formatQuickReplies(buttons): #[(title1, image_url1), ..., title11]
             title, image_url = b
             qr += [{"content_type":"text","title":title,"payload":title,"image_url":image_url}]
         else:
-            # b is title
             qr += [{"content_type": "text", "title": b, "payload": b}]
     return qr
 

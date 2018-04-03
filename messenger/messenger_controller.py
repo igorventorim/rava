@@ -4,6 +4,7 @@ from flask import request, Blueprint
 from config.configuration import Configuration
 from messenger.messenger_profile import MessengerProfile
 from messenger.messenger_service import MessengerService
+from cine.sinc_cine_data import SincCineData
 
 
 messenger_blueprint = Blueprint('messenger_blueprint',__name__)
@@ -59,3 +60,4 @@ def readGreeting():
     r = MessengerProfile().readGreeting()
     print(r)
     return r["data"], 200
+

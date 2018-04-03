@@ -59,7 +59,7 @@ class SincData():
                                 cardapio.set_tipo(type)
                                 Configuration.db.session.add(cardapio)
                                 Configuration.db.session.commit()
-                                print(menu)
+                                print("Cardápio atualizado com sucesso!")
 
 
                 print("Request " + searchURL + " realizado com sucesso!")

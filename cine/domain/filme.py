@@ -6,8 +6,8 @@ class Filme(Configuration.db.Model):
 
     id = Configuration.db.Column(Configuration.db.BIGINT, primary_key=True, autoincrement=True)
     titulo = Configuration.db.Column(Configuration.db.String(300), nullable=False)
-    sinopse = Configuration.db.Column(Configuration.db.String(1500), nullable=True)
-    classificacao = Configuration.db.Column(Configuration.db.Integer, nullable=False)
+    sinopse = Configuration.db.Column(Configuration.db.String(2000), nullable=True)
+    classificacao = Configuration.db.Column(Configuration.db.String(15), nullable=True)
 
 
     def get_id(self):
@@ -19,7 +19,7 @@ class Filme(Configuration.db.Model):
     def get_sinopse(self):
         return self.sinopse
 
-    def get_classificao(self):
+    def get_classificacao(self):
         return self.classificacao
 
     def set_id(self,id):
@@ -31,5 +31,5 @@ class Filme(Configuration.db.Model):
     def set_sinopse(self,sinopse):
         self.sinopse = sinopse
 
-    def set_classificao(self,classificacao):
+    def set_classificacao(self,classificacao):
         self.classificacao = classificacao
