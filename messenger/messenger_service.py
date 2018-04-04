@@ -100,16 +100,20 @@ class MessengerService:
     def saveLog(message,data):
         if message != None:
             items = json.loads(data)
-            user_id = items['recipient']['id']
+            code = items['recipient']['id']
+            user_id = Usuario.query.filter_by(code=code)
             response = items['message']['text']
-            log = Log()
-            log.set_entities(message.getEntities())
-            log.set_usuario_id(str(user_id))
-            log.set_response(response)
-            log.set_message(message.getContentMessage())
-            log.set_data(datetime.now())
-            Configuration.db.session.add(log)
-            Configuration.db.session.commit()
+            if(code != None):
+                log = Log()
+                log.set_entities(message.getEntities())
+                log.set_usuario_id(user_id)
+                log.set_response(response)
+                log.set_message(message.getContentMessage())
+                log.set_data(datetime.now())
+                Configuration.db.session.add(log)
+                Configuration.db.session.commit()
+            else:
+                print("Não foi possível encontrar o usuário na base de dados.")
 
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
