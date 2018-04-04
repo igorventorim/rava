@@ -110,8 +110,8 @@ class MessengerService:
                 log.set_response(response)
                 log.set_message(message.getContentMessage())
                 log.set_data(datetime.now())
-                # Configuration.db.session.add(log)
-                # Configuration.db.session.commit()
+                Configuration.db.session.add(log)
+                Configuration.db.session.commit()
             else:
                 print("Não foi possível encontrar o usuário na base de dados.")
 
