@@ -82,6 +82,7 @@ class MessengerService:
                elif value[0]['confidence'] > max and value[0]['confidence'] > 0.55:
                    max = value[0]['confidence']
                    chave = key
+            message.setIntent(entidades[chave][0]['value'])
             return entidades[chave][0]['value']
 
     def selectModule(self, element):
@@ -109,6 +110,7 @@ class MessengerService:
                 log.set_usuario_id(user.get_id())
                 log.set_response(response)
                 log.set_message(message.getContentMessage())
+                log.set_intent(message.getIntent())
                 log.set_data(datetime.now())
                 Configuration.db.session.add(log)
                 Configuration.db.session.commit()

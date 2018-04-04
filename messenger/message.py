@@ -6,6 +6,7 @@ class Message:
         self.__isPostback = "postback" in self.__messaging_event
         self.__content_message = self.__getPayloadOrText()
         self.__entities = None
+        self.__intent = None
 
     def __getPayloadOrText(self): # just to instanciate the above
         if self.__isMessage:
@@ -41,3 +42,9 @@ class Message:
 
     def getEntities(self):
         return self.__entities
+
+    def setIntent(self,intent):
+        self.__intent = intent
+
+    def getIntent(self):
+        return self.__intent

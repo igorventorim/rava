@@ -10,6 +10,7 @@ class Log(Configuration.db.Model):
     message = Configuration.db.Column(Configuration.db.String(1500), nullable=False)
     response = Configuration.db.Column(Configuration.db.String(1500), nullable=False)
     entities = Configuration.db.Column(ARRAY(Configuration.db.Text), nullable=True)
+    intent = Configuration.db.Column(Configuration.db.String(50), nullable=True)
     usuario_id = Configuration.db.Column(Configuration.db.BIGINT,Configuration.db.ForeignKey('usuario.id'), nullable=False)
     usuario = Configuration.db.relationship('Usuario', backref = Configuration.db.backref('log', lazy=True))
 
@@ -31,6 +32,9 @@ class Log(Configuration.db.Model):
     def get_usuario_id(self):
         return self.usuario_id
 
+    def get_intent(self):
+        return self.intent
+
     def set_id(self,id):
         self.id = id
 
@@ -48,6 +52,9 @@ class Log(Configuration.db.Model):
 
     def set_usuario_id(self,usuario_id):
         self.usuario_id = usuario_id
+
+    def set_intent(self,intent):
+        self.intent = intent
 
     def __repr__(self):
         return '<Log %r>' % self.id
