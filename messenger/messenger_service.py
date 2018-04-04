@@ -101,17 +101,17 @@ class MessengerService:
         if message != None:
             items = json.loads(data)
             code = items['recipient']['id']
-            user_id = Usuario.query.filter_by(code=code).first()
+            user = Usuario.query.filter_by(code=code).first()
             response = items['message']['text']
             if(code != None):
                 log = Log()
                 log.set_entities(message.getEntities())
-                log.set_usuario_id(user_id)
+                log.set_usuario_id(user.get_id())
                 log.set_response(response)
                 log.set_message(message.getContentMessage())
                 log.set_data(datetime.now())
-                Configuration.db.session.add(log)
-                Configuration.db.session.commit()
+                # Configuration.db.session.add(log)
+                # Configuration.db.session.commit()
             else:
                 print("Não foi possível encontrar o usuário na base de dados.")
 
