@@ -101,7 +101,7 @@ class MessengerService:
         if message != None:
             items = json.loads(data)
             code = items['recipient']['id']
-            user_id = Usuario.query.filter_by(code=code)
+            user_id = Usuario.query.filter_by(code=code).first()
             response = items['message']['text']
             if(code != None):
                 log = Log()
