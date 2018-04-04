@@ -104,7 +104,7 @@ class MessengerService:
             response = items['message']['text']
             log = Log()
             log.set_entities(message.getEntities())
-            log.set_usuario_id(user_id)
+            log.set_usuario_id(str(user_id))
             log.set_response(response)
             log.set_message(message.getContentMessage())
             log.set_data(datetime.now())

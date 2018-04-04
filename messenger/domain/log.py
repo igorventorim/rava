@@ -10,7 +10,7 @@ class Log(Configuration.db.Model):
     message = Configuration.db.Column(Configuration.db.String(1500), nullable=False)
     response = Configuration.db.Column(Configuration.db.String(1500), nullable=False)
     entities = Configuration.db.Column(ARRAY(Configuration.db.Text), nullable=True)
-    usuario_id = Configuration.db.Column(Configuration.db.BIGINT,Configuration.db.ForeignKey('usuario.id'), nullable=False)
+    usuario_id = Configuration.db.Column(Configuration.db.String(80),Configuration.db.ForeignKey('usuario.id'), nullable=False)
     usuario = Configuration.db.relationship('Usuario', backref = Configuration.db.backref('log', lazy=True))
 
     def get_id(self):
