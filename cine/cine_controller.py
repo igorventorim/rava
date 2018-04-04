@@ -9,3 +9,4 @@ cine_blueprint = Blueprint('cine_blueprint',__name__)
 def sincCine():
     sinc = SincCineData()
     sinc.extract_data_cine()
+    return "ok"

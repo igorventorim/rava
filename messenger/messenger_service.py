@@ -3,6 +3,10 @@ from messenger.message import Message
 from config.configuration import Configuration
 from messenger import answer_view_templates
 from wit import Wit
+from messenger.domain.usuario import Usuario
+import json
+from messenger.domain.log import Log
+from datetime import datetime
 import requests
 
 class MessengerService:
@@ -24,21 +28,28 @@ class MessengerService:
             for entry in data["entry"]:
                 for messaging_event in entry["messaging"]:
                     message = Message(messaging_event)
+                    check = Usuario.query.filter_by(code=message.getClientID()).first()
+                    if check is None:
+                        user = Usuario()
+                        user.set_code(message.getClientID())
+                        #user.set_nome() TODO: SET NAME USER HERE
                     self.__selector(message)
 
 
     @staticmethod
-    def sendMessage(data):
+    def sendMessage(message,data):
         PARAMS = {"access_token": Configuration.PAGE_ACCESS_TOKEN}
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=PARAMS, headers=HEADERS, data=data)
         if r.status_code != 200:
             print(r.status_code)
             print(r.text)
+        else:
+            MessengerService.saveLog(message,data)
 
     def sendMessageTest(self,message):
         data = answer_view_templates.text(1807409562632930, message)
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __selector(self,message):
         try:
@@ -52,7 +63,7 @@ class MessengerService:
     def __erro(self, message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __handleResponseWit(self,response,message):
         entidades = response['entities']
@@ -81,6 +92,21 @@ class MessengerService:
             return self.service_generics
         else:
             return None
+
+    @staticmethod
+    def saveLog(message,data):
+        if message != None:
+            items = json.loads(data)
+            user_id = items['recipient']['id']
+            response = items['message']['text']
+            log = Log()
+            log.set_entities(message.getEntities())
+            log.set_usuario_id(user_id)
+            log.set_response(response)
+            log.set_message(message.getContentMessage())
+            log.set_data(datetime.now())
+            Configuration.db.session.add(log)
+            Configuration.db.session.commit()
 
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService

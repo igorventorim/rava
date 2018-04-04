@@ -29,12 +29,12 @@ class RUService:
         else:
             msg = msg + cardapio.get_texto()
         data = answer_view_templates.text(user_id, msg)
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def visualizar_prato(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_PRATO])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def register_spam_ru(self,message):
         user_id = message.getClientID()
@@ -46,7 +46,7 @@ class RUService:
             data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_SPAM_RU])
         else:
             data = answer_view_templates.text(user_id, Strings.CMD_SPAM_RU_REGISTERED)
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def unregister_spam_ru(self,message):
         user_id = message.getClientID()
@@ -55,7 +55,7 @@ class RUService:
         if(person != None):
             Configuration.db.session.delete(person)
             Configuration.db.session.commit()
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def sendMenus(self):
         people = Person.query.all()
@@ -68,12 +68,12 @@ class RUService:
             return
         for person in people:
             data = answer_view_templates.textPublish(person.get_id(), saudacao + cardapio.get_texto())
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(None,data)
 
     def cost(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_ru[Strings.CMD_PRICE])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def get_search_keyword_ru(self,texto):
         _url = Configuration.URL_API_NLP+"extractSKru"

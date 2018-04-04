@@ -14,6 +14,7 @@ class SincCineData():
         soup = BeautifulSoup(r.content, "html5lib")
         table_row = 0
         dict = {}
+        dates = {}
         table = soup.find("table")
         if(table != None):
             for item in table.find_all("tr"):
@@ -22,11 +23,11 @@ class SincCineData():
                 for cell in item.find_all("td"):
                     table_column +=1
                     movie = None
-                    date = None
                     if(table_row == 1):
                          date = cell.find("h1").get_text().replace('\n\t\t\t\t\t','')+"/"+str(datetime.datetime.now().year)
                          day_of_week = cell.find("h3").get_text().replace('\n\t\t\t\t\t','')
                          dict[table_column] = "["+day_of_week+" - "+date+"] "
+                         dates[table_column] = date
                     else:
                         title_or_hour = cell.find_all("p")
                         if len(title_or_hour) >= 2:
@@ -36,18 +37,19 @@ class SincCineData():
                             if title != None:
                                 movie = self.getDataMovie(title,movie_url)
 
-                                if movie != None and title != None and hour != None and date != None:
-                                    check = Programacao.query.filter_by()
+                                if movie != None and hour != None and dates[table_column] != None:
+                                    check = Programacao.query.filter_by(filme_id=movie.get_id(),horario=hour,data=dates[table_column]).first()
                                     if check is None:
                                         programacao = Programacao()
                                         programacao.set_horario(hour)
                                         programacao.set_filme_id(movie.get_id())
-                                        programacao.set_date(datetime.datetime.strptime(date,"%d/%m/%Y"))
+                                        programacao.set_date(datetime.datetime.strptime(dates[table_column],"%d/%m/%Y"))
                                         Configuration.db.session.add(programacao)
                                         Configuration.db.session.commit()
 
                         title = None
                         hour = None
+
 
 
 
@@ -68,12 +70,11 @@ class SincCineData():
                         sinopse = p.get_text()
                     if "classi" in p.get_text().lower():
                         classificacao = p.get_text().lower()[p.get_text().find(':')+1:]
-                print(sinopse+"\n"+classificacao)
 
-        check = Filme.query.filter_by(titulo=title).first()
+        check = Filme.query.filter_by(titulo=title.lower()).first()
         if check is None:
             filme = Filme()
-            filme.set_titulo(title)
+            filme.set_titulo(title.lower())
             filme.set_sinopse(sinopse)
             filme.set_classificacao(classificacao)
             Configuration.db.session.add(filme)

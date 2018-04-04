@@ -10,32 +10,32 @@ class GenericsService:
     def __comoestou(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_PERGUNTA_SAUDACAO])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __apresentacao(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_APRESENTACAO])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __agradecimento(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_AGRADECIMENTO])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __saudacao(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_SAUDACAO].format(UserData().getFirstNameClient(user_id)))
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __despedida(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_DESPEDIDA])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     def __idade(self,message):
         user_id = message.getClientID()
         data = answer_view_templates.text(user_id, Strings.response_general[Strings.CMD_IDADE])
-        MessengerService.sendMessage(data)
+        MessengerService.sendMessage(message,data)
 
     options = {Strings.CMD_PERGUNTA_SAUDACAO.upper(): __comoestou,
                Strings.CMD_AGRADECIMENTO.upper(): __agradecimento,
