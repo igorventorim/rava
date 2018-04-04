@@ -7,6 +7,7 @@ from messenger.domain.usuario import Usuario
 import json
 from messenger.domain.log import Log
 from datetime import datetime
+from messenger.user_data import UserData
 import requests
 
 class MessengerService:
@@ -32,7 +33,9 @@ class MessengerService:
                     if check is None:
                         user = Usuario()
                         user.set_code(message.getClientID())
-                        #user.set_nome() TODO: SET NAME USER HERE
+                        user.set_nome(UserData().getFirstNameClient(message.getClientID()))
+                        Configuration.db.session.add(user)
+                        Configuration.db.session.commit()
                     self.__selector(message)
 
 
