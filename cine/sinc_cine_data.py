@@ -38,7 +38,7 @@ class SincCineData():
                                 movie = self.getDataMovie(title,movie_url)
 
                                 if movie != None and hour != None and dates[table_column] != None:
-                                    check = Programacao.query.filter_by(filme_id=movie.get_id(),horario=hour,data=dates[table_column]).first()
+                                    check = Programacao.query.filter_by(filme_id=movie.get_id(),horario=hour,data=datetime.datetime.strptime(dates[table_column],"%d/%m/%Y")).first()
                                     if check is None:
                                         programacao = Programacao()
                                         programacao.set_horario(hour)
