@@ -149,33 +149,62 @@ class ExtractorRUService:
             if "salada\n" in menu[i].lower():
                 saladas = menu[i+1].replace('\t', '')
                 cardapio.set_salada(self.remover_acentos(saladas))
-                # print(saladas)
             elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
                 pratos = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_prato(self.remover_acentos(pratos))
                 self.getPrato(pratos)
-                # print(pratos)
-            # elif "opção" in menu[i].lower():
-            #     opt = menu[i + 1].replace('\n', '')
-            #     cardapio.set_opcao(self.remover_acentos(opt))
-                # print(opt)
+            elif "opção" in menu[i].lower():
+                opt = menu[i + 1].replace('\n', '')
+                cardapio.set_opcao(self.remover_acentos(opt))
             elif "guarnição" in menu[i].lower():
                 guarnicoes = menu[i + 1].replace('\n', '')
                 cardapio.set_guarnicao(self.remover_acentos(guarnicoes))
-                # print(guarnicoes)
             elif "sobremesa" in menu[i].lower():
                 sobremesa = menu[i + 1].replace('\n', '')
                 cardapio.set_sobremesa(self.remover_acentos(sobremesa))
-                # print(sobremesa)
+            elif "suco" in menu[i].lower():
+                suco = menu[i].replace('\n', '').replace('\t', '')
+                cardapio.set_suco(self.remover_acentos(suco))
+            elif "acompanhamento" in menu[i].lower():
+                acompanhamento = menu[i+1].replace('\n', '').replace('\t', '')
+                cardapio.set_acompanhamento(acompanhamento)
+
+        return cardapio
+
+    def buildObjectByText(self,menu,tipo,data):
+        cardapio = Cardapio()
+        cardapio.set_tipo(tipo)
+        cardapio.set_data(datetime.datetime.strptime(data,'%d-%m-%Y'))
+
+        for i in range(0, len(menu)):
+            if "salada\n" in menu[i].lower():
+                saladas = menu[i + 1].replace('\t', '')
+                cardapio.set_salada(self.remover_acentos(saladas))
+            elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
+                pratos = menu[i + 1].replace('\n', '').replace('\t', '')
+                cardapio.set_prato(self.remover_acentos(pratos))
+                self.getPrato(pratos)
+            elif "opção" in menu[i].lower():
+                opt = menu[i + 1].replace('\n', '')
+                cardapio.set_opcao(self.remover_acentos(opt))
+            elif "guarnição" in menu[i].lower():
+                guarnicoes = menu[i + 1].replace('\n', '')
+                cardapio.set_guarnicao(self.remover_acentos(guarnicoes))
+            elif "sobremesa" in menu[i].lower():
+                sobremesa = menu[i + 1].replace('\n', '')
+                cardapio.set_sobremesa(self.remover_acentos(sobremesa))
             elif "suco" in menu[i].lower():
                 suco = menu[i].replace('\n', '').replace('\t', '')
                 cardapio.set_suco(self.remover_acentos(suco))
 
             elif "acompanhamento" in menu[i].lower():
-                acompanhamento = menu[i+1].replace('\n', '').replace('\t', '')
+                acompanhamento = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_acompanhamento(acompanhamento)
-                # print(suco)
+
+        print(cardapio)
         return cardapio
+
+
 
     def getPrato(self, pratos):
 
