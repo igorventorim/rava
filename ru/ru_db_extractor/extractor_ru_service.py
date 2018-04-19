@@ -65,10 +65,7 @@ class ExtractorRUService:
                             check = Cardapio.query.filter_by(data=now.date(),tipo=type).first()
 
                             if check is None:
-                                cardapio = Cardapio()
-                                cardapio.set_data(now.date())
-                                cardapio.set_texto(menu)
-                                cardapio.set_tipo(type)
+                                cardapio = self.buildObjectByText(menu,type,now.date())
                                 Configuration.db.session.add(cardapio)
                                 Configuration.db.session.commit()
                                 print("Cardápio atualizado com sucesso!")
@@ -131,8 +128,8 @@ class ExtractorRUService:
         fp = open(filename,"r")
         menu = fp.readlines()
         clean_menu = []
-        for i in range(0,len(menu)):
-            menu[i] = menu[i].replace('\xa0','')
+        for i in range(0, len(menu)):
+            menu[i] = menu[i].replace('\xa0', '')
             if menu[i] != '\n' and menu[i] != '\t\n':
                 clean_menu.append(menu[i])
         return clean_menu
@@ -142,7 +139,8 @@ class ExtractorRUService:
         menu = self.readFile(filename)
         tipo = 1 if self.getType(filename) == "Almoço" else 2
         cardapio.set_tipo(tipo)
-
+        fp = open(filename, "r")
+        texto = fp.read()
         cardapio.set_data(datetime.datetime.strptime(filename[25:35],'%d-%m-%Y'))
 
         for i in range(0, len(menu)):
@@ -152,7 +150,7 @@ class ExtractorRUService:
             elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
                 pratos = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_prato(self.remover_acentos(pratos))
-                self.getPrato(pratos)
+                # self.getPrato(pratos)
             elif "opção" in menu[i].lower():
                 opt = menu[i + 1].replace('\n', '')
                 cardapio.set_opcao(self.remover_acentos(opt))
@@ -168,13 +166,20 @@ class ExtractorRUService:
             elif "acompanhamento" in menu[i].lower():
                 acompanhamento = menu[i+1].replace('\n', '').replace('\t', '')
                 cardapio.set_acompanhamento(acompanhamento)
+        menu = self.getType(filename) + " - Data: " + str(cardapio.get_data().day) + "/" + str(cardapio.get_data().month) + "/" + str(cardapio.get_data().year) + "\n"
+        cardapio.set_texto(menu+str(texto))
 
         return cardapio
 
-    def buildObjectByText(self,menu,tipo,data):
+    def buildObjectByText(self,cardapio_text,tipo,data):
         cardapio = Cardapio()
         cardapio.set_tipo(tipo)
-        cardapio.set_data(datetime.datetime.strptime(data,'%d-%m-%Y'))
+        cardapio.set_texto(cardapio_text)
+        menu = cardapio_text.split("\n")
+        if(type(data) == str):
+            cardapio.set_data(datetime.datetime.strptime(data,'%d-%m-%Y'))
+        else:
+            cardapio.set_data(data)
 
         for i in range(0, len(menu)):
             if "salada\n" in menu[i].lower():
@@ -183,7 +188,7 @@ class ExtractorRUService:
             elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
                 pratos = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_prato(self.remover_acentos(pratos))
-                self.getPrato(pratos)
+                # self.getPrato(pratos)
             elif "opção" in menu[i].lower():
                 opt = menu[i + 1].replace('\n', '')
                 cardapio.set_opcao(self.remover_acentos(opt))
@@ -200,29 +205,46 @@ class ExtractorRUService:
             elif "acompanhamento" in menu[i].lower():
                 acompanhamento = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_acompanhamento(acompanhamento)
-
-        print(cardapio)
         return cardapio
 
+    def update_db(self):
+        cardapios = Cardapio.query.all()
+        for cardapio in cardapios:
+            item = self.buildObjectByText(cardapio.get_texto(),cardapio.get_tipo(),cardapio.get_data())
+            cardapio.set_acompanhamento(item.get_acompanhamento())
+            cardapio.set_guarnicao(item.get_guarnicao())
+            cardapio.set_opcao(item.get_opcao())
+            cardapio.set_prato(item.get_prato())
+            cardapio.set_salada(item.get_salada())
+            cardapio.set_sobremesa(item.get_sobremesa())
+            cardapio.set_suco(item.get_suco())
+            Configuration.db.session.commit()
+
+        onlyfiles = [f for f in os.listdir("ru/ru_db_extractor/files") if isfile(join("ru/ru_db_extractor/files", f))]
+        for filename in onlyfiles:
+            cardapio = self.buildObjectByFile(os.path.join("ru/ru_db_extractor/files", filename))
+            if Cardapio.query.filter_by(data=cardapio.get_data(), tipo=cardapio.get_tipo()).first() is None:
+                Configuration.db.session.add(cardapio)
+                Configuration.db.session.commit()
 
 
-    def getPrato(self, pratos):
-
-        it = pratos.split("/")
-
-        for p in it:
-            # print(p)
-            if(p[0] == " "):
-                word = p[1:-1].lower()
-            elif(p[-1] == " "):
-                word = p[0:-2].lower()
-            else:
-                word = p.lower()
-
-            if word not in self.pp:
-                self.pp[word] = 0
-
-            self.pp[word] += 1
+    # def getPrato(self, pratos):
+    #
+    #     it = pratos.split("/")
+    #
+    #     for p in it:
+    #         # print(p)
+    #         if(p[0] == " "):
+    #             word = p[1:-1].lower()
+    #         elif(p[-1] == " "):
+    #             word = p[0:-2].lower()
+    #         else:
+    #             word = p.lower()
+    #
+    #         if word not in self.pp:
+    #             self.pp[word] = 0
+    #
+    #         self.pp[word] += 1
 
 
 
@@ -233,13 +255,12 @@ class ExtractorRUService:
             print(str(count)+ ";"+key+";"+str(value))
 
 
-    def generateJson(self):
-        file = open("db.json","w")
-        databaseRU = []
-        onlyfiles = [f for f in os.listdir("ru/ru_db_extractor/files") if isfile(join("ru/ru_db_extractor/files", f))]
-        for filename in onlyfiles:
-            cardapio = self.buildObjectByFile(os.path.join("ru/ru_db_extractor/files", filename))
-            print(cardapio)
+    # def generateJson(self):
+    #     file = open("db.json","w")
+    #     databaseRU = []
+    #     onlyfiles = [f for f in os.listdir("ru/ru_db_extractor/files") if isfile(join("ru/ru_db_extractor/files", f))]
+    #     for filename in onlyfiles:
+    #         cardapio = self.buildObjectByFile(os.path.join("ru/ru_db_extractor/files", filename))
             # databaseRU.append(cardapio)
         # print(json.dumps(databaseRU,cls=MyEncoder))
         # file.write('{\"cardapio\":'+json.dumps(databaseRU,cls=MyEncoder)+'}')
