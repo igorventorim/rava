@@ -84,8 +84,8 @@ class Cardapio(Configuration.db.Model):
     #     self.opcao = opcao
 
     def __repr__(self):
-        return "Cardápio:\n\nTipo: "+str(self.get_tipo()) +"\nData: "+str(self.get_data())+"\nSalada: "+str(self.get_salada())\
-               +"Prato: "+str(self.get_prato())+"\nAcompanhamento: "+str(self.get_acompanhamento())+"\nGuarnição: "+str(self.get_guarnicao())\
+        return "Cardápio:\n\nTipo: "+str(self.get_tipo()) +"\nData: "+str(self.get_data())+"\nSalada: "+str(self.get_salada()).rstrip("\n")\
+               +"\nPrato: "+str(self.get_prato())+"\nAcompanhamento: "+str(self.get_acompanhamento())+"\nGuarnição: "+str(self.get_guarnicao())\
                +"\nSobremesa: "+str(self.get_sobremesa())+"\nSuco: "+str(self.get_suco())+ \
                "\n=============================\n"
                # "\nOpcao: "+self.get_opcao()+\

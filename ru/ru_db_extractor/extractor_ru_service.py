@@ -24,9 +24,9 @@ class ExtractorRUService:
 
     def getType(self,tipo):
         if "almo" in tipo.lower():
-            return 1
+            return "Almoço"
         else:
-            return 2
+            return "Jantar"
 
     def menu(self):
 
@@ -140,7 +140,7 @@ class ExtractorRUService:
     def buildObjectByFile(self,filename):
         cardapio = Cardapio()
         menu = self.readFile(filename)
-        tipo = self.getType(filename)
+        tipo = 1 if self.getType(filename) == "Almoço" else 2
         cardapio.set_tipo(tipo)
 
         cardapio.set_data(datetime.datetime.strptime(filename[25:35],'%d-%m-%Y'))
