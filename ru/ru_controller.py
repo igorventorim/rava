@@ -19,5 +19,5 @@ def send_menus():
 @ru_blueprint.route("/sincMenu")
 def sinc_menu():
     extract.menu()
-    extract.generateJson()
+    # extract.generateJson()
     return "ok", 200
