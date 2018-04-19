@@ -24,9 +24,10 @@ class ExtractorRUService:
 
     def getType(self,tipo):
         if "almo" in tipo.lower():
-            return 1
+            return "Almoço"
         else:
-            return 2
+            return "Jantar"
+
 
     def menu(self):
 
@@ -52,6 +53,7 @@ class ExtractorRUService:
             if (refeicoes != None):
 
                 for refeicao in refeicoes.children:
+
                     if (refeicao.find("views-field-title") == None):
                         tipo = refeicao.find("div", class_="views-field-title").find("span", class_="field-content")
                         tipo = self.getType(tipo.get_text())
@@ -63,7 +65,7 @@ class ExtractorRUService:
                                 menu += re.sub(' +',' ',element.get_text())+"\n"
 
                             check = Cardapio.query.filter_by(data=now.date(),tipo=type).first()
-                            print(check)
+
                             if check is None:
                                 cardapio = Cardapio()
                                 cardapio.set_data(now.date())
