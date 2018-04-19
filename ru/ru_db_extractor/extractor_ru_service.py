@@ -63,7 +63,7 @@ class ExtractorRUService:
                                 menu += re.sub(' +',' ',element.get_text())+"\n"
 
                             check = Cardapio.query.filter_by(data=now.date(),tipo=type).first()
-
+                            print(check)
                             if check is None:
                                 cardapio = Cardapio()
                                 cardapio.set_data(now.date())
