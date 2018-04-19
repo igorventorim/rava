@@ -55,6 +55,7 @@ class SincCineData():
 
 
 
+
     def getDataMovie(self,title,movie_url):
         sinopse = None
         classificacao = None
