@@ -11,6 +11,7 @@ class Cardapio(Configuration.db.Model):
     data = Configuration.db.Column(Configuration.db.Date, nullable=False)
     salada = Configuration.db.Column(Configuration.db.String(150))
     prato = Configuration.db.Column(Configuration.db.String(150))
+    # opcao = Configuration.db.Column(Configuration.db.String(150))
     acompanhamento = Configuration.db.Column(Configuration.db.String(150))
     guarnicao = Configuration.db.Column(Configuration.db.String(150))
     sobremesa = Configuration.db.Column(Configuration.db.String(150))
@@ -46,6 +47,9 @@ class Cardapio(Configuration.db.Model):
     def get_suco(self):
         return self.suco
 
+    # def get_opcao(self):
+    #     return self.opcao
+
     def set_id(self,id):
         self.id = id
 
@@ -75,3 +79,15 @@ class Cardapio(Configuration.db.Model):
 
     def set_suco(self,suco):
         self.suco = suco
+
+    # def set_opcao(self,opcao):
+    #     self.opcao = opcao
+
+    def __repr__(self):
+        return "Cardápio:\n\nTipo: "+str(self.get_tipo()) +"\nData: "+str(self.get_data())+"\nSalada: "+str(self.get_salada())\
+               +"Prato: "+str(self.get_prato())+"\nAcompanhamento: "+str(self.get_acompanhamento())+"\nGuarnição: "+str(self.get_guarnicao())\
+               +"\nSobremesa: "+str(self.get_sobremesa())+"\nSuco: "+str(self.get_suco())+ \
+               "\n=============================\n"
+               # "\nOpcao: "+self.get_opcao()+\
+
+
