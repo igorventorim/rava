@@ -52,6 +52,7 @@ class ExtractorRUService:
             if (refeicoes != None):
 
                 for refeicao in refeicoes.children:
+
                     if (refeicao.find("views-field-title") == None):
                         tipo = refeicao.find("div", class_="views-field-title").find("span", class_="field-content")
                         tipo = self.getType(tipo.get_text())
