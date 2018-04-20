@@ -84,7 +84,7 @@ class RUService:
 
     def hadThis(self,message):
         result = self.get_search_keyword_ru(message.getContentMessage())
-        print(result)
+        print(result.text)
 
     def get_frequency_menu(self,message):
         pass
