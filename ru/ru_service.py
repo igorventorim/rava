@@ -80,11 +80,12 @@ class RUService:
         _data = {'texto':texto}
         _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
         result = requests.post(url=_url,auth=_credentials,data=_data)
-        return result
+        return result.text
 
     def hadThis(self,message):
-        result = self.get_search_keyword_ru(message.getContentMessage())
-        print(result.text)
+        item = self.get_search_keyword_ru(message.getContentMessage())
+        cardapios = Cardapio.query.all()
+        #TODO CONTINUAR SELEÇÃO A SER UTILIZADA!!!
 
     def get_frequency_menu(self,message):
         pass
