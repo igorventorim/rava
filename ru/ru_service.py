@@ -80,12 +80,21 @@ class RUService:
         _data = {'texto':texto}
         _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
         result = requests.post(url=_url,auth=_credentials,data=_data)
+        return result
+
+    def hadThis(self,message):
+        result = self.get_search_keyword_ru(message.getContentMessage())
         print(result)
+
+    def get_frequency_menu(self,message):
+        pass
 
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,
                Strings.CMD_SPAM_RU.upper(): register_spam_ru,
                Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru,
-               Strings.CMD_PRICE.upper(): cost}
+               Strings.CMD_PRICE.upper(): cost,
+               Strings.CMD_SELECAO: hadThis,
+               Strings.CMD_FREQUENCIA: get_frequency_menu}
 
 from messenger.messenger_service import MessengerService

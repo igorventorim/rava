@@ -28,6 +28,8 @@ class Strings():
     MORE = u"Mais"
     OK = u"Ok"
     WAIT_TIME = u"Tempo de espera aproximado: {} minutos."
+    YES="Sim"
+    NO="Não"
 
     PROFESSOR="Professor"
     ALUNO="Aluno"
@@ -53,6 +55,9 @@ class Strings():
     CMD_CARDAPIO = "cmd_cardapio"
     CMD_SPAM_RU = "cmd_spam_ru"
     CMD_DELETE_SPAM_RU = "cmd_delete_spam_ru"
+    CMD_SELECAO = "cmd_selecao"
+    CMD_FREQUENCIA = "cmd_frequencia"
+
     CMD_SPAM_RU_REGISTERED = "Uai, você já está recebendo minhas mensagens!"
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \
