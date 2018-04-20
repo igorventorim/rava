@@ -94,7 +94,7 @@ class RUService:
                Strings.CMD_SPAM_RU.upper(): register_spam_ru,
                Strings.CMD_DELETE_SPAM_RU.upper(): unregister_spam_ru,
                Strings.CMD_PRICE.upper(): cost,
-               Strings.CMD_SELECAO: hadThis,
-               Strings.CMD_FREQUENCIA: get_frequency_menu}
+               Strings.CMD_SELECAO.upper(): hadThis,
+               Strings.CMD_FREQUENCIA.upper(): get_frequency_menu}
 
 from messenger.messenger_service import MessengerService
