@@ -146,9 +146,13 @@ class ExtractorRUService:
 
         for i in range(0, len(menu)):
             if "salada\n" in menu[i].lower():
+                if menu[i+1] == '':
+                    i = i + 1
                 saladas = menu[i+1].replace('\t', '')
                 cardapio.set_salada(self.remover_acentos(saladas))
             elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
+                if menu[i+1] == '':
+                    i = i + 1
                 pratos = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_prato(self.remover_acentos(pratos))
                 # self.getPrato(pratos)
@@ -183,10 +187,15 @@ class ExtractorRUService:
             cardapio.set_data(data)
 
         for i in range(0, len(menu)):
-            if "salada\n" in menu[i].lower():
+
+            if "salada" in menu[i].lower():
+                if menu[i+1] == '':
+                    i = i + 1
                 saladas = menu[i + 1].replace('\t', '')
                 cardapio.set_salada(self.remover_acentos(saladas))
             elif "prato" in menu[i].lower() or "sopa/" in menu[i].lower():
+                if menu[i+1] == '':
+                    i = i + 1
                 pratos = menu[i + 1].replace('\n', '').replace('\t', '')
                 cardapio.set_prato(self.remover_acentos(pratos))
                 # self.getPrato(pratos)
@@ -219,14 +228,15 @@ class ExtractorRUService:
             cardapio.set_salada(item.get_salada())
             cardapio.set_sobremesa(item.get_sobremesa())
             cardapio.set_suco(item.get_suco())
-            Configuration.db.session.commit()
 
+        # Configuration.db.session.commit()
         onlyfiles = [f for f in os.listdir("ru/ru_db_extractor/files") if isfile(join("ru/ru_db_extractor/files", f))]
         for filename in onlyfiles:
             cardapio = self.buildObjectByFile(os.path.join("ru/ru_db_extractor/files", filename))
             if Cardapio.query.filter_by(data=cardapio.get_data(), tipo=cardapio.get_tipo()).first() is None:
                 Configuration.db.session.add(cardapio)
-                Configuration.db.session.commit()
+
+        Configuration.db.session.commit()
 
 
     # def getPrato(self, pratos):
