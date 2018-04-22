@@ -10,7 +10,6 @@ from config.configuration import Configuration
 import requests
 import re
 import nltk
-nltk.download('stopwords')
 
 class RUService:
 
@@ -168,7 +167,7 @@ class RUService:
 
         features = vectorizer.get_feature_names()
         vectorizer = CountVectorizer(analyzer="char_wb", ngram_range=(4, 8), vocabulary=features)
-        query_vcnt = vectorizer.fit_transform(query)
+        query_vcnt = vectorizer.fit_transform([query])
         near = [items[idx] for idx, dist in
                 sorted([(ids, pairwise_distances(query_vcnt, s, metric="cosine")[0][0]) for ids, s in enumerate(vcnt)],
                        key=lambda x: x[1]) if dist < 0.4]
