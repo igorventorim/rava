@@ -84,11 +84,11 @@ class RUService:
         _data = {'texto':texto}
         _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
         result = requests.post(url=_url,auth=_credentials,data=_data)
-        return result.text
+        return self.__std_words__(result.text)
 
     def hadThis(self,message):
         user_id = message.getClientID()
-        query = self.get_search_keyword_ru(message)
+        query = self.get_search_keyword_ru(message.getContentMessage())
         cardapios = None
         if 'datetime' in message.getEntities():
             datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
