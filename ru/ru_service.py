@@ -84,7 +84,7 @@ class RUService:
         _data = {'texto':texto}
         _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
         result = requests.post(url=_url,auth=_credentials,data=_data)
-        return self.__std_words__(result.text)
+        return result.text
 
     def hadThis(self,message):
         user_id = message.getClientID()
