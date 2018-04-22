@@ -88,7 +88,7 @@ class RUService:
 
     def hadThis(self,message):
         user_id = message.getClientID()
-        query = [self.get_search_keyword_ru(message)]
+        query = self.get_search_keyword_ru(message)
 
         if 'datetime' in message.getEntities():
             datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
@@ -148,7 +148,7 @@ class RUService:
         qtd = len(items)
 
         if len(near) == 0:
-            msg = "Isso nunca teve no restaurante universitário."
+            msg = "Isso nunca teve no restaurante universitário, mas calma, talvez eu não tenha conseguido entender."
         elif len(near) <= (qtd * 0.01):
             msg = "Raramente tem isso."
         elif len(near) <= (qtd * 0.05):
