@@ -10,6 +10,7 @@ from config.configuration import Configuration
 import requests
 import re
 import nltk
+nltk.download('stopwords')
 
 class RUService:
 
