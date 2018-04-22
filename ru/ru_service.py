@@ -84,7 +84,7 @@ class RUService:
         _data = {'texto':texto}
         _credentials = (Configuration.USER_API_NLP,Configuration.PASSWORD_API_NLP)
         result = requests.post(url=_url,auth=_credentials,data=_data)
-        return result.text
+        return self.__std_words__(result.text)
 
     def hadThis(self,message):
         user_id = message.getClientID()
@@ -114,7 +114,10 @@ class RUService:
                     for element in elements:
                         element = self.__std_words__(element.lower())
                         items.append(element)
-            near = self.vectorize(query, items)
+            if(items != []):
+                near = self.vectorize(query, items)
+            else:
+                near = None
             print(query)
             print(near)
 
@@ -140,7 +143,10 @@ class RUService:
                     for element in elements:
                         element = self.__std_words__(element.lower())
                         items.append(element)
-            near = self.vectorize(query,items)
+            if items != []:
+                near = self.vectorize(query,items)
+            else:
+                near = None
             qtd = len(items)
 
             if len(near) == 0:
