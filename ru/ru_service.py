@@ -113,7 +113,8 @@ class RUService:
                     items.append(element)
         near = self.vectorize(query, items)
         print(query)
-        print(items)
+        print(near)
+        # print(items)
 
         if (len(near) > 0):
             msg = Strings.YES
