@@ -124,7 +124,10 @@ class RUService:
             if (len(near) > 0):
                 msg = Strings.YES
             else:
-                msg = Strings.NO
+                if datenow.date() > datenow.now().date():
+                    msg = "Não sei"
+                else:
+                    msg = Strings.NO
         else:
             msg = "Desculpe, não consegui extrair todas as informações, poderia falar de outra forma?"
         data = answer_view_templates.text(user_id, msg)
