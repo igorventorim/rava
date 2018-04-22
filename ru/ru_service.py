@@ -89,66 +89,72 @@ class RUService:
     def hadThis(self,message):
         user_id = message.getClientID()
         query = self.get_search_keyword_ru(message.getContentMessage())
-        cardapios = None
-        if 'datetime' in message.getEntities():
-            datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
-            type = message.getEntities()['datetime'][0]['grain']
-            if type == "day":
-                cardapios = Cardapio.query.filter_by(data=datenow.date())
-            elif type == "week":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=7)))
-            elif type == "month":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=30)))
-            elif type == "year":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=365)))
-        if cardapios == None:
-            cardapios = Cardapio.query.all()
 
-        items = []
-        for cardapio in cardapios:
-            if cardapio.get_prato() != None:
-                elements = cardapio.get_prato().split("/ ")
-                for element in elements:
-                    element = self.__std_words__(element.lower())
-                    items.append(element)
-        near = self.vectorize(query, items)
-        print(query)
-        print(near)
-        # print(items)
+        if query != '':
 
-        if (len(near) > 0):
-            msg = Strings.YES
+            cardapios = None
+            if 'datetime' in message.getEntities():
+                datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
+                type = message.getEntities()['datetime'][0]['grain']
+                if type == "day":
+                    cardapios = Cardapio.query.filter_by(data=datenow.date())
+                elif type == "week":
+                    cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=7)))
+                elif type == "month":
+                    cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=30)))
+                elif type == "year":
+                    cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datenow.date()+datetime.timedelta(days=365)))
+            if cardapios == None:
+                cardapios = Cardapio.query.all()
+
+            items = []
+            for cardapio in cardapios:
+                if cardapio.get_prato() != None:
+                    elements = cardapio.get_prato().split("/ ")
+                    for element in elements:
+                        element = self.__std_words__(element.lower())
+                        items.append(element)
+            near = self.vectorize(query, items)
+            print(query)
+            print(near)
+
+            if (len(near) > 0):
+                msg = Strings.YES
+            else:
+                msg = Strings.NO
         else:
-            msg = Strings.NO
-
+            msg = "Desculpe, não consegui extrair todas as informações, poderia falar de outra forma?"
         data = answer_view_templates.text(user_id, msg)
         MessengerService.sendMessage(message, data)
 
     def get_frequency_menu(self,message):
         user_id = message.getClientID()
         query = self.get_search_keyword_ru(message.getContentMessage())
-        cardapios = Cardapio.query.all()
-        items = []
-        for cardapio in cardapios:
-            if cardapio.get_prato() != None:
-                elements = cardapio.get_prato().split("/ ")
-                for element in elements:
-                    element = self.__std_words__(element.lower())
-                    items.append(element)
-        near = self.vectorize(query,items)
-        qtd = len(items)
 
-        if len(near) == 0:
-            msg = "Isso nunca teve no restaurante universitário, mas calma, talvez eu não tenha conseguido entender."
-        elif len(near) <= (qtd * 0.01):
-            msg = "Raramente tem isso."
-        elif len(near) <= (qtd * 0.05):
-            msg = "Isso é algo comum de se ter por aqui."
-        elif len(near) <= (qtd * 0.1):
-            msg = "Tem várias vezes."
-        elif len(near) > 4 * (qtd * 0.2):
-            msg = "Podemos dizer que tem isso todos os dias."
+        if query != '':
+            cardapios = Cardapio.query.all()
+            items = []
+            for cardapio in cardapios:
+                if cardapio.get_prato() != None:
+                    elements = cardapio.get_prato().split("/ ")
+                    for element in elements:
+                        element = self.__std_words__(element.lower())
+                        items.append(element)
+            near = self.vectorize(query,items)
+            qtd = len(items)
 
+            if len(near) == 0:
+                msg = "Isso nunca teve no restaurante universitário, mas calma, talvez eu não tenha conseguido entender."
+            elif len(near) <= (qtd * 0.01):
+                msg = "Raramente tem isso."
+            elif len(near) <= (qtd * 0.05):
+                msg = "Isso é algo comum de se ter por aqui."
+            elif len(near) <= (qtd * 0.1):
+                msg = "Tem várias vezes."
+            elif len(near) > 4 * (qtd * 0.2):
+                msg = "Podemos dizer que tem isso todos os dias."
+        else:
+            msg = "Desculpe, não consegui extrair todas as informações, poderia falar de outra forma?"
         data = answer_view_templates.text(user_id, msg)
         MessengerService.sendMessage(message, data)
 
