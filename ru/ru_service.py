@@ -112,6 +112,8 @@ class RUService:
                     element = self.__std_words__(element.lower())
                     items.append(element)
         near = self.vectorize(query, items)
+        print(query)
+        print(items)
 
         if (len(near) > 0):
             msg = Strings.YES
