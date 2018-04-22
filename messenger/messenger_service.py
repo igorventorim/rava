@@ -55,13 +55,13 @@ class MessengerService:
         MessengerService.sendMessage(message,data)
 
     def __selector(self,message):
-        try:
+        # try:
             # cmd = message.getContentMessage().split(' ', 1)[0]
             result = self.client.message(message.getContentMessage())
             cmd = self.__handleResponseWit(result,message)
             self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
-        except:
-            self.__erro(message)
+        # except:
+        #     self.__erro(message)
 
     def __erro(self, message):
         user_id = message.getClientID()

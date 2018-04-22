@@ -238,50 +238,8 @@ class ExtractorRUService:
 
         Configuration.db.session.commit()
 
-
-    # def getPrato(self, pratos):
-    #
-    #     it = pratos.split("/")
-    #
-    #     for p in it:
-    #         # print(p)
-    #         if(p[0] == " "):
-    #             word = p[1:-1].lower()
-    #         elif(p[-1] == " "):
-    #             word = p[0:-2].lower()
-    #         else:
-    #             word = p.lower()
-    #
-    #         if word not in self.pp:
-    #             self.pp[word] = 0
-    #
-    #         self.pp[word] += 1
-
-
-
     def printDict(self):
         count = 0
         for key,value in self.pp.items():
             count += 1
             print(str(count)+ ";"+key+";"+str(value))
-
-
-    # def generateJson(self):
-    #     file = open("db.json","w")
-    #     databaseRU = []
-    #     onlyfiles = [f for f in os.listdir("ru/ru_db_extractor/files") if isfile(join("ru/ru_db_extractor/files", f))]
-    #     for filename in onlyfiles:
-    #         cardapio = self.buildObjectByFile(os.path.join("ru/ru_db_extractor/files", filename))
-            # databaseRU.append(cardapio)
-        # print(json.dumps(databaseRU,cls=MyEncoder))
-        # file.write('{\"cardapio\":'+json.dumps(databaseRU,cls=MyEncoder)+'}')
-
-
-    # obj = buildObject(os.path.join("files", "01-02-2016_almoco.txt"))
-    # print(json.dumps(obj.__dict__))
-
-
-
-# generateJson()
-# printDict()
-# createMenuFiles()
