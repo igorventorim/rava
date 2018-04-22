@@ -149,13 +149,13 @@ class RUService:
 
         if len(near) == 0:
             msg = "Isso nunca teve no restaurante universitário."
-        elif len(near) <= 2 * qtd / 5:
+        elif len(near) <= qtd * 0.01:
             msg = "Raramente tem isso."
-        elif len(near) <= 3*qtd/5:
+        elif len(near) <= qtd * 0.05:
             msg = "Isso é algo comum de se ter por aqui."
-        elif len(near) <= 4 * qtd / 5:
+        elif len(near) <= qtd * 0.01:
             msg = "Tem várias vezes."
-        elif len(near) > 4 * qtd / 5:
+        elif len(near) > 4 * qtd * 0.2:
             msg = "Podemos dizer que tem isso todos os dias."
 
         data = answer_view_templates.text(user_id, msg)
