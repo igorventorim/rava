@@ -117,7 +117,7 @@ class RUService:
             if(items != []):
                 near = self.vectorize(query, items)
             else:
-                near = None
+                near = []
             print(query)
             print(near)
 
@@ -146,7 +146,7 @@ class RUService:
             if items != []:
                 near = self.vectorize(query,items)
             else:
-                near = None
+                near = []
             qtd = len(items)
 
             if len(near) == 0:
