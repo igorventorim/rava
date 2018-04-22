@@ -89,7 +89,7 @@ class RUService:
     def hadThis(self,message):
         user_id = message.getClientID()
         query = self.get_search_keyword_ru(message)
-
+        cardapios = None
         if 'datetime' in message.getEntities():
             datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
             type = message.getEntities()['datetime'][0]['grain']
@@ -101,34 +101,22 @@ class RUService:
                 cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=30)))
             elif type == "year":
                 cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=365)))
-            items = []
-            for cardapio in cardapios:
-                if cardapio.get_prato() != None:
-                    elements = cardapio.get_prato().split("/ ")
-                    for element in elements:
-                        element = self.__std_words__(element.lower())
-                        items.append(element)
-            near = self.vectorize(query, items)
-
-            if (len(near) > 0):
-                msg = Strings.YES
-            else:
-                msg = Strings.NO
-        else:
+        if cardapios == None:
             cardapios = Cardapio.query.all()
-            items = []
-            for cardapio in cardapios:
-                if cardapio.get_prato() != None:
-                    elements = cardapio.get_prato().split("/ ")
-                    for element in elements:
-                        element = self.__std_words__(element.lower())
-                        items.append(element)
-            near = self.vectorize(query, items)
 
-            if (len(near) > 0):
-                msg = Strings.YES
-            else:
-                msg = Strings.NO
+        items = []
+        for cardapio in cardapios:
+            if cardapio.get_prato() != None:
+                elements = cardapio.get_prato().split("/ ")
+                for element in elements:
+                    element = self.__std_words__(element.lower())
+                    items.append(element)
+        near = self.vectorize(query, items)
+
+        if (len(near) > 0):
+            msg = Strings.YES
+        else:
+            msg = Strings.NO
 
         data = answer_view_templates.text(user_id, msg)
         MessengerService.sendMessage(message, data)
