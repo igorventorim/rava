@@ -33,4 +33,4 @@ query = ["frango frito"]
 vectorizer = CountVectorizer(analyzer="char_wb", ngram_range=(4,8), vocabulary=features)
 
 query_vcnt = vectorizer.fit_transform(query)
-print([ db[idx] for idx, dist in sorted([(ids, pairwise_distances(query_vcnt, s, metric="cosine")[0][0]) for ids, s in enumerate(vcnt)], key=lambda x:x[1]) if dist < 1])
+print([ db[idx] for idx, dist in sorted([(ids, pairwise_distances(query_vcnt, s, metric="cosine")[0][0]) for ids, s in enumerate(vcnt)], key=lambda x:x[1]) if dist < 0.0001])

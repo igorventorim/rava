@@ -1,3 +1,5 @@
+from sklearn.metrics.pairwise import pairwise_distances
+from sklearn.feature_extraction.text import CountVectorizer
 from utils.strings import Strings
 from messenger import answer_view_templates
 # from app import db
@@ -6,6 +8,8 @@ from ru.domain.cardapio import Cardapio
 import datetime
 from config.configuration import Configuration
 import requests
+import re
+import nltk
 
 class RUService:
 
@@ -83,12 +87,97 @@ class RUService:
         return result.text
 
     def hadThis(self,message):
-        item = self.get_search_keyword_ru(message.getContentMessage())
-        cardapios = Cardapio.query.all()
-        #TODO CONTINUAR SELEÇÃO A SER UTILIZADA!!!
+        user_id = message.getClientID()
+        query = [self.get_search_keyword_ru(message)]
+
+        if 'datetime' in message.getEntities():
+            datenow = datetime.datetime.strptime(message.getEntities()['datetime'][0]['value'][:10], "%Y-%m-%d")
+            type = message.getEntities()['datetime'][0]['grain']
+            if type == "day":
+                cardapios = Cardapio.query.filter_by(data=datenow.date())
+            elif type == "week":
+                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(), datetime.timedelta(days=7)))
+            elif type == "month":
+                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=30)))
+            elif type == "year":
+                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=365)))
+            items = []
+            for cardapio in cardapios:
+                if cardapio.get_prato() != None:
+                    elements = cardapio.get_prato().split("/ ")
+                    for element in elements:
+                        element = self.__std_words__(element.lower())
+                        items.append(element)
+            near = self.vectorize(query, items)
+
+            if (len(near) > 0):
+                msg = Strings.YES
+            else:
+                msg = Strings.NO
+        else:
+            cardapios = Cardapio.query.all()
+            items = []
+            for cardapio in cardapios:
+                if cardapio.get_prato() != None:
+                    elements = cardapio.get_prato().split("/ ")
+                    for element in elements:
+                        element = self.__std_words__(element.lower())
+                        items.append(element)
+            near = self.vectorize(query, items)
+
+            if (len(near) > 0):
+                msg = Strings.YES
+            else:
+                msg = Strings.NO
+
+        data = answer_view_templates.text(user_id, msg)
+        MessengerService.sendMessage(message, data)
 
     def get_frequency_menu(self,message):
-        pass
+        user_id = message.getClientID()
+        query = self.get_search_keyword_ru(message.getContentMessage())
+        cardapios = Cardapio.query.all()
+        items = []
+        for cardapio in cardapios:
+            if cardapio.get_prato() != None:
+                elements = cardapio.get_prato().split("/ ")
+                for element in elements:
+                    element = self.__std_words__(element.lower())
+                    items.append(element)
+        near = self.vectorize(query,items)
+        qtd = len(items)
+
+        if len(near) == 0:
+            msg = "Isso nunca teve no restaurante universitário."
+        elif len(near) <= 2 * qtd / 5:
+            msg = "Raramente tem isso."
+        elif len(near) <= 3*qtd/5:
+            msg = "Isso é algo comum de se ter por aqui."
+        elif len(near) <= 4 * qtd / 5:
+            msg = "Tem várias vezes."
+        elif len(near) > 4 * qtd / 5:
+            msg = "Podemos dizer que tem isso todos os dias."
+
+        data = answer_view_templates.text(user_id, msg)
+        MessengerService.sendMessage(message, data)
+
+    def vectorize(self,query,items):
+        vectorizer = CountVectorizer(analyzer="char_wb", ngram_range=(4, 8))
+        vcnt = vectorizer.fit_transform([d for d in items])
+
+        features = vectorizer.get_feature_names()
+        vectorizer = CountVectorizer(analyzer="char_wb", ngram_range=(4, 8), vocabulary=features)
+        query_vcnt = vectorizer.fit_transform(query)
+        near = [items[idx] for idx, dist in
+                sorted([(ids, pairwise_distances(query_vcnt, s, metric="cosine")[0][0]) for ids, s in enumerate(vcnt)],
+                       key=lambda x: x[1]) if dist < 0.4]
+        return near
+
+    def __std_words__(self,string, blacklist=['maruipe', 'goiabeiras']):
+        tokenizer = re.compile('\w+')
+        tkn = tokenizer.findall(string)
+        blacklist = blacklist + nltk.corpus.stopwords.words("portuguese")
+        return " ".join([t for t in tkn if t not in blacklist])
 
     options = {Strings.CMD_CARDAPIO.upper(): visualizar_cardapio,
                Strings.CMD_PRATO.upper(): visualizar_prato,

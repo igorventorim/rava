@@ -1,0 +1,294 @@
+ID;Prato;Freq
+1;peixe frito;1
+2;frango frito;64
+3;bobo de carne seca;10
+4;frango desfiado ao molho de manjericao;1
+5;picadinho carioca;1
+6;escondidinho de linguica;1
+7;goiabeiras e maruipe: feijoada;1
+8;isca de carne ao molho;1
+9;goiabeiras: frango desfiado;1
+10;isca bovina com cebola e pimentao;3
+11;linguica toscana acebolada;11
+12;pernil grelhado;32
+13;hamburguer de frango;14
+14;hamburguer de frango acebolado;1
+15;nuggets assado;2
+16;frango ensopado com cenoura;1
+17;frago desfiado ao molho;1
+18;frango ensopado com batata;2
+19;carre ao molho de vinho;8
+20;hamburguer de frango tipo a pizzaiolo;5
+21;carne ensopada com batata;7
+22;carre ao molho madeira;2
+23;isca bovina com pimentoes;2
+24;file de sobrecoxa desfiado;1
+25;isca bivina acebolada;1
+26;isca cremosa;2
+27;goiabeiras: frango assado;2
+28;carre assado e bife de panela com cenoura;2
+29;pernil em iscas;1
+30;isca bovina acebolada e com pimentoes;1
+31;hamburguer bovino ao molho;20
+32;carne moida acebolada;1
+33;bife de panela com paio;1
+34;bife de hamburguer bovino ao molho;1
+35;carne ao molho;3
+36;carne ensopada com paio e cenoura;1
+37;figado acebolado;5
+38;isca bovina ensopada com cenoura;1
+39;pernil em iscas refogado;1
+40;carne em cubos com pimentao;2
+41;lomo saltado ;2
+42;goiabeiras: carne ensopada;1
+43;frango empanado frito;1
+44;quibe vegetariano ;3
+45;file de peixe desfiado;2
+46;frango frito ao molho;1
+47;maruipe: fricasse de frango;1
+48;carne moida com batatas;1
+49;ketchupa;1
+50;falafel de queijo ;1
+51;falafel ;5
+52;nuggets;50
+53;maruipe: kibe;1
+54;hamburguer de bovino;1
+55;maruipe: paio acebolado;1
+56;soja refogada;1
+57;file de peito de frango desfiado;54
+58;canjiquinha com cenoura e carne de frango;1
+59;goiabeiras: frango frito;2
+60;frango mineiro;1
+61;almondegas;4
+62;moela com batatas;3
+63;frango grelhado ao molho;1
+64;frango desfiado com milho e ervilha;2
+65;hamburguer acebolada;1
+66;goiabeiras: kartoffelpuffer;1
+67;bife de panela;117
+68;linguica de frango frita;3
+69;suco de maracuja;1
+70;peixe cremoso;2
+71;ragu ;1
+72;isca bovina com cebola e pimentoes;5
+73;frango ensopado e hamburguer a pizzaiolo;2
+74;carne ensopada com cenoura e paio;4
+75;almondega bovina ao molho;16
+76;isca bovina ao molho branco;2
+77;mexidos de ovos comfrango desfiado e queijo;1
+78;carne moida festiva;1
+79;isca acebolada;30
+80;carne ensopada com aipim;16
+81;opcao;6
+82;bife suino refogado;1
+83;carne ensopada;43
+84;goulash ;1
+85;quibe assado;9
+86;goiabeiras e maruipe: frango desfiado;1
+87;torta de soja com queijo e isca bovina acebolada;2
+88;maruipe: linguica toscana acebolada;1
+89;isca bovina acebolada com pimentoes;3
+90;isca bovina com pimentao;3
+91;linguica toscana frita - isca cremosa;1
+92;bife a fazendinha;14
+93;frango com batata;1
+94;carre ao molho;31
+95;linguica de frango ao molho de tomate;2
+96;frango desfiado ao molho sugo;1
+97;file de peito de frango desfiado ao molho branco;4
+98;frango desfiado com milho verde;1
+99;hamburguer tipo a pizzaiolo;1
+100;goiabeiras e maruipe: rocambole com frango;1
+101;goiabeiras e maruipe: bife de panela;1
+102;moela de frango com batatas;2
+103;peixe ao shoyo;2
+104;linguica de frango acebolada;8
+105;isca de carne acebolada;3
+106;carre grelhado;17
+107;falafel de frango;1
+108;proteina de soja refogada;1
+109;almondega de frango ao molho sugo;1
+110;escondidinho de carne moida;2
+111;frango com quiabo;4
+112;ovos mexidos;1
+113;fricasse;3
+114;hamburguer bovino a pizzaiolo;3
+115;carre frito;1
+116;moqueca de ovos;1
+117;nuggets frito;5
+118;escondidinho de frango;3
+119;bife bovino ensopado;1
+120;hamburguer bovino;12
+121;bife de cacarola;2
+122;carne moida com milho e ervilha;3
+123;sopa de macarrao com cenoura e carne;1
+124;hamburguer;1
+125;peixe gratinado;4
+126;file de frango desfiado;3
+127;carre;4
+128;carne moida com ervilha, milho e pimentao;1
+129;proteina de soja;1
+130;carne moida com ervilha;4
+131;almondegas bovinas ao molho;4
+132;goulash;18
+133;linguica de frango;22
+134;nuggtes ;1
+135;omelete enrolado com recheio de frango;1
+136;moela ensopada com batatas;1
+137;frango assado ao vinho;2
+138;moela com batatas e carne moida;1
+139;frango frito - nuggtes;1
+140;frango desfiado ao molho;5
+141;fricase de frango;1
+142;almondega bovina ao molho sugo;1
+143;isca com cebola e pimentoes;1
+144;frango desfiado ao molho branco;7
+145;carne moida cremosa;25
+146;bobo de frango;4
+147;isca de pernil;2
+148;escondidinho de salsicha;11
+149;file de sobrecoxa ao molho;2
+150;isca bovina;7
+151;frango ao molho branco e carne ensopada;1
+152;caldo de feijao com bacon e paio;1
+153;falafel* de queijo;1
+154;moqueca de peixe;3
+155;creme de ervilha com bacon e paio;1
+156;almondegas bovinas;3
+157;carne moida com ervilha e milho;6
+158;goiabeiras e maruipe: nuggets;1
+159;torta de soja com queijo;2
+160;maruipe: abacaxi;1
+161;carne moida com cenoura e paio;1
+162;hamburguer bovino ao molho de queijo;2
+163;frango grelhado;10
+164;carne seca com abobora;2
+165;hamburguer de frango ao molho sugo;1
+166;quibe vegetariano assado;4
+167;maruipe: copa lombo assado;1
+168;polenta com proteina de soja;1
+169;goiabeiras e maruipe: linguica toscana acebolada;1
+170;torta de peixe;3
+171;ragu;4
+172;omelete;4
+173;carre assado;13
+174;torta de file de peixe;1
+175;goiabeiras e maruipe: frango desfiado com milho verde;1
+176;carne ensopada com batatas;4
+177;frango ensopado com quiabo;8
+178;haburguer de frango;1
+179;linguica toscana;29
+180;frango ao creme de milho;1
+181;carne assada ao molho;1
+182;goiabeiras e maruipe: carre assado;1
+183;carne assada;1
+184;goiabeiras e maruipe: frango ensopado;1
+185;panqueca de frango;1
+186;pernil ao molho;2
+187;nuggtes;3
+188;isca mista ;2
+189;carne ao molho cremoso;2
+190;frango grelhado com amendoim torrado;1
+191;almondega de frango ao molho rose;2
+192;bife suino;2
+193;isca de carne;2
+194;almondega de frango;7
+195;strogonoff;1
+196;goiabeiras:frango ensopado;1
+197;carne moida ao molho;2
+198;quibe vegetariano;15
+199;carne moida com batata;5
+200;goiabeiras: torta de file de peixe;1
+201;isca bovina refogada;3
+202;peixe a gomes de sa;7
+203;carne seca cremosa;2
+204;almondegas ao molho;5
+205;omelete de forno;5
+206;frango colorido;1
+207;moela com batata;1
+208;quibe frito;11
+209;lasanha de frango;2
+210;frando frito;1
+211;isca bovina comcebola e pimentoes;2
+212;copa lombo assado;2
+213;maruipe: frango ensopado;2
+214;fricasse de frango;10
+215;empadao de frango;1
+216;carre assado ao molho;1
+217;frango assado;51
+218;carne ensopada com cenoura;5
+219;goiabeiras: frango ensopado;1
+220;quibe assado com carne;1
+221;sopa de macarrao com cenoura e frango;1
+222;carne moida;35
+223;carne moida com paio;4
+224;ovo mexido;1
+225;almondega bovina;21
+226;frango desfiado e linguica toscana;2
+227;quibe;4
+228;cassoulet;2
+229;lasanha a bolonhesa;1
+230;frango desfiado;73
+231;sobrecoxa empanada;1
+232;quibe vegetariano com queijo;2
+233;doce de leite em tablete;1
+234;maruipe: almondega bovina ao molho;2
+235;bife de pernil grelhado;2
+236;almondega de frango ao molho;4
+237;hamburguer de frango a pizzaiolo;4
+238;linguica acebolada;3
+239;bife cremoso;2
+240;cubos de carne com aipim;2
+241;bife cremoso com paio;3
+242;sobrecoxa ao molho;3
+243;goiabeiras e maruipe: isca bovina combacon;1
+244;maruipe: isca acebolada;1
+245;goiabeiras e maruipe: escondidinho de frango;1
+246;isca bovina acebolada;41
+247;frango desfiado com ervilha;1
+248;hamburguer bovino ao molho tipo rose;2
+249;sobremesa;4
+250;almondega;2
+251;stogonoff bovino;1
+252;isca refogada;2
+253;frango gratinado;1
+254;carne ensopada com paio;1
+255;quibe vegetariano com soja;2
+256;maruipe: almondega de frango;1
+257;frango com bagique;1
+258;pernil em isca acebolado;3
+259;file de peito desfiado ao molho branco;1
+260;frango ao molho branco;5
+261;linguica toscana frita;5
+262;torta de frango;1
+263;isca acebolada com pimentoes;6
+264;goulash*;1
+265;carne bovina ensopada;1
+266;isca de figado com azeitonas e batata palha;1
+267;carne seca acebolada;4
+268;almondegas bovina ao molho;4
+269;carne seca acebolada ;1
+270;hanburguer bovino a pizzaiolo;1
+271;sobrecoxa assada;2
+272;falafel;14
+273;carne moida com cenoura e pimentao;1
+274;bife suino grelhado;1
+275;almondega bovina ao molho rose;1
+276;carre ensopado;7
+277;nuggets de frango;1
+278;falafel de queijo;2
+279;isca de figado com batata palha e azeitonas;1
+280;carre cozido;2
+281;hamburguer a pizzaiolo;3
+282;frango ensopado;92
+283;strogonoff bovino;3
+284;hamburguer de frango ao molho;3
+285;peixe desfiado;4
+286;carre ao molho sugo;2
+287;paio acebolado;1
+288;maruipe: frango assado;2
+289;goiabeiras e maruipe: frango assado;1
+290;panqueca de carne moida com queijo e molho branco;1
+291;isca bovina ensopada;2
+292;isca de figado;6
+293;nugget;1

@@ -25,3 +25,8 @@ def sinc_menu():
 def update_db():
     extract.update_db()
     return "ok", 200
+
+@ru_blueprint.route("/teste")
+def teste_query():
+    ru_service.hadThis("teve carne ensopada hoje no ru?")
+    return "ok", 200
