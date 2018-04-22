@@ -96,11 +96,11 @@ class RUService:
             if type == "day":
                 cardapios = Cardapio.query.filter_by(data=datenow.date())
             elif type == "week":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(), datetime.timedelta(days=7)))
+                cardapios = Cardapio.query.filter(Cardapio.data.between(str(datenow.date()), str(datetime.timedelta(days=7))))
             elif type == "month":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=30)))
+                cardapios = Cardapio.query.filter(Cardapio.data.between(str(datenow.date()),str(datetime.timedelta(days=30))))
             elif type == "year":
-                cardapios = Cardapio.query.filter(Cardapio.data.between(datenow.date(),datetime.timedelta(days=365)))
+                cardapios = Cardapio.query.filter(Cardapio.data.between(str(datenow.date()),str(datetime.timedelta(days=365))))
         if cardapios == None:
             cardapios = Cardapio.query.all()
 
