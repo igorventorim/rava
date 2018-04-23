@@ -1,4 +1,3 @@
-from messenger.messenger_service import MessengerService
 from utils.strings import Strings
 from messenger import answer_view_templates
 import datetime
@@ -48,3 +47,5 @@ class CineService:
 
 
     options = {Strings.CMD_PROGRAMACAO.upper(): getProgramacao}
+
+from messenger.messenger_service import MessengerService
