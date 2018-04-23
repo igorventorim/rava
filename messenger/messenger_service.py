@@ -8,6 +8,7 @@ import json
 from messenger.domain.log import Log
 from datetime import datetime
 from messenger.user_data import UserData
+from cine.cine_service import CineService
 import requests
 
 class MessengerService:
@@ -18,11 +19,13 @@ class MessengerService:
         self.service_atribuna = AtribunaService()
         self.service_ru = RUService()
         self.service_generics = GenericsService()
+        self.service_cine = CineService()
         self.client = Wit(Configuration.WIT_TOKEN)
         self.__options.update(self.service_virtual_class.options)
         self.__options.update(self.service_atribuna.options)
         self.__options.update(self.service_ru.options)
         self.__options.update(self.service_generics.options)
+        self.__options.update(self.service_cine.options)
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -77,7 +80,7 @@ class MessengerService:
             chave = ""
             message.setEntities(entidades)
             for key, value in entidades.items():
-               if key != 'intent':
+               if key == 'datetime' or key == 'keywords': #TODO: COLOCAR PARA CONFERIR NA LISTA DE ENTIDADES AUXILIARES
                 continue
                elif value[0]['confidence'] > max and value[0]['confidence'] > 0.55:
                    max = value[0]['confidence']
@@ -94,6 +97,8 @@ class MessengerService:
             return self.service_atribuna
         elif element in self.service_generics.options:
             return self.service_generics
+        elif element in self.service_cine.options:
+            return self.service_cine
         else:
             return None
 

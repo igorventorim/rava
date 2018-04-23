@@ -58,6 +58,8 @@ class Strings():
     CMD_SELECAO = "cmd_selecao"
     CMD_FREQUENCIA = "cmd_frequencia"
 
+    CMD_PROGRAMACAO = "cmd_programacao"
+
     CMD_SPAM_RU_REGISTERED = "Uai, você já está recebendo minhas mensagens!"
 
     HELP_INFO_PROFESSOR = "Para uma melhor comunicação, definimos um dialeto a ser utilizado. Basta utilizar o comando que desta forma conseguirei compreender o que você quer fazer, veja:\n\n" \

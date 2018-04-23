@@ -25,6 +25,9 @@ class Programacao(Configuration.db.Model):
     def get_filme(self):
         return self.filme
 
+    def get_horario(self):
+        return self.horario
+
     def set_date(self,date):
         self.data = date
 
