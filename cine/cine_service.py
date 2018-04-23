@@ -37,10 +37,8 @@ class CineService:
                 Programacao.data.between(datetime.datetime.now().date()+ datetime.timedelta(days=weekday), datetime.datetime.now().date()+ datetime.timedelta(days=weekday)+ datetime.timedelta(days=6))).order_by(Programacao.data.asc())
         msg = ""
         for programacao in programacoes:
-            msg +=  str(programacao.get_filme().get_titulo()) + "\n"
-            msg +=  str(programacao.get_date())+"\n"
-            msg += str(programacao.get_horario())+"\n"
-            msg += "====================================\n"
+            msg += str(programacao.get_filme().get_titulo()) + "\n"
+            msg += str(programacao.get_date())+" - " + str(programacao.get_horario())+"\n\n"
 
         data = answer_view_templates.text(user_id, msg)
         MessengerService.sendMessage(message, data)
