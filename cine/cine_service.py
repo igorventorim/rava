@@ -43,8 +43,9 @@ class CineService:
             msg += msg +"====================================\n"
 
         data = answer_view_templates.text(user_id, msg)
-        from messenger.messenger_service import MessengerService
         MessengerService.sendMessage(message, data)
 
 
     options = {Strings.CMD_PROGRAMACAO.upper(): getProgramacao}
+
+from messenger.messenger_service import MessengerService

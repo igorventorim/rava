@@ -8,7 +8,6 @@ import json
 from messenger.domain.log import Log
 from datetime import datetime
 from messenger.user_data import UserData
-from cine.cine_service import CineService
 import requests
 
 class MessengerService:
@@ -125,3 +124,4 @@ from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
 from atribuna.atribuna_service import AtribunaService
 from messenger.generics_service import GenericsService
+from cine.cine_service import CineService
