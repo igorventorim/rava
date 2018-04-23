@@ -34,16 +34,14 @@ class CineService:
             else:
                 weekday = 3 - weekday
             programacoes = Programacao.query.filter(
-                Programacao.data.between(datetime.datetime.now().date()+ datetime.timedelta(days=weekday), datetime.datetime.now().date()+ datetime.timedelta(days=weekday)+ datetime.timedelta(days=6)))
+                Programacao.data.between(datetime.datetime.now().date()+ datetime.timedelta(days=weekday), datetime.datetime.now().date()+ datetime.timedelta(days=weekday)+ datetime.timedelta(days=6))).order_by(Programacao.data.asc())
 
-
-
-            for programacao in programacoes:
-                print("Filme")
-                print(programacao.get_date())
-                print(programacao.get_horario())
-                print(programacao.get_filme().get_titulo())
-                print("====================================")
+        for programacao in programacoes:
+            print("Filme")
+            print(programacao.get_date())
+            print(programacao.get_horario())
+            print(programacao.get_filme().get_titulo())
+            print("====================================")
 
 
 
