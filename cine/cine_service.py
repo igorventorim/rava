@@ -35,16 +35,15 @@ class CineService:
                 weekday = 3 - weekday
             programacoes = Programacao.query.filter(
                 Programacao.data.between(datetime.datetime.now().date()+ datetime.timedelta(days=weekday), datetime.datetime.now().date()+ datetime.timedelta(days=weekday)+ datetime.timedelta(days=6))).order_by(Programacao.data.asc())
-
+        msg = ""
         for programacao in programacoes:
-            msg = ""
-            msg += msg + str(programacao.get_filme().get_titulo()) + "\n"
-            msg += msg + str(programacao.get_date())+"\n"
-            msg += msg + str(programacao.get_horario())+"\n"
-            msg += msg +"====================================\n"
-            data = answer_view_templates.text(user_id, msg)
-            MessengerService.sendMessage(message, data)
+            msg +=  str(programacao.get_filme().get_titulo()) + "\n"
+            msg +=  str(programacao.get_date())+"\n"
+            msg += str(programacao.get_horario())+"\n"
+            msg += "====================================\n"
 
+        data = answer_view_templates.text(user_id, msg)
+        MessengerService.sendMessage(message, data)
 
 
 
