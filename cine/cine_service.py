@@ -42,7 +42,7 @@ class CineService:
                 print("Filme")
                 print(programacao.get_date())
                 print(programacao.get_horario())
-                print(programacao.get_filme())
+                print(programacao.get_filme().get_titulo())
                 print("====================================")
 
 
