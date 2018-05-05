@@ -339,7 +339,7 @@ class VirtualClassService:
         elif redis.getValue(user_id)["curso"] == None:
             list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower()).all()
             print(list)
-            if list == None:
+            if list == []:
                 data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+"na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
                 MessengerService.sendMessage(message,data)
             else:
