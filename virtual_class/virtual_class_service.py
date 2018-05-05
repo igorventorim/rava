@@ -340,7 +340,7 @@ class VirtualClassService:
             list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower()).all()
             print(list)
             if list == []:
-                data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+"na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
+                data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+" na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
                 MessengerService.sendMessage(message,data)
             else:
                 struct = redis.getValue(user_id)
@@ -351,7 +351,7 @@ class VirtualClassService:
                 redis.setKey(user_id,struct)
                 data = answer_view_templates.text(user_id,question.getQuestao())
                 MessengerService.sendMessage(message,data)
-        elif len(redis.getValue(user_id)) < 10 :
+        elif len(redis.getValue(user_id)["respostas"]) < 10 :
             struct = redis.getValue(user_id)
             list = Simulado.query.filter_by(conteudo=struct["curso"].lower()).all()
             respostas = struct["respostas"]
