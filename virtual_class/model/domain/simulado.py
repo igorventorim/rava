@@ -5,9 +5,9 @@ class Simulado(Configuration.db.Model):
 
     __tablename__ = "simulado"
     id = Configuration.db.Column(Configuration.db.BIGINT, autoincrement=True, primary_key=True)
-    questao = Configuration.db.Column(Configuration.db.String(50), unique=True, nullable=False)
+    questao = Configuration.db.Column(Configuration.db.String(50), nullable=False)
     resposta = Configuration.db.Column(Configuration.db.String(1000), nullable=False)
-    conteudo = Configuration.db.Column(Configuration.db.String(50), unique=True, nullable=False)
+    conteudo = Configuration.db.Column(Configuration.db.String(50), nullable=False)
 
     def __init__(self, questao, resposta, curso):
         self.questao = questao
