@@ -61,3 +61,9 @@ def readGreeting():
     print(r)
     return r["data"], 200
 
+
+@messenger_blueprint.route("/clearRedis")
+def clearRedis():
+    Configuration.redis.clearAll()
+    return "ok"
+
