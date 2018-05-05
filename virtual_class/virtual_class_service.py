@@ -331,16 +331,16 @@ class VirtualClassService:
             redis.setKey(user_id,struct)
             redis.setExpire(user_id,14400)
             data = answer_view_templates.text(user_id,"Você poderia me informar, simulado de qual matéria você deseja responder? (Caso não queira mais fazer, digite: sair)")
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(message,data)
         elif message.getContentMessage().upper() == "SAIR":
             data = answer_view_templates.text(user_id,"É para já, deixa o simulado para outra hora.")
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(message,data)
             redis.delete(user_id)
         elif redis.getValue(user_id)["curso"] == None:
             list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower())
             if list == None:
                 data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+"na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
-                MessengerService.sendMessage(data)
+                MessengerService.sendMessage(message,data)
             else:
                 struct = redis.getValue(user_id)
                 struct["curso"] = message.getContentMessage()
@@ -349,7 +349,7 @@ class VirtualClassService:
                 struct["respostas"][str(question.getId())] = None
                 redis.setKey(user_id,struct)
                 data = answer_view_templates.text(user_id,question.getQuestao())
-                MessengerService.sendMessage(data)
+                MessengerService.sendMessage(message,data)
         elif len(redis.getValue(user_id)) < 10 :
             struct = redis.getValue(user_id)
             list = Simulado.query.filter_by(conteudo=struct["curso"].lower())
@@ -365,7 +365,7 @@ class VirtualClassService:
             struct["respostas"] = respostas
             redis.setKey(user_id, struct)
             data = answer_view_templates.text(user_id, question.getQuestao())
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(message,data)
         else:
             redis.delete(user_id)
             data = answer_view_templates.text(user_id,"Corrigindo...")
