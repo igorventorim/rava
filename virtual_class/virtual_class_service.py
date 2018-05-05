@@ -360,8 +360,12 @@ class VirtualClassService:
                     respostas[key] = message.getContentMessage()
                     break
             question = random.choice(list)
-            while question.getId() in struct["respostas"].keys():
+            print(struct["respostas"].keys())
+            print(question.getId())
+            while str(question.getId()) in struct["respostas"].keys():
                 question = random.choice(list)
+                print(struct["respostas"].keys())
+                print(question.getId())
             respostas[question.getId()] = None
             struct["respostas"] = respostas
             redis.setKey(user_id, struct)
@@ -370,10 +374,10 @@ class VirtualClassService:
         else:
             redis.delete(user_id)
             data = answer_view_templates.text(user_id,"Corrigindo...")
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(message,data)
             #TODO: CHAMAR O PLUGIN AQUI!!!
             data = answer_view_templates.text(user_id, "Sua nota é X")
-            MessengerService.sendMessage(data)
+            MessengerService.sendMessage(message,data)
 
 
     options = {Strings.GET_STARTED.upper(): __started,
