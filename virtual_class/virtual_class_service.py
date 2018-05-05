@@ -330,14 +330,14 @@ class VirtualClassService:
             struct["curso"] = None
             redis.setKey(user_id,struct)
             redis.setExpire(user_id,14400)
-            data = answer_view_templates.text(user_id,"Você poderia me informar, simulado de qual matéria você deseja responder? (Caso não queira mais fazer, digite: sair)")
+            data = answer_view_templates.text(user_id,"Você poderia me informar de qual matéria você deseja responder o simulado? (Caso não queira mais fazer, digite: sair)")
             MessengerService.sendMessage(message,data)
         elif message.getContentMessage().upper() == "SAIR":
             data = answer_view_templates.text(user_id,"É para já, deixa o simulado para outra hora.")
             MessengerService.sendMessage(message,data)
             redis.delete(user_id)
         elif redis.getValue(user_id)["curso"] == None:
-            list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower())
+            list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower()).all()
             if list == None:
                 data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+"na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
                 MessengerService.sendMessage(message,data)
@@ -352,7 +352,7 @@ class VirtualClassService:
                 MessengerService.sendMessage(message,data)
         elif len(redis.getValue(user_id)) < 10 :
             struct = redis.getValue(user_id)
-            list = Simulado.query.filter_by(conteudo=struct["curso"].lower())
+            list = Simulado.query.filter_by(conteudo=struct["curso"].lower()).all()
             respostas = struct["respostas"]
             for key, value in respostas.items():
                 if value == None:
