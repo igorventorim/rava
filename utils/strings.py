@@ -42,6 +42,7 @@ class Strings():
     CMD_VISUALIZAR_NOTAS="/notas"
     CMD_PROFESSOR="/professor"
     CMD_ALUNO="/aluno"
+    CMD_SIMULADO="cmd_simulado"
 
     CMD_PERGUNTA_SAUDACAO="pergunta_saudacao"
     CMD_AGRADECIMENTO="agradecimento"

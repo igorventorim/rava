@@ -19,8 +19,12 @@ class Configuration:
 
     db = None
 
+    redis = None
+
     URL_API_NLP = "https://api-ventorim.herokuapp.com/"
 
     USER_API_NLP = 'rava-ufes'
 
     PASSWORD_API_NLP = '123456'
+
+    REDIS_URL = os.environ.get("REDIS_URL") if AMBIENTE else None

@@ -8,9 +8,11 @@ from virtual_class.model.domain.question import Question
 from virtual_class.model.domain.student import Student
 from virtual_class.model.domain.teatcher import Teatcher
 from virtual_class.model.domain.courseStudent import CourseStudent
+from virtual_class.model.domain.simulado import Simulado
 from utils.my_encoder import MyEncoder
 from utils.strings import Strings
 from messenger.user_data import UserData
+import random
 # from app import db
 from config.configuration import Configuration
 class VirtualClassService:
@@ -281,10 +283,96 @@ class VirtualClassService:
             self.removeElementVoid(pNota["facebook"],curso.getId())
         return json.dumps(pNota, cls=MyEncoder)
 
+    def generateStructToSimulado(self,element):
+        pNota = {"facebook":{}}
+        for curso in Course.query.all():
+            pNota["facebook"][curso.getId()] = {}
+
+            for atividade in Question.query.filter_by(course_id=curso.getId()).all():
+                pNota["facebook"][curso.getId()][atividade.getId()] = {}
+
+                for resposta in Answer.query.filter_by(question_id=atividade.getId()):
+                    if not resposta.getStudentId() in pNota["facebook"][curso.getId()][atividade.getId()].keys():
+                        pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()] = []
+                    obj = Object()
+                    obj.setCourse(str(curso.getId()))
+                    obj.setInstanceId(str(atividade.getId()))
+                    obj.setUserId(str(resposta.getStudentId()))
+                    obj.setContextId(str(curso.getTeatcher()))
+                    obj.setQuestion(str(atividade.getDesc()))
+                    obj.setItemId(str(resposta.getId()))
+                    obj.setFileName("facebook")
+                    obj.setRawGradeMin("0.00000")
+                    obj.setRawGradeMax("100.00000")
+                    obj.setIdGradeGrades(str(resposta.getId()))
+                    obj.setNotaProfessor("-1.00000")
+                    obj.setCourseName(curso.getName())
+                    obj.setResposta(resposta.getAnswerText())
+                    # obj.setFeedback()
+                    # obj.setUrl()
+                    pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()].append(obj)
+
+                self.removeElementVoid(pNota["facebook"][curso.getId()],atividade.getId())
+
+            self.removeElementVoid(pNota["facebook"],curso.getId())
+        return json.dumps(pNota, cls=MyEncoder)
+
 
     def removeElementVoid(self,dict,key):
         if not bool(dict[key]):
             dict.pop(key)
+
+    def __simulado(self,message):
+        redis = Configuration.redis
+        user_id = message.getClientID()
+        if not redis.existsUserOn(user_id):
+            struct = {}
+            struct["curso"] = None
+            redis.setKey(user_id,struct)
+            redis.setExpire(user_id,14400)
+            data = answer_view_templates.text(user_id,"Você poderia me informar, simulado de qual matéria você deseja responder? (Caso não queira mais fazer, digite: sair)")
+            MessengerService.sendMessage(data)
+        elif message.getContentMessage().upper() == "SAIR":
+            data = answer_view_templates.text(user_id,"É para já, deixa o simulado para outra hora.")
+            MessengerService.sendMessage(data)
+            redis.delete(user_id)
+        elif redis.getValue(user_id)["curso"] == None:
+            list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower())
+            if list == None:
+                data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+"na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
+                MessengerService.sendMessage(data)
+            else:
+                struct = redis.getValue(user_id)
+                struct["curso"] = message.getContentMessage()
+                struct["respostas"] = {}
+                question = random.choice(list)
+                struct["respostas"][str(question.getId())] = None
+                redis.setKey(user_id,struct)
+                data = answer_view_templates.text(user_id,question.getQuestao())
+                MessengerService.sendMessage(data)
+        elif len(redis.getValue(user_id)) < 10 :
+            struct = redis.getValue(user_id)
+            list = Simulado.query.filter_by(conteudo=struct["curso"].lower())
+            respostas = struct["respostas"]
+            for key, value in respostas.items():
+                if value == None:
+                    respostas[key] = message.getContentMessage()
+                    break
+            question = random.choice(list)
+            while question.getId() in struct["respostas"].keys():
+                question = random.choice(list)
+            respostas[question.getId()] = None
+            struct["respostas"] = respostas
+            redis.setKey(user_id, struct)
+            data = answer_view_templates.text(user_id, question.getQuestao())
+            MessengerService.sendMessage(data)
+        else:
+            redis.delete(user_id)
+            data = answer_view_templates.text(user_id,"Corrigindo...")
+            MessengerService.sendMessage(data)
+            #TODO: CHAMAR O PLUGIN AQUI!!!
+            data = answer_view_templates.text(user_id, "Sua nota é X")
+            MessengerService.sendMessage(data)
 
 
     options = {Strings.GET_STARTED.upper(): __started,
@@ -299,7 +387,8 @@ class VirtualClassService:
                Strings.CMD_VISUALIZAR_ATIVIDADES.upper(): __visualizar_atividades,
                Strings.CMD_VISUALIZAR_NOTAS.upper(): __visualizar_notas,
                Strings.CMD_ALUNO.upper(): __aluno,
-               Strings.CMD_PROFESSOR.upper(): __professor
+               Strings.CMD_PROFESSOR.upper(): __professor,
+               Strings.CMD_SIMULADO.upper():__simulado
                }
 
 

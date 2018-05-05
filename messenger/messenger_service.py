@@ -1,3 +1,4 @@
+from utils.redis import Redis
 from utils.strings import Strings
 from messenger.message import Message
 from config.configuration import Configuration
@@ -38,6 +39,9 @@ class MessengerService:
                         user.set_nome(UserData().getFirstNameClient(message.getClientID()))
                         Configuration.db.session.add(user)
                         Configuration.db.session.commit()
+
+                    MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
+                    MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                     self.__selector(message)
 
 
@@ -59,8 +63,11 @@ class MessengerService:
     def __selector(self,message):
         try:
             result = self.client.message(message.getContentMessage())
-            cmd = self.__handleResponseWit(result,message)
-            self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
+            if Configuration.redis.existsUserOn(message.getClientID()):
+                self.service_virtual_class.options[Strings.CMD_SIMULADO.upper()](self.service_virtual_class,message)
+            else:
+                cmd = self.__handleResponseWit(result,message)
+                self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
         except:
             self.__erro(message)
 

@@ -44,3 +44,20 @@ def textPublish(client_id, text):
         },
         "tag": "NON_PROMOTIONAL_SUBSCRIPTION"
     })
+
+
+def typing_on(client_id):
+    return json.dumps({
+        "recipient": {
+            "id": client_id
+        },
+        "sender_action": "typing_on"
+    })
+
+def mark_seen(client_id):
+    return json.dumps({
+        "recipient": {
+            "id": client_id
+        },
+        "sender_action": "mark_seen"
+    })
