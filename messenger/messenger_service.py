@@ -34,11 +34,14 @@ class MessengerService:
                     message = Message(messaging_event)
                     check = Usuario.query.filter_by(code=message.getClientID()).first()
                     if check is None:
-                        user = Usuario()
-                        user.set_code(message.getClientID())
-                        user.set_nome(UserData().getFirstNameClient(message.getClientID()))
-                        Configuration.db.session.add(user)
-                        Configuration.db.session.commit()
+                        try:
+                            user = Usuario()
+                            user.set_code(message.getClientID())
+                            user.set_nome(UserData().getFirstNameClient(message.getClientID()))
+                            Configuration.db.session.add(user)
+                            Configuration.db.session.commit()
+                        except:
+                            print("Erro ao cadastrar o usuário")
 
                     MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
                     MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))

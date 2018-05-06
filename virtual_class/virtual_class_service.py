@@ -283,10 +283,10 @@ class VirtualClassService:
             self.removeElementVoid(pNota["facebook"],curso.getId())
         return json.dumps(pNota, cls=MyEncoder)
 
-    def generateStructToSimulado(self,element):
+    def generateStructToSimulado(self,user_id,element):
         pNota = {"facebook":{}}
         for curso in Course.query.all():
-            pNota["facebook"][curso.getId()] = {}
+            pNota["facebook"][1] = {}
 
             for atividade in Question.query.filter_by(course_id=curso.getId()).all():
                 pNota["facebook"][curso.getId()][atividade.getId()] = {}
@@ -306,7 +306,7 @@ class VirtualClassService:
                     obj.setRawGradeMax("100.00000")
                     obj.setIdGradeGrades(str(resposta.getId()))
                     obj.setNotaProfessor("-1.00000")
-                    obj.setCourseName(curso.getName())
+                    obj.setCourseName(element["curso"])
                     obj.setResposta(resposta.getAnswerText())
                     # obj.setFeedback()
                     # obj.setUrl()
@@ -338,7 +338,6 @@ class VirtualClassService:
             redis.delete(user_id)
         elif redis.getValue(user_id)["curso"] == None:
             list = Simulado.query.filter_by(conteudo=message.getContentMessage().lower()).all()
-            print(list)
             if list == []:
                 data = answer_view_templates.text(user_id,"Não tenho simulado da matéria "+message.getContentMessage()+" na minha base de dados, você poderia informar outra? (Caso não queira mais fazer, digite: sair)")
                 MessengerService.sendMessage(message,data)
@@ -360,22 +359,23 @@ class VirtualClassService:
                     respostas[key] = message.getContentMessage()
                     break
             question = random.choice(list)
-            print(struct["respostas"].keys())
-            print(question.getId())
+
             while str(question.getId()) in struct["respostas"].keys():
                 question = random.choice(list)
-                print(struct["respostas"].keys())
-                print(question.getId())
+
             respostas[question.getId()] = None
             struct["respostas"] = respostas
             redis.setKey(user_id, struct)
             data = answer_view_templates.text(user_id, question.getQuestao())
             MessengerService.sendMessage(message,data)
         else:
+            struct = redis.getValue(user_id)
             redis.delete(user_id)
             data = answer_view_templates.text(user_id,"Corrigindo...")
             MessengerService.sendMessage(message,data)
+            struct_plugin = self.generateStructToSimulado(user_id,struct)
             #TODO: CHAMAR O PLUGIN AQUI!!!
+
             data = answer_view_templates.text(user_id, "Sua nota é X")
             MessengerService.sendMessage(message,data)
 

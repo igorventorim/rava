@@ -13,7 +13,8 @@ class UserData:
         return json.loads(requests.get("https://graph.facebook.com/v2.6/"+str(client_id), params=params).text)
 
     def getFirstNameClient(self,client_id):
-        return (self.requestUser(client_id))["first_name"]
+        result = self.requestUser(client_id)
+        return result["first_name"]
 
     def getLastNameClient(self,client_id):
         return (self.requestUser(client_id))["last_name"]
