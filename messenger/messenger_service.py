@@ -41,7 +41,9 @@ class MessengerService:
                             Configuration.db.session.add(user)
                             Configuration.db.session.commit()
                         except:
-                            print("Erro ao cadastrar o usuário")
+                            print("Erro ao cadastrar o usuário: "+message.getClientID())
+                            print(message)
+
 
                     MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
                     MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
