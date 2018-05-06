@@ -42,7 +42,6 @@ class MessengerService:
                             Configuration.db.session.commit()
                         except:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
-                            print(message)
 
 
                     MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
@@ -114,23 +113,26 @@ class MessengerService:
 
     @staticmethod
     def saveLog(message,data):
-        if message != None:
-            items = json.loads(data)
-            code = items['recipient']['id']
-            user = Usuario.query.filter_by(code=code).first()
-            response = items['message']['text']
-            if(code != None):
-                log = Log()
-                log.set_entities(message.getEntities())
-                log.set_usuario_id(user.get_id())
-                log.set_response(response)
-                log.set_message(message.getContentMessage())
-                log.set_intent(message.getIntent())
-                log.set_data(datetime.now())
-                Configuration.db.session.add(log)
-                Configuration.db.session.commit()
-            else:
-                print("Não foi possível encontrar o usuário na base de dados.")
+        try:
+            if message != None:
+                items = json.loads(data)
+                code = items['recipient']['id']
+                user = Usuario.query.filter_by(code=code).first()
+                response = items['message']['text']
+                if(code != None):
+                    log = Log()
+                    log.set_entities(message.getEntities())
+                    log.set_usuario_id(user.get_id())
+                    log.set_response(response)
+                    log.set_message(message.getContentMessage())
+                    log.set_intent(message.getIntent())
+                    log.set_data(datetime.now())
+                    Configuration.db.session.add(log)
+                    Configuration.db.session.commit()
+                else:
+                    print("Não foi possível encontrar o usuário na base de dados.")
+        except:
+            print("Não foi possível realizar o registro de log.")
 
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
