@@ -14,7 +14,10 @@ class UserData:
 
     def getFirstNameClient(self,client_id):
         result = self.requestUser(client_id)
-        return result["first_name"]
+        if result["first_name"] == None:
+            return None
+        else:
+            return result["first_name"]
 
     def getLastNameClient(self,client_id):
         return (self.requestUser(client_id))["last_name"]
