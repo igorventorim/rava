@@ -24,6 +24,9 @@ class RUService:
         else:
             datenow = datetime.datetime.now()
             msg = "O que temos para hoje é ...\n"
+
+        if datetime.datetime.now().day == datenow.day:
+            datenow = datetime.datetime.now()
         tipo = 1 if datenow.hour < 15 else 2
         cardapio = Cardapio.query.filter_by(data=datenow.date(), tipo=tipo).first()
 
