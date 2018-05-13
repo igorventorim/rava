@@ -10,6 +10,7 @@ from messenger.domain.log import Log
 from datetime import datetime
 from messenger.user_data import UserData
 import requests
+import aiml
 
 class MessengerService:
 
@@ -26,6 +27,10 @@ class MessengerService:
         self.__options.update(self.service_ru.options)
         self.__options.update(self.service_generics.options)
         self.__options.update(self.service_cine.options)
+        self.aiml_db = aiml.Kernel()
+        self.aiml_db.learn("std-startup.xml")
+        self.aiml_db.respond("load aiml b")
+
 
     def unpackMessage(self,data):
         if data["object"] == "page":
@@ -76,8 +81,10 @@ class MessengerService:
             self.__erro(message)
 
     def __erro(self, message):
+        #TODO VERIFICAR SE ESSA ESTRATÉGIA FOI BOA...
         user_id = message.getClientID()
-        data = answer_view_templates.text(user_id, Strings.APOLOGIZE_USER_FOR_ERROR)
+        response_by_aiml_db = self.aiml_db.respond(message.getContentMessage())
+        data = answer_view_templates.text(user_id, response_by_aiml_db)
         MessengerService.sendMessage(message,data)
 
     def __handleResponseWit(self,response,message):

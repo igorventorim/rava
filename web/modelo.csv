@@ -1,0 +1,88 @@
+Questão;Resposta
+Qual é o papel de um programa protótipo na resolução de problemas?;Simular o comportamento de partes do produto de software desejado.
+Quais etapas do ciclo de vida do software são influenciadas pelo estágio de teste?;O estágio de teste pode influenciar tanto o estágio de codificação (fase 5) quanto o estágio de refinamento da solução (fase 7)
+Quais são as principais vantagens associadas à programação orientada a objetos?;Abstração e reutilização.
+Onde os programas C ++ começam a executar?;Na função principal.
+O que é uma variável?;Um local na memória que pode armazenar um valor.
+Onde as variáveis ​​são declaradas em um programa C ++?;Variáveis ​​podem ser declaradas em qualquer lugar de um programa. Eles podem ser declarados dentro de uma função (variáveis ​​locais) ou fora das funções (variáveis ​​globais)
+Qual é a principal diferença entre um while e um do ... while statement?;O bloco dentro de uma declaração do ... while será executada pelo menos uma vez.
+O que é tipicamente incluído em uma definição de classe?;Membros de dados (atributos) e funções de membro.
+Qual é a diferença entre um membro de dados e uma variável local dentro de uma função de membro?;Os membros de dados podem ser acessados ​​de qualquer função membro dentro da definição de classe. Variáveis ​​locais só podem ser acessadas dentro da função de membro que as define.
+Qual é a diferença entre um construtor e uma função?;Um construtor é chamado sempre que um objeto é criado, enquanto uma função precisa ser chamada explicitamente. Os construtores não têm o tipo de retorno, mas as funções precisam indicar um tipo de retorno.
+Quando o C ++ cria um construtor padrão?;Se nenhum construtor for fornecido, o compilador fornece um por padrão. Se um construtor é definido para uma classe, o compilador não cria um construtor padrão.
+Quantos construtores podem ser criados para uma classe?;Número ilimitado
+Qual é a diferença entre um protótipo de função e uma definição de função?;Um protótipo de função inclui a assinatura da função, ou seja, o nome da função, o tipo de retorno e o tipo de parâmetros. A definição da função inclui o corpo real da função.
+Qual é o papel de um arquivo de cabeçalho?;Para armazenar uma interface de classe, incluindo membros de dados e protótipos de função de membro.
+O que inclui uma assinatura de função?;O nome da função e os tipos dos parâmetros.
+Qual é o escopo das variáveis ​​globais?;Escopo do arquivo.
+Como o compilador manipula funções inline?;Faz uma cópia do código de função em todo lugar onde uma chamada de função é feita.
+Qual é a principal vantagem associada aos argumentos de função que são passados ​​por referência?;Evita fazer cópias de grandes estruturas de dados ao chamar funções.
+Como as funções sobrecarregadas são diferenciadas pelo compilador?;Baseado na assinatura da função. Quando uma função sobrecarregada é chamada, o compilador encontrará a função cuja assinatura está mais próxima da chamada de função especificada.
+Ao definir uma função recursiva, quais são as causas possíveis para a recursão infinita?;Se a etapa de recursão for definida incorretamente ou se o caso base não estiver incluído.
+Quais são as semelhanças entre iteração e recursão?;Ambos envolvem repetição; ambos têm testes de terminação; ambos podem ocorrer infinitamente.;;;;;;
+Quais são as duas maneiras diferentes de especificar o comprimento de uma matriz?;Na declaração de matriz ou usando uma lista inicializadora.
+Qual é a principal diferença entre strings declaradas usando o tipo string versus strings declaradas usando uma matriz de caracteres?;As cadeias de caracteres declaradas usando uma matriz de caracteres têm um elemento nulo adicionado no final da matriz.
+Como as matrizes são passadas para funções?;por referência.
+Qual é a diferença entre uma matriz declarada como estática e outra que não é?;As matrizes declaradas como estáticas vivem ao longo da vida do programa; isto é, eles são inicializados apenas uma vez, quando a função que declara a matriz é chamada pela primeira vez.;;;;;;;
+Quantas dimensões precisam ser especificadas ao passar uma matriz multidimensional como um argumento para uma função?;Todas as dimensões, exceto a primeira.
+Usar um índice fora dos limites da matriz gera um erro. Isso é um erro de compilação ou um erro em tempo de execução?;Erro em tempo de execução.
+Como os arrays bidimensionais são armazenados na memória, por linhas ou por colunas?;por linhas.
+Em uma frase, qual é a idéia principal implementada pelo tipo de inserção?;Tomando um elemento de array de cada vez, da esquerda para a direita, ele o insere na posição correta entre os elementos já ordenados à sua esquerda.
+Em uma frase, qual é a idéia principal implementada por seleção?;Tomando um elemento de array de cada vez, da esquerda para a direita, ele identifica o mínimo dos elementos restantes e o troca com o elemento atual.
+Qual é o número de operações para ordenação por inserção em um cenário otimizado e qual é o melhor cenário?;N (o comprimento da matriz) operações alcançadas para uma matriz ordenada.
+Qual é o caso base para uma implementação recursiva da mesclagem de mesclagem?;Quando o tamanho da matriz a ser classificada é 1 (ou 2)
+O que é um ponteiro?;Uma variável que contém o endereço na memória de outra variável.
+O que o operador de endereço (&) retorna?;O endereço de memória do seu operando.
+O que o operador de estrela (*) retorna?;Um alias (sinônimo) para o nome do objeto para o qual seu operando aponta na memória. É o operador de desreferenciamento.
+Como um array pode ser endereçado na notação ponteiro / offset?;Inicializando um ponteiro para apontar para o primeiro elemento da matriz e, em seguida, incrementando esse ponteiro com o índice do elemento da matriz.
+O que o tamanho do operador retorna?;O tamanho em bytes do seu operando.
+Quais são as diferentes maneiras de passar um ponteiro para uma função?;Existem quatro maneiras: ponteiro não constante para dados constantes, ponteiro não constante para dados não constantes, ponteiro constante para dados constantes, ponteiro constante para dados não constantes.
+O que é um ponteiro de função?;O endereço do local na memória onde o código da função reside.
+O que é uma lista encadeada?;Uma coleção de elementos que podem ser alocados dinamicamente.
+Qual é a principal vantagem de listas vinculadas em matrizes?;As listas ligadas podem ser de tamanho variável.
+Qual é a principal vantagem de matrizes sobre listas vinculadas?;Os elementos em uma matriz podem ser acessados ​​diretamente (ao contrário das listas vinculadas, que requerem percurso iterativo).
+Como as listas encadeadas são passadas como argumentos para uma função?;Por referência.
+Qual é a diferença entre uma lista encadeada circular e uma lista encadeada básica?;O último elemento em uma lista encadeada circular aponta para o cabeçalho da lista.
+Qual é a principal vantagem de uma lista duplamente vinculada em relação a uma lista vinculada básica?;Todas as operações de exclusão e inserção podem ser executadas em tempo constante, incluindo aquelas operações realizadas antes de um determinado local na lista ou no final da lista.
+Qual é a principal desvantagem de uma lista duplamente vinculada sobre uma lista vinculada básica?;Espaço extra necessário para armazenar os ponteiros posteriores.
+O que é uma pilha?;Uma estrutura de dados que pode armazenar elementos, que possui a propriedade que o último item adicionado será o primeiro a ser removido (ou o último a entrar primeiro a sair)
+Quais são as duas funções principais definidas por uma pilha?;empurrar e pop
+Como você pode implementar uma pilha com uma matriz?;Mantenha a parte superior da pilha voltada para o final da matriz, para que as operações push e pop adicionem ou removam elementos do lado direito da matriz.
+Como você pode implementar uma pilha com uma lista?;Mantenha a parte superior da pilha apontando para o cabeçalho da lista encadeada, para que as operações push e pop adicionem ou removam elementos no início da lista.
+Qual implementação (baseada em array vs. baseada em lista) é preferida e por quê?;Link-based, porque eles são dinâmicos (sem restrições de tamanho)
+Como as expressões infixadas são avaliadas pelos computadores?;Primeiro, eles são convertidos em forma postfix, seguidos por uma avaliação da expressão postfix.
+Quais operações você precisaria executar para encontrar um determinado elemento em uma pilha?;Pop todos os elementos e armazená-los em outra pilha até que o elemento seja encontrado, em seguida, empurre de volta todos os elementos da pilha original.
+O que é uma fila?;Uma estrutura de dados que pode armazenar elementos, que possui a propriedade que o último item adicionado será o último a ser removido (ou first-in-first-out).
+Quais são as duas principais funções definidas por uma fila?;enfileirar e desencaixar
+Como você pode implementar uma fila com um array?;Use um array circular. Mantenha a parte traseira da fila em direção ao final da matriz e a frente em direção ao início, e permita que o ponteiro traseiro se enrole.
+Como você pode implementar uma fila com uma lista?;Mantenha a parte traseira da fila apontando para a cauda da lista encadeada, para que a operação de enfileiramento seja feita no final da lista e mantenha a frente da fila apontando para a cabeça da lista encadeada, para que a operação de desenfileiramento seja feito no início da lista.
+Qual implementação (baseada em array vs. baseada em lista) é preferida para uma fila e por quê?;Baseado em link, porque eles são dinâmicos (sem restrições de tamanho)
+Qual é a operação de pilha correspondente à operação de enfileiramento nas filas?;push
+Qual estrutura de dados é mais apropriada para agendar trabalhos de impressão em uma impressora, uma pilha ou uma fila?;fila
+O que é uma árvore?;Uma coleção de nós, que possui um nó especial chamado raiz, e o restante dos nós são particionados em um ou mais conjuntos disjuntos, sendo cada conjunto uma árvore.
+Qual é a altura de uma árvore?;O comprimento do caminho mais longo desde a raiz até qualquer uma das suas folhas.
+O que é uma folha?;Um nó que não possui filhos.
+O que é uma árvore binária?;Uma árvore para a qual o número máximo de filhos por nó é dois.
+O que é uma árvore de pesquisa binária?;Uma árvore binária que possui a propriedade que para qualquer nó o filho esquerdo é menor que o pai, que por sua vez é menor que o filho direito.
+O que é a travessia inorder de uma árvore binária?;Atravessar a subárvore esquerda, depois a raiz e depois a subárvore direita.
+Quantas comparações são necessárias para encontrar um elemento em uma árvore de busca binária?;A altura da árvore (ou log do número de elementos na árvore).
+Quais são os elementos normalmente incluídos em uma definição de classe?;Membros da função e membros de dados.
+Quais são os especificadores de acesso que podem ser usados ​​em uma definição de classe C ++?;Privado e público.
+Como os objetos são inicializados quando são criados?;Usando construtores.
+O que é uma assinatura de função?;O nome da função e a lista de parâmetros, incluindo seus tipos.
+O que é uma função recursiva?;Uma função que chama a si mesma.
+Qual é a maneira alternativa de resolver um problema que poderia ser resolvido através de funções recursivas?;Por meio de iteração.
+Qual é a diferença entre uma matriz que é declarada como estática e outra que não é?;Os arrays estáticos são inicializados apenas uma vez quando a função é chamada.
+Qual é a principal diferença entre uma string de caracteres que é lida em uma variável do tipo string versus uma variável do tipo char []?;O char [] adicionará automaticamente um caractere nulo \ 0 ao final da string.
+Descreva brevemente o paradigma de divisão e conquista.;Divida um problema em subproblemas menores, resolva-os recursivamente e combine as soluções em uma solução para o problema original.
+Descreva resumidamente em uma frase como funciona o trabalho de mesclagem?;Divide o array original em dois, ordena cada uma das duas metades e depois mescla os arrays ordenados.
+O que é um ponteiro?;O endereço de um local na memória.
+Qual é a abordagem experimental para medir o tempo de execução de um algoritmo?;Implemente o algoritmo e meça o tempo de execução físico.
+Solicite as seguintes funções pelo tempo de execução: n ^ 2; log (log n); 2 ^ (log n); n! ; n ^ 3.;log (log n); 2 ^ (log n); n ^ 2; n ^ 3; n!
+Resumidamente, como a seleção funciona?;Seleciona o mínimo de um array e coloca-o na primeira posição, então seleciona o mínimo do resto do array e o coloca na segunda posição, e assim por diante.
+Qual é a vantagem de listas vinculadas sobre arrays?;Listas encadeadas são estruturas dinâmicas, que permitem que um número variável de elementos seja armazenado.
+O que é uma fila?;Uma estrutura de dados que armazena elementos seguindo o primeiro princípio in first out. As operações principais em uma fila são enfileiramento e desenfileiramento.
+Quais são as principais operações associadas a uma pilha?;push e pop
+O que é a travessia de Euler de uma árvore?;Um passeio ao redor da árvore, começando com a raiz, onde cada nó é visto três vezes: da esquerda, de baixo, da direita.
+Como você exclui um nó de uma árvore de busca binária?;Encontre o nó e, em seguida, substitua-o pelo nó mais à esquerda da subárvore direita (ou pelo nó mais à direita da subárvore esquerda).
+Quantos passos são necessários para procurar um nó em uma árvore de busca binária?;A altura da árvore.
