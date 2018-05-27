@@ -298,7 +298,7 @@ class VirtualClassService:
                 pNota["facebook"][element["curso"]][idQuestion][user_id] = []
 
             obj = Object()
-            obj.setCourse("999")
+            obj.setCourse("X")
             obj.setInstanceId(str(group)) #GRUPO DE QUESTÕES str(idQuestion)
             obj.setUserId(user_id)
             obj.setContextId("")
@@ -391,12 +391,12 @@ class VirtualClassService:
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("http://35.230.6.53:8080/execute", headers=HEADERS, data=data)
         if r.status_code != 200:
-            print(r.text)
-            return json.loads(r.text)
-        else:
             result = {}
             result['nota'] = "Não foi possível calcular a sua nota."
             return result
+        else:
+
+            return json.loads(r.text)
 
     options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
