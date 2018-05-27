@@ -288,7 +288,7 @@ class VirtualClassService:
         # for curso in Course.query.all():
         pNota["facebook"][element["curso"]] = {}
         count = 0
-        for idQuestion,resposta in element["respostas"]:
+        for idQuestion,resposta in element["respostas"].items():
             count = count +1
             pNota["facebook"][element["curso"]][count] = {}
             if not user_id in pNota["facebook"][element["curso"]][idQuestion].keys():
