@@ -299,7 +299,7 @@ class VirtualClassService:
 
             obj = Object()
             obj.setCourse("")
-            obj.setInstanceId(group) #GRUPO DE QUESTÕES str(idQuestion)
+            obj.setInstanceId(idQuestion) #GRUPO DE QUESTÕES str(idQuestion)
             obj.setUserId(user_id)
             obj.setContextId("")
             obj.setQuestion((Simulado.query.filter_by(id=idQuestion).first().getQuestao()))
