@@ -298,12 +298,12 @@ class VirtualClassService:
                 pNota["facebook"][element["curso"]][idQuestion][user_id] = []
 
             obj = Object()
-            obj.setCourse("1")
-            obj.setInstanceId(idQuestion) #GRUPO DE QUESTÕES str(idQuestion)
+            obj.setCourse("999")
+            obj.setInstanceId(str(group)) #GRUPO DE QUESTÕES str(idQuestion)
             obj.setUserId(user_id)
-            obj.setContextId("2")
+            obj.setContextId("")
             obj.setQuestion((Simulado.query.filter_by(id=idQuestion).first().getQuestao()))
-            obj.setItemId(group)
+            obj.setItemId(idQuestion)
             obj.setFileName("facebook")
             obj.setRawGradeMin("0.00000")
             obj.setRawGradeMax("100.00000")
