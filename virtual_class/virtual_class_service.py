@@ -298,12 +298,12 @@ class VirtualClassService:
                 pNota["facebook"][element["curso"]][idQuestion][user_id] = []
 
             obj = Object()
-            obj.setCourse("")
+            obj.setCourse("1")
             obj.setInstanceId(idQuestion) #GRUPO DE QUESTÕES str(idQuestion)
             obj.setUserId(user_id)
-            obj.setContextId("")
+            obj.setContextId("2")
             obj.setQuestion((Simulado.query.filter_by(id=idQuestion).first().getQuestao()))
-            obj.setItemId(str(count))
+            obj.setItemId(group)
             obj.setFileName("facebook")
             obj.setRawGradeMin("0.00000")
             obj.setRawGradeMax("100.00000")
@@ -394,7 +394,9 @@ class VirtualClassService:
             print(r.text)
             return json.loads(r.text)
         else:
-            return "Não foi possível calcular a sua nota."
+            result = {}
+            result['nota'] = "Não foi possível calcular a sua nota."
+            return result
 
     options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
