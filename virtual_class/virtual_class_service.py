@@ -350,7 +350,7 @@ class VirtualClassService:
                 redis.setKey(user_id,struct)
                 data = answer_view_templates.text(user_id,question.getQuestao())
                 MessengerService.sendMessage(message,data)
-        elif len(redis.getValue(user_id)["respostas"]) < 5 :
+        elif len(redis.getValue(user_id)["respostas"]) < 10 :
             struct = redis.getValue(user_id)
             list = Simulado.query.filter_by(conteudo=struct["curso"].lower()).all()
             respostas = struct["respostas"]
@@ -373,7 +373,7 @@ class VirtualClassService:
             respostas = struct["respostas"]
             for key, value in respostas.items():
                 if value == None:
-                    struct[key] = message.getContentMessage()
+                    respostas[key] = message.getContentMessage()
                     break
             redis.delete(user_id)
             data = answer_view_templates.text(user_id,"Corrigindo...")
