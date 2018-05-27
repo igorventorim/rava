@@ -382,7 +382,7 @@ class VirtualClassService:
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
             respostaPlugin = self.requestPlugin(struct_plugin)
-            data = answer_view_templates.text(user_id, "Nota :"+respostaPlugin['nota'])
+            data = answer_view_templates.text(user_id, "Nota :"+str(respostaPlugin['nota']))
             MessengerService.sendMessage(message,data)
 
 
