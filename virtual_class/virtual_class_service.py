@@ -391,6 +391,7 @@ class VirtualClassService:
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("http://35.230.6.53:8080/execute", headers=HEADERS, data=data)
         if r.status_code != 200:
+            print(r.text)
             return json.loads(r.text)
         else:
             return "Não foi possível calcular a sua nota."
