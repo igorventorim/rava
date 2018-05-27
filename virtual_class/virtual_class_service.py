@@ -1,5 +1,7 @@
 import json
 
+import requests
+
 from messenger import answer_view_templates
 from virtual_class.model.domain.answer import Answer
 from virtual_class.model.domain.course import Course
@@ -350,7 +352,7 @@ class VirtualClassService:
                 redis.setKey(user_id,struct)
                 data = answer_view_templates.text(user_id,question.getQuestao())
                 MessengerService.sendMessage(message,data)
-        elif len(redis.getValue(user_id)["respostas"]) < 10 :
+        elif len(redis.getValue(user_id)["respostas"]) < 5 :
             struct = redis.getValue(user_id)
             list = Simulado.query.filter_by(conteudo=struct["curso"].lower()).all()
             respostas = struct["respostas"]
@@ -379,13 +381,18 @@ class VirtualClassService:
             data = answer_view_templates.text(user_id,"Corrigindo...")
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
-            print(struct_plugin)
-            #TODO: CHAMAR O PLUGIN AQUI!!!
-            respostaPlugin = ""
-
-            data = answer_view_templates.text(user_id, "Sua nota é "+respostaPlugin)
+            respostaPlugin = json.loads(self.requestPlugin(struct_plugin))
+            data = answer_view_templates.text(user_id, "Nota :"+respostaPlugin['nota'])
             MessengerService.sendMessage(message,data)
 
+
+    def requestPlugin(self,data):
+        HEADERS = {"Content-Type": "application/json"}
+        r = requests.post("http://35.230.6.53/execute", headers=HEADERS, data=data)
+        if r.status_code != 200:
+            return r.text
+        else:
+            return "Não foi possível calcular a sua nota."
 
     options = {Strings.GET_STARTED.upper(): __started,
                Strings.HELP.upper(): __help,
