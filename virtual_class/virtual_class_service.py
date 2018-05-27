@@ -290,7 +290,7 @@ class VirtualClassService:
         count = 0
         for idQuestion,resposta in element["respostas"].items():
             count = count +1
-            pNota["facebook"][element["curso"]][count] = {}
+            pNota["facebook"][element["curso"]][idQuestion] = {}
             if not user_id in pNota["facebook"][element["curso"]][idQuestion].keys():
                 pNota["facebook"][element["curso"]][idQuestion][user_id] = []
 
