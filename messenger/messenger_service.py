@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from utils.redis import Redis
 from utils.strings import Strings
 from messenger.message import Message
@@ -84,7 +87,7 @@ class MessengerService:
         #TODO VERIFICAR SE ESSA ESTRATÉGIA FOI BOA...
         user_id = message.getClientID()
         response_by_aiml_db = self.aiml_db.respond(message.getContentMessage())
-        data = answer_view_templates.text(user_id, str(response_by_aiml_db,"utf-8"))
+        data = answer_view_templates.text(user_id, response_by_aiml_db)
         MessengerService.sendMessage(message,data)
 
     def __handleResponseWit(self,response,message):
