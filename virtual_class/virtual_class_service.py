@@ -381,16 +381,16 @@ class VirtualClassService:
             data = answer_view_templates.text(user_id,"Corrigindo...")
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
-            respostaPlugin = json.loads(self.requestPlugin(struct_plugin))
+            respostaPlugin = self.requestPlugin(struct_plugin)
             data = answer_view_templates.text(user_id, "Nota :"+respostaPlugin['nota'])
             MessengerService.sendMessage(message,data)
 
 
     def requestPlugin(self,data):
         HEADERS = {"Content-Type": "application/json"}
-        r = requests.post("http://35.230.6.53/execute", headers=HEADERS, data=data)
+        r = requests.post("http://35.230.6.53:8080/execute", headers=HEADERS, data=data)
         if r.status_code != 200:
-            return r.text
+            return json.loads(r.text)
         else:
             return "Não foi possível calcular a sua nota."
 
