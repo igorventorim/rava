@@ -83,7 +83,7 @@ class MessengerService:
     def __erro(self, message):
         #TODO VERIFICAR SE ESSA ESTRATÉGIA FOI BOA...
         user_id = message.getClientID()
-        response_by_aiml_db = self.aiml_db.respond(message.getContentMessage())
+        response_by_aiml_db = str(self.aiml_db.respond(message.getContentMessage()), 'utf-8')
         data = answer_view_templates.text(user_id, response_by_aiml_db)
         MessengerService.sendMessage(message,data)
 

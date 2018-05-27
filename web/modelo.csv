@@ -19,11 +19,11 @@ Como o compilador manipula funções inline?;Faz uma cópia do código de funç�
 Qual é a principal vantagem associada aos argumentos de função que são passados ​​por referência?;Evita fazer cópias de grandes estruturas de dados ao chamar funções.
 Como as funções sobrecarregadas são diferenciadas pelo compilador?;Baseado na assinatura da função. Quando uma função sobrecarregada é chamada, o compilador encontrará a função cuja assinatura está mais próxima da chamada de função especificada.
 Ao definir uma função recursiva, quais são as causas possíveis para a recursão infinita?;Se a etapa de recursão for definida incorretamente ou se o caso base não estiver incluído.
-Quais são as semelhanças entre iteração e recursão?;Ambos envolvem repetição; ambos têm testes de terminação; ambos podem ocorrer infinitamente.;;;;;;
+Quais são as semelhanças entre iteração e recursão?;Ambos envolvem repetição,  ambos têm testes de terminação,  ambos podem ocorrer infinitamente.
 Quais são as duas maneiras diferentes de especificar o comprimento de uma matriz?;Na declaração de matriz ou usando uma lista inicializadora.
 Qual é a principal diferença entre strings declaradas usando o tipo string versus strings declaradas usando uma matriz de caracteres?;As cadeias de caracteres declaradas usando uma matriz de caracteres têm um elemento nulo adicionado no final da matriz.
 Como as matrizes são passadas para funções?;por referência.
-Qual é a diferença entre uma matriz declarada como estática e outra que não é?;As matrizes declaradas como estáticas vivem ao longo da vida do programa; isto é, eles são inicializados apenas uma vez, quando a função que declara a matriz é chamada pela primeira vez.;;;;;;;
+Qual é a diferença entre uma matriz declarada como estática e outra que não é?;As matrizes declaradas como estáticas vivem ao longo da vida do programa ,  isto é, eles são inicializados apenas uma vez, quando a função que declara a matriz é chamada pela primeira vez.
 Quantas dimensões precisam ser especificadas ao passar uma matriz multidimensional como um argumento para uma função?;Todas as dimensões, exceto a primeira.
 Usar um índice fora dos limites da matriz gera um erro. Isso é um erro de compilação ou um erro em tempo de execução?;Erro em tempo de execução.
 Como os arrays bidimensionais são armazenados na memória, por linhas ou por colunas?;por linhas.
@@ -78,7 +78,6 @@ Descreva brevemente o paradigma de divisão e conquista.;Divida um problema em s
 Descreva resumidamente em uma frase como funciona o trabalho de mesclagem?;Divide o array original em dois, ordena cada uma das duas metades e depois mescla os arrays ordenados.
 O que é um ponteiro?;O endereço de um local na memória.
 Qual é a abordagem experimental para medir o tempo de execução de um algoritmo?;Implemente o algoritmo e meça o tempo de execução físico.
-Solicite as seguintes funções pelo tempo de execução: n ^ 2; log (log n); 2 ^ (log n); n! ; n ^ 3.;log (log n); 2 ^ (log n); n ^ 2; n ^ 3; n!
 Resumidamente, como a seleção funciona?;Seleciona o mínimo de um array e coloca-o na primeira posição, então seleciona o mínimo do resto do array e o coloca na segunda posição, e assim por diante.
 Qual é a vantagem de listas vinculadas sobre arrays?;Listas encadeadas são estruturas dinâmicas, que permitem que um número variável de elementos seja armazenado.
 O que é uma fila?;Uma estrutura de dados que armazena elementos seguindo o primeiro princípio in first out. As operações principais em uma fila são enfileiramento e desenfileiramento.

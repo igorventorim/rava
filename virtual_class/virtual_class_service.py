@@ -285,36 +285,36 @@ class VirtualClassService:
 
     def generateStructToSimulado(self,user_id,element):
         pNota = {"facebook":{}}
-        for curso in Course.query.all():
-            pNota["facebook"][1] = {}
+        # for curso in Course.query.all():
+        pNota["facebook"][element["curso"]] = {}
+        count = 0
+        for idQuestion,resposta in element["respostas"]:
+            count = count +1
+            pNota["facebook"][element["curso"]][count] = {}
+            if not user_id in pNota["facebook"][element["curso"]][idQuestion].keys():
+                pNota["facebook"][element["curso"]][idQuestion][user_id] = []
 
-            for atividade in Question.query.filter_by(course_id=curso.getId()).all():
-                pNota["facebook"][curso.getId()][atividade.getId()] = {}
+            obj = Object()
+            obj.setCourse("")
+            obj.setInstanceId(str(idQuestion))
+            obj.setUserId(user_id)
+            obj.setContextId("")
+            obj.setQuestion("")
+            obj.setItemId(str(count))
+            obj.setFileName("facebook")
+            obj.setRawGradeMin("0.00000")
+            obj.setRawGradeMax("100.00000")
+            obj.setIdGradeGrades(str(count))
+            obj.setNotaProfessor("-1.00000")
+            obj.setCourseName(element["curso"])
+            obj.setResposta(resposta)
+            # obj.setFeedback()
+            # obj.setUrl()
+            pNota["facebook"][element["curso"]][idQuestion][user_id].append(obj)
 
-                for resposta in Answer.query.filter_by(question_id=atividade.getId()):
-                    if not resposta.getStudentId() in pNota["facebook"][curso.getId()][atividade.getId()].keys():
-                        pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()] = []
-                    obj = Object()
-                    obj.setCourse(str(curso.getId()))
-                    obj.setInstanceId(str(atividade.getId()))
-                    obj.setUserId(str(resposta.getStudentId()))
-                    obj.setContextId(str(curso.getTeatcher()))
-                    obj.setQuestion(str(atividade.getDesc()))
-                    obj.setItemId(str(resposta.getId()))
-                    obj.setFileName("facebook")
-                    obj.setRawGradeMin("0.00000")
-                    obj.setRawGradeMax("100.00000")
-                    obj.setIdGradeGrades(str(resposta.getId()))
-                    obj.setNotaProfessor("-1.00000")
-                    obj.setCourseName(element["curso"])
-                    obj.setResposta(resposta.getAnswerText())
-                    # obj.setFeedback()
-                    # obj.setUrl()
-                    pNota["facebook"][curso.getId()][atividade.getId()][resposta.getStudentId()].append(obj)
+            self.removeElementVoid(pNota["facebook"][element["curso"]],idQuestion)
 
-                self.removeElementVoid(pNota["facebook"][curso.getId()],atividade.getId())
-
-            self.removeElementVoid(pNota["facebook"],curso.getId())
+            self.removeElementVoid(pNota["facebook"],element["curso"])
         return json.dumps(pNota, cls=MyEncoder)
 
 
@@ -374,9 +374,11 @@ class VirtualClassService:
             data = answer_view_templates.text(user_id,"Corrigindo...")
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
+            print(struct_plugin)
             #TODO: CHAMAR O PLUGIN AQUI!!!
+            respostaPlugin = ""
 
-            data = answer_view_templates.text(user_id, "Sua nota é X")
+            data = answer_view_templates.text(user_id, "Sua nota é "+respostaPlugin)
             MessengerService.sendMessage(message,data)
 
 

@@ -23,8 +23,9 @@ for idsample, sample in enumerate(db):
     db[idsample] = idx, text, freq
 
 vectorizer = CountVectorizer(analyzer="char_wb", ngram_range=(4,8))
-vcnt = vectorizer.fit_transform([d[1] for d in db])
 
+vcnt = vectorizer.fit_transform([d[1] for d in db])
+print(vcnt)
 features = vectorizer.get_feature_names()
 
 query = ["carne"]
