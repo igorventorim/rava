@@ -370,6 +370,11 @@ class VirtualClassService:
             MessengerService.sendMessage(message,data)
         else:
             struct = redis.getValue(user_id)
+            respostas = struct["respostas"]
+            for key, value in respostas.items():
+                if value == None:
+                    struct[key] = message.getContentMessage()
+                    break
             redis.delete(user_id)
             data = answer_view_templates.text(user_id,"Corrigindo...")
             MessengerService.sendMessage(message,data)
