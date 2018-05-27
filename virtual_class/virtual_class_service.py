@@ -299,7 +299,7 @@ class VirtualClassService:
             obj.setInstanceId(str(idQuestion))
             obj.setUserId(user_id)
             obj.setContextId("")
-            obj.setQuestion(Simulado.filter_by(id=idQuestion).first())
+            obj.setQuestion(Simulado.query.filter_by(id=idQuestion).first())
             obj.setItemId(str(count))
             obj.setFileName("facebook")
             obj.setRawGradeMin("0.00000")
