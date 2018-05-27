@@ -395,7 +395,7 @@ class VirtualClassService:
             result['nota'] = "Não foi possível calcular a sua nota."
             return result
         else:
-
+            print(r.text)
             return json.loads(r.text)
 
     options = {Strings.GET_STARTED.upper(): __started,
