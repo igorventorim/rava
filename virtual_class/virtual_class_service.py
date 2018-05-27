@@ -307,7 +307,7 @@ class VirtualClassService:
             obj.setFileName("facebook")
             obj.setRawGradeMin("0.00000")
             obj.setRawGradeMax("100.00000")
-            obj.setIdGradeGrades(str(count))
+            obj.setIdGradeGrades(idQuestion) #str(count)
             obj.setNotaProfessor("-1.00000")
             obj.setCourseName(element["curso"])
             obj.setResposta(resposta)
@@ -383,7 +383,7 @@ class VirtualClassService:
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
             respostaPlugin = self.requestPlugin(struct_plugin)
-            data = answer_view_templates.text(user_id, "Nota :"+str(respostaPlugin['nota']))
+            data = answer_view_templates.text(user_id, "NOTA :"+str(respostaPlugin))
             MessengerService.sendMessage(message,data)
 
 
