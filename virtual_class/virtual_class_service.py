@@ -301,7 +301,7 @@ class VirtualClassService:
             obj.setCourse("X")
             obj.setInstanceId(str(group)) #GRUPO DE QUESTÕES str(idQuestion)
             obj.setUserId(user_id)
-            obj.setContextId("")
+            obj.setContextId("simulado")
             obj.setQuestion((Simulado.query.filter_by(id=idQuestion).first().getQuestao()))
             obj.setItemId(idQuestion)
             obj.setFileName("facebook")

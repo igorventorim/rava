@@ -84,7 +84,6 @@ class MessengerService:
             self.__erro(message)
 
     def __erro(self, message):
-        #TODO VERIFICAR SE ESSA ESTRATÉGIA FOI BOA...
         user_id = message.getClientID()
         response_by_aiml_db = self.aiml_db.respond(message.getContentMessage())
         data = answer_view_templates.text(user_id, response_by_aiml_db)
