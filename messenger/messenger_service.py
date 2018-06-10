@@ -55,7 +55,7 @@ class MessengerService:
 
                     if not self.redis.existsUserOn(message.getClientID()+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
-                        self.redis.setExpire(60)
+                        self.redis.setExpire(message.getClientID()+"_msg",60)
                     else:
                         return
 
