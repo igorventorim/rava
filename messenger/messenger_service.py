@@ -12,6 +12,7 @@ import json
 from messenger.domain.log import Log
 from datetime import datetime
 from messenger.user_data import UserData
+from sqlalchemy import desc
 import requests
 import aiml
 
@@ -33,6 +34,7 @@ class MessengerService:
         self.aiml_db = aiml.Kernel()
         self.aiml_db.learn("std-startup.xml")
         self.aiml_db.respond("load aiml b")
+        self.redis = Configuration.redis
 
 
     def unpackMessage(self,data):
@@ -51,6 +53,12 @@ class MessengerService:
                         except:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
 
+                    if not self.redis.existsUserOn(message.getClientID()):
+                        struct = {"Já possui mensagem"}
+                        self.redis.setKey(message.getClientID()+"_msg",struct)
+                        self.redis.setExpire(60)
+                    else:
+                        return
 
                     MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
                     MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
@@ -142,6 +150,8 @@ class MessengerService:
                     print("Não foi possível encontrar o usuário na base de dados.")
         except:
             print("Não foi possível realizar o registro de log.")
+
+        Configuration.redis.delete(message.getClientID() + "_msg")
 
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService

@@ -16,6 +16,7 @@ class Object(object):
         self.__url = None
         self.__feedback = None
         self.__question = None
+        self.__idnumber = None
 
     def getFeedback(self):
         return self.__feedback
@@ -62,6 +63,9 @@ class Object(object):
     def getQuestion(self):
         return self.__question
 
+    def getIdNumber(self):
+        return self.__idnumber
+
     def setCourse(self, value):
         self.__course = value
 
@@ -106,6 +110,9 @@ class Object(object):
 
     def setQuestion(self,value):
         self.__question = value
+
+    def setIdNumber(self,value):
+        self.__idnumber = value
 
 
 
