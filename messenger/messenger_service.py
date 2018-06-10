@@ -56,7 +56,7 @@ class MessengerService:
                     MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                     if not self.redis.existsUserOn(message.getClientID()+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
-                        self.redis.setExpire(message.getClientID()+"_msg",60)
+                        self.redis.setExpire(message.getClientID()+"_msg",30)
                     else:
                         return
                     self.__selector(message)
