@@ -54,7 +54,7 @@ class MessengerService:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
                     if not self.redis.existsUserOn(str(message.getClientID())+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
-                        self.redis.setExpire(message.getClientID()+"_msg",5)
+                        self.redis.setExpire(message.getClientID()+"_msg",2)
                         MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
                         MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                         self.__selector(message)
