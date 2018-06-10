@@ -53,7 +53,7 @@ class MessengerService:
                         except:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
 
-                    if not self.redis.existsUserOn(message.getClientID()):
+                    if not self.redis.existsUserOn(message.getClientID()+"_msg"):
                         struct = {"Já possui mensagem"}
                         self.redis.setKey(message.getClientID()+"_msg",struct)
                         self.redis.setExpire(60)
