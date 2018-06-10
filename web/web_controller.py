@@ -12,6 +12,7 @@ def avaliation():
         file = request.files['file']
         teacher = request.form['teacher']
         test_name = request.form['test_name']
+        test_name = test_name.replace(" ","_").lower()
         list = file.readlines()
 
         return web_service.register_simulado(list,test_name,teacher)
@@ -25,4 +26,5 @@ def download():
 @web_blueprint.route("/getSimulado",methods=['GET'])
 def getSimulado():
     test_name= request.args['simulado']
+    test_name = test_name.replace(" ","_").lower()
     return web_service.getSimulado(test_name)
