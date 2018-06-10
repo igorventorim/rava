@@ -63,7 +63,6 @@ class MessengerService:
 
     @staticmethod
     def sendMessage(message,data):
-        Configuration.redis.delete(str(message.getClientID())+"_msg")
         PARAMS = {"access_token": Configuration.PAGE_ACCESS_TOKEN}
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=PARAMS, headers=HEADERS, data=data)
