@@ -391,7 +391,7 @@ class VirtualClassService:
 
     def requestPlugin(self,data):
         HEADERS = {"Content-Type": "application/json"}
-        r = requests.post("http://iventorim.artmila.com.br:8080/execute", headers=HEADERS, data=data)
+        r = requests.post("http://35.230.6.53:8080/execute", headers=HEADERS, data=data)
         if r.status_code != 200:
             result = {}
             result['nota'] = "Não foi possível calcular a sua nota."
