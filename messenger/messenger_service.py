@@ -56,7 +56,7 @@ class MessengerService:
                     MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                     if not self.redis.existsUserOn(message.getClientID()+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
-                        self.redis.setExpire(message.getClientID()+"_msg",30)
+                        self.redis.setExpire(message.getClientID()+"_msg",5)
                     else:
                         return
                     self.__selector(message)
@@ -147,8 +147,6 @@ class MessengerService:
                     print("Não foi possível encontrar o usuário na base de dados.")
         except:
             print("Não foi possível realizar o registro de log.")
-
-        Configuration.redis.delete(message.getClientID() + "_msg")
 
 from virtual_class.virtual_class_service import VirtualClassService
 from ru.ru_service import RUService
