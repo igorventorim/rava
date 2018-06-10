@@ -52,17 +52,18 @@ class MessengerService:
                             Configuration.db.session.commit()
                         except:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
-                    MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
-                    MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                     if not self.redis.existsUserOn(str(message.getClientID())+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
                         self.redis.setExpire(message.getClientID()+"_msg",5)
+                        MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
+                        MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                         self.__selector(message)
 
 
 
     @staticmethod
     def sendMessage(message,data):
+        Configuration.redis.delete(str(message.getClientID())+"_msg")
         PARAMS = {"access_token": Configuration.PAGE_ACCESS_TOKEN}
         HEADERS = {"Content-Type": "application/json"}
         r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=PARAMS, headers=HEADERS, data=data)
