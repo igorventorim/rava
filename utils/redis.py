@@ -21,6 +21,9 @@ class Redis:
     def setKey(self, key, value):
         self.__r.set(str(key), json.dumps(value))
 
+    def setNormalKey(self,key,value):
+        self.__r.set(key, value)
+
     def getValue(self, key):
         return json.loads(self.__r.get(str(key)))
 
