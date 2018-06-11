@@ -348,7 +348,7 @@ class VirtualClassService:
                 MessengerService.sendMessage(message,data)
             else:
                 struct = redis.getValue(user_id)
-                struct["curso"] = message.getContentMessage()
+                struct["curso"] = message.getContentMessage().replace(" ","_").lower()
                 struct["respostas"] = {}
                 question = random.choice(list)
                 struct["respostas"][str(question.getId())] = None

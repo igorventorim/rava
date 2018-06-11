@@ -77,14 +77,14 @@ class MessengerService:
         MessengerService.sendMessage(message,data)
 
     def __selector(self,message):
-        # try:
+        try:
             result = self.client.message(message.getContentMessage())
             if Configuration.redis.existsUserOn(message.getClientID()):
                 self.service_virtual_class.options[Strings.CMD_SIMULADO.upper()](self.service_virtual_class,message)
             else:
                 cmd = self.__handleResponseWit(result,message)
                 self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
-        # except:
+        except:
             self.__erro(message)
 
     def __erro(self, message):
