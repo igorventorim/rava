@@ -388,7 +388,7 @@ class VirtualClassService:
             resultado = ""
             for element in respostaPlugin:
                 resultado += "Questão: #"+str(element['id_grade_grades'])+" - Nota: "+str(element['nota'])+"\n"
-            data = answer_view_templates.text(user_id, "NOTA :"+str(respostaPlugin))
+            data = answer_view_templates.text(user_id, resultado)
             MessengerService.sendMessage(message,data)
 
 
