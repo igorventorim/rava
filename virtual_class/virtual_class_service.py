@@ -353,7 +353,7 @@ class VirtualClassService:
                 question = random.choice(list)
                 struct["respostas"][str(question.getId())] = None
                 redis.setKey(user_id,struct)
-                data = answer_view_templates.text(user_id,question.getQuestao())
+                data = answer_view_templates.text(user_id,"#"+question.getId()+" - "+question.getQuestao())
                 MessengerService.sendMessage(message,data)
         elif len(redis.getValue(user_id)["respostas"]) < 5 :
             struct = redis.getValue(user_id)
@@ -371,7 +371,7 @@ class VirtualClassService:
             respostas[question.getId()] = None
             struct["respostas"] = respostas
             redis.setKey(user_id, struct)
-            data = answer_view_templates.text(user_id, question.getQuestao())
+            data = answer_view_templates.text(user_id, "#"+question.getId()+" - "+question.getQuestao())
             MessengerService.sendMessage(message,data)
         else:
             struct = redis.getValue(user_id)
@@ -385,6 +385,9 @@ class VirtualClassService:
             MessengerService.sendMessage(message,data)
             struct_plugin = self.generateStructToSimulado(user_id,struct)
             respostaPlugin = self.requestPlugin(struct_plugin)
+            resultado = ""
+            for element in respostaPlugin:
+                resultado += "Questão: #"+element['id_grade_grades']+" - Nota: "+element['nota']+"\n"
             data = answer_view_templates.text(user_id, "NOTA :"+str(respostaPlugin))
             MessengerService.sendMessage(message,data)
 
