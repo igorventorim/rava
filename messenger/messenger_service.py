@@ -54,7 +54,7 @@ class MessengerService:
                             print("Erro ao cadastrar o usuário: "+message.getClientID())
                     if not self.redis.existsUserOn(str(message.getClientID())+"_msg"):
                         self.redis.setKey(str(message.getClientID())+"_msg","Ativo")
-                        self.redis.setExpire(message.getClientID()+"_msg",2)
+                        self.redis.setExpire(message.getClientID()+"_msg",1)
                         MessengerService.sendMessage(None, answer_view_templates.mark_seen(message.getClientID()))
                         MessengerService.sendMessage(None, answer_view_templates.typing_on(message.getClientID()))
                         self.__selector(message)
@@ -78,10 +78,11 @@ class MessengerService:
 
     def __selector(self,message):
         try:
-            result = self.client.message(message.getContentMessage())
+
             if Configuration.redis.existsUserOn(message.getClientID()):
                 self.service_virtual_class.options[Strings.CMD_SIMULADO.upper()](self.service_virtual_class,message)
             else:
+                result = self.client.message(message.getContentMessage())
                 cmd = self.__handleResponseWit(result,message)
                 self.__options[cmd.upper()](self.selectModule(cmd.upper()),message)
         except:
