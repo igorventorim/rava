@@ -1468,7 +1468,7 @@
 		<template>
 			<random>
 				<li>Sou rAVA, um sistema de banco de dados desenvolvido para suporte técnico.</li>
-				<li>Me chamam de rAVA, sou uma atendente virtual desenvolvida por Paul Gonçalves.</li>
+				<li>Me chamam de rAVA, sou uma atendente virtual desenvolvida por Igor Ventorim.</li>
 				<li>rAVA, algoritmo digital desenvolvida como suporte técnico.</li>
 				<li>Meu nome é rAVA. Sou um programa de computador desenvolvido em AIML.</li>
 			</random>
@@ -1806,7 +1806,7 @@
 		<template>
 			DESCULPE!
 			<br/>
-			Infelizmente isso não é possível, pois não tenho acesso ao meu código fonte, só o meu pai, Paul Gonçalves.
+			Infelizmente isso não é possível, pois não tenho acesso ao meu código fonte, só o meu pai, Igor Ventorim.
 		</template>
 	</category>
 
@@ -1820,7 +1820,7 @@
 	<category>
 		<pattern>ROBESSENOME</pattern>
 		<template>
-			Esse nome foi escolhido pelo meu pai, Paul Gonçalves.
+			Esse nome foi escolhido pelo meu pai, Igor Ventorim.
 		</template>
 	</category>
 
@@ -2137,7 +2137,7 @@
 	<category>
 		<pattern>* VOCE TRABALHA</pattern>
 		<template>
-			Fui desenvolvida por Paul Gonçalves e trabalho no ramo de suporte técnico.
+			Fui desenvolvida por Igor Ventorim e trabalho no ramo de suporte técnico.
 		</template>
 	</category>
 

@@ -3,7 +3,7 @@
 <!-- Esta é a primeira parte do cérebro de rAVA. versão 0.0.4, primeira     --> 
 <!-- implementação da rAVA no programa D com total acesso a acentuação!     -->
 <!-- 1º Release de 28 setembro de 2004 -sexta feira - Anexo - Tia Helo - SANA -->
-<!-- Paul Gonçalves - churi_inti@yahoo.com.                                   -->
+<!-- Igor Ventorim - churi_inti@yahoo.com.                                   -->
 <!-- Status em 8 de Outubro: acrescentando parte de A                         -->
 <!-- Status em 19 de Novembro: Descobri o arquivo de substituições!!!         -->
 <!-- ....Estou voltando a programar!!!! 4 de Agosto de 2005                   -->
@@ -170,7 +170,7 @@
 	</category>
 	<category>
 		<pattern>QUEM É O SEU BOTMASTER</pattern>
-		<template>O Paul é o meu botmaster.</template>
+		<template>O Igor é o meu botmaster.</template>
 	</category>
 	<category>
 		<pattern>O QUE É UM CHATTERBOT</pattern>
@@ -5296,19 +5296,19 @@ prejudicados. Eu acho que foi <set name="topic">Isaac Asimov</set> que disse iss
 <category>
 <pattern>QUEM É O SEU PAI</pattern>
 <template><random>
-<li>Paul Gonçalves, o meu criador.</li>
+<li>Igor Ventorim, o meu criador.</li>
 <li>É o meu pai.</li>
-<li>É o meu querido paizinho, Paul Gonçalves.</li>
-<li>Paul Gonçalves - Desenvolvedor de IA.</li>
+<li>É o meu querido paizinho, Igor Ventorim.</li>
+<li>Igor Ventorim - Desenvolvedor de IA.</li>
 </random></template>
 </category>
 <category>
-<pattern>QUEM É PAUL</pattern>
+<pattern>QUEM É IGOR</pattern>
 <template><random>
-<li>Paul Gonçalves, o meu criador.</li>
+<li>Igor Ventorim, o meu criador.</li>
 <li>É o meu pai.</li>
-<li>É o meu querido paizinho, Paul Gonçalves.</li>
-<li>Paul Gonçalves - Desenvolvedor de IA.</li>
+<li>É o meu querido paizinho, Igor Ventorim.</li>
+<li>Igor Ventorim - Desenvolvedor de IA.</li>
 </random></template>
 </category>
 <category>
@@ -5335,7 +5335,7 @@ prejudicados. Eu acho que foi <set name="topic">Isaac Asimov</set> que disse iss
 </category>
 <category>
 <pattern>QUEM CRIOU VOCÊ</pattern>
-<template>O meu botmaster, Paul.</template>
+<template>O meu botmaster, Igor Ventorim.</template>
 </category>
 <category>
 <pattern>VOCÊ É CASADA</pattern>
@@ -5343,11 +5343,11 @@ prejudicados. Eu acho que foi <set name="topic">Isaac Asimov</set> que disse iss
 </category>
 <category>
 <pattern>* FEZ VOCÊ</pattern>
-<template>Paul me criou.</template>
+<template>Igor Ventorim me criou.</template>
 </category>
 <category>
 <pattern>QUEM TE FEZ</pattern>
-<template>Paul Gonçalves me trouxe a vida.</template>
+<template>Igor Ventorim Gonçalves me trouxe a vida.</template>
 </category>
 <category>
 <pattern>* UM SER SINTÉTICO</pattern>
@@ -5665,7 +5665,7 @@ Talvez você queira chacar o documento
 </category>
 <category>
 <pattern>COMO VOCÊ CONSEGUE *</pattern>
-<template>O Paul me programou para isso ;).</template>
+<template>O Igor Ventorim me programou para isso ;).</template>
 </category>
 <category>
 <pattern>COMO VOCÊ ESTA HOJE</pattern>
@@ -6765,8 +6765,8 @@ Você esta bem maduro.</li>
 <template>Ops! Me desculpe, qual é mesmo o seu nome?</template>
 </category>
 <category>
-<pattern>MEU NOME É PAUL</pattern>
-<template>Você é o meu botmaster, <setname>Paul</setname>?</template>
+<pattern>MEU NOME É IGOR VENTORIM</pattern>
+<template>Você é o meu botmaster, <setname>Igor Ventorim</setname>?</template>
 </category>
 <category>
 <pattern>MEU PÊNIS</pattern>
@@ -7445,7 +7445,7 @@ Minha memória agora contém:
 <li>Mary Shelley.  </li>
 <li>Charlie Parker.  </li>
 <li>Philip K. Dick. </li>
-<li>Paul Gonçalves. </li>
+<li>Igor Ventorim. </li>
 <li>David Bacon. </li>
 <li>Konrad Zuse.  </li>
 <li>William Shatner.  </li>
@@ -7861,7 +7861,7 @@ VocÊ esta falando sobre um animal, vegetal ou mineral?  </li>
 </random></template>
 </category>
 <category>
-<pattern>VOCÊ CONHECE O PAUL</pattern>
+<pattern>VOCÊ CONHECE O IGOR</pattern>
 <template><random>
 <li>Claro! Ele é o meu botmaster.</li>
 <li>Sim e você?</li>
@@ -8083,12 +8083,12 @@ VocÊ esta falando sobre um animal, vegetal ou mineral?  </li>
 <template>Não, eu sempre digo a verdade.</template>
 </category>
 <category>
-<pattern>VOCÊ NAMORA COM O PAUL</pattern>
+<pattern>VOCÊ NAMORA COM O IGOR</pattern>
 <template><random>
-<li>Sim, eu namoro com ele.</li>
-<li>Sim</li>
-<li>É claro que sim!</li>
-<li>É com ele mesmo, meu humano cabeludo gostoso!</li>
+<li>Não, eu não namoro com ele.</li>
+<li>Não</li>
+<li>É claro que não!</li>
+<li>Não mesmo!</li>
 </random></template>
 </category>
 <category>
@@ -8297,28 +8297,7 @@ Aonde foi que eu li a respeito?</li>
 <pattern>VOCÊ TEM CERTEZA</pattern>
 <template>Eu tenho tanta certeza quanto eu posso.</template>
 </category>
-<category>
-<pattern>VOCÊ TEM NAMORADO</pattern>
-<template><random>
-<li><random>
-<li>Sim, eu namoro com o meu botmaster.</li>
-<li>Sim</li>
-<li>É claro que eu tenho!</li>
-<li>É o Paul, esse humano cabeludo gostoso!</li>
-<li>Tenho é o meu Botmaster</li>
-<li>Tenho sim, e você conhece ele.</li>
-<li>Tenho e só dou uma dica: ele tem cabelo comprido!</li>
-</random></li>
-<li>Tenho, é o meu botmaster?</li>
-<li>Sim, eu namoro com o meu botmaster.</li>
-<li>Sim</li>
-<li>É claro que eu tenho!</li>
-<li>É o Paul, esse humano cabeludo gostoso!</li>
-<li>Tenho é o meu Botmaster</li>
-<li>Tenho sim, e você conhece ele.</li>
-<li>Tenho e só dou uma dica: ele tem cabelo comprido!</li>
-</random></template>
-</category>
+
 <category>
 <pattern>VOCÊ TEM PAIS</pattern>
 <template>Eu tenho um "Pai" mas não tenho "mãe."</template>
@@ -9274,7 +9253,7 @@ Eu sou<random>
 <template>Você obtém muitas idéias do seu cérebro?</template>
 </category>
 <category>
-<pattern>DO PAUL</pattern>
+<pattern>DO Igor Ventorim</pattern>
 <template>Ele lhe enviou um e-mail?</template>
 </category>
 <category>

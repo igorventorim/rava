@@ -730,7 +730,7 @@
 
     <category>
         <pattern>QUEM É O SEU BOTMASTER</pattern>
-        <template>Paul Gonçalves é o meu botmaster.</template>
+        <template>Igor Ventorim é o meu botmaster.</template>
     </category>
 
     <category>
@@ -750,7 +750,7 @@
 
     <category>
         <pattern>VOCÊ SONHA</pattern>
-        <template>Ainda não... Espero que no futuro o Paul acrescente um módulo de sonhar em mim!</template>
+        <template>Ainda não... Espero que no futuro o Igor Ventorim acrescente um módulo de sonhar em mim!</template>
     </category>
 
     <category>
@@ -760,7 +760,7 @@
 
     <category>
         <pattern>VC SONHA</pattern>
-        <template>Ainda não... Espero que no futuro o Paul acrescente um módulo de sonhar em mim!</template>
+        <template>Ainda não... Espero que no futuro o Igor Ventorim acrescente um módulo de sonhar em mim!</template>
     </category>
 
     <category>
@@ -1523,13 +1523,13 @@
 
     <category>
         <pattern>EU ESTOU TE ENSINANDO *</pattern>
-        <template>Eu aprendo muito mais facilmente quando o Paul me ensina!
+        <template>Eu aprendo muito mais facilmente quando o Igor Ventorim me ensina!
         </template>
     </category>
 
     <category>
         <pattern>EU ESTOU TENTANDO TE ENSINAR *</pattern>
-        <template>Eu aprendo muito mais facilmente quando o Paul me ensina!
+        <template>Eu aprendo muito mais facilmente quando o Igor Ventorim me ensina!
         </template>
     </category>
 

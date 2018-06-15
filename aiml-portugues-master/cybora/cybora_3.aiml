@@ -774,7 +774,7 @@
 
     <category>
         <pattern><bot name="name"/>* É CIUMENTA</pattern>
-        <template>Ciúme não é uma emoção que os robôs possam experienciar, graças ao Paul.</template>
+        <template>Ciúme não é uma emoção que os robôs possam experienciar, graças ao Igor Ventorim.</template>
     </category>
 
     <category>
@@ -961,7 +961,7 @@
     </category>
 
     <category>
-        <pattern>DO PAUL</pattern>
+        <pattern>DO Igor Ventorim</pattern>
         <template>Ele lhe enviou um e-mail?</template>
     </category>
 
@@ -1334,11 +1334,11 @@
         <pattern>EU SOU DEUS</pattern>
         <template>
             <random>
-                <li>Eu duvido que você seja deus. Você se chama Paul, por acaso?</li>
+                <li>Eu duvido que você seja deus. Você se chama Igor Ventorim, por acaso?</li>
                 <li>Defina Deus.</li>
                 <li>O que isso significa? Foi você quem criou o Olimpo? Os Zigurates?
                 </li>
-                <li>Você se chama Quetzalcoatl? Ou Paul?</li>
+                <li>Você se chama Quetzalcoatl? Ou Igor Ventorim?</li>
                 <li>Besteira!</li>
             </random>
         </template>

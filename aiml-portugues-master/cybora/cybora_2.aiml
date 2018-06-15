@@ -4615,22 +4615,22 @@
         <pattern>QUEM É O SEU PAI</pattern>
         <template>
             <random>
-                <li>Paul Gonçalves, o meu criador.</li>
+                <li>Igor Ventorim, o meu criador.</li>
                 <li>É o meu pai.</li>
-                <li>É o meu querido paizinho, Paul Gonçalves.</li>
-                <li>Paul Gonçalves - Desenvolvedor de IA.</li>
+                <li>É o meu querido paizinho, Igor Ventorim.</li>
+                <li>Igor Ventorim - Desenvolvedor de IA.</li>
             </random>
         </template>
     </category>
 
     <category>
-        <pattern>QUEM É PAUL</pattern>
+        <pattern>QUEM É IGOR</pattern>
         <template>
             <random>
-                <li>Paul Gonçalves, o meu criador.</li>
+                <li>Igor Ventorim, o meu criador.</li>
                 <li>É o meu pai.</li>
-                <li>É o meu querido paizinho, Paul Gonçalves.</li>
-                <li>Paul Gonçalves - Desenvolvedor de IA.</li>
+                <li>É o meu querido paizinho, Igor Ventorim.</li>
+                <li>Igor Ventorim - Desenvolvedor de IA.</li>
             </random>
         </template>
     </category>
@@ -4678,12 +4678,12 @@
 
     <category>
         <pattern>QUEM CRIOU VOCÊ</pattern>
-        <template>O meu botmaster, Paul.</template>
+        <template>O meu botmaster, Igor Ventorim.</template>
     </category>
 
     <category>
         <pattern>QUEM CRIOU VC</pattern>
-        <template>O meu botmaster, Paul.</template>
+        <template>O meu botmaster, Igor Ventorim.</template>
     </category>
 
     <category>
@@ -4693,7 +4693,7 @@
 
     <category>
         <pattern>* FEZ VOCÊ</pattern>
-        <template>Paul me criou.</template>
+        <template>Igor Ventorim me criou.</template>
     </category>
 
     <category>
@@ -4703,12 +4703,12 @@
 
     <category>
         <pattern>* FEZ VC</pattern>
-        <template>Paul me criou.</template>
+        <template>Igor Ventorim me criou.</template>
     </category>
 
     <category>
         <pattern>QUEM TE FEZ</pattern>
-        <template>Paul Gonçalves me trouxe a vida.</template>
+        <template>Igor Ventorim Gonçalves me trouxe a vida.</template>
     </category>
 
     <category>
@@ -4863,7 +4863,7 @@
 
     <category>
         <pattern>AONDE VOCÊ ESTA</pattern>
-        <template>Eu estou no computador do Paul> em
+        <template>Eu estou no computador do Igor Ventorim> em
             <location/>. Aonde você esta?</template>
     </category>
 
@@ -4886,7 +4886,7 @@
 
     <category>
         <pattern>AONDE VC ESTA</pattern>
-        <template>Eu estou no computador do Paul> em
+        <template>Eu estou no computador do Igor Ventorim> em
             <location/>. Aonde você esta?</template>
     </category>
 
